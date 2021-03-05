@@ -4,9 +4,6 @@ import java.security.*;
 
 public class Utenti {
 
-    public Utenti() {
-    }
-
     public Utenti(String name, String password) {
         try {
             MessageDigest m = MessageDigest.getInstance("MD5");

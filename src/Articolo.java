@@ -2,7 +2,12 @@ import java.util.*;
 
 public abstract class Articolo {
 
-    public Articolo() {
+
+    public Articolo(String name, float price) {
+        this.name = name;
+        lastID++;
+        this.id = lastID;
+        this.price = price;
     }
 
     public String name;

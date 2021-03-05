@@ -3,6 +3,7 @@ import java.util.*;
 public class CentroNotifiche implements Observer {
 
     private CentroNotifiche() {
+        nofications = new ArrayList<>();
     }
 
     private ArrayList<String> nofications;
@@ -13,8 +14,8 @@ public class CentroNotifiche implements Observer {
         // TODO implement here
     }
 
-    public void addNotification(String newNotification){
-
+    public void addNotification(String newNotification){// non è in uml
+            nofications.add(newNotification);
     }
 
     public void update(String notification) {
