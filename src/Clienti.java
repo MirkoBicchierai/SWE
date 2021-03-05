@@ -10,10 +10,31 @@ public class Clienti {
         this.id=lastID;
     }
 
-    public int id; // non è in uml
-    public String businessName;
-    public String country;
-    public String email;
+    private int id; // non è in uml
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public static int getLastID() {
+        return lastID;
+    }
+
+    private String businessName;
+    private String country;
+    private String email;
     private static int lastID;
 
 }

@@ -9,8 +9,8 @@ public class Programma {
     public ArrayList<Utenti> users = new ArrayList<>();
     private ArrayList<Articolo> articles = new ArrayList<>();
     private ArrayList<Catalogo> catalogs = new ArrayList<>();
-    private ArrayList<Clienti> customers = new ArrayList<>();
-    private ArrayList<Ordini> orders = new ArrayList<>();
+    public ArrayList<Clienti> customers = new ArrayList<>();
+    public ArrayList<Ordini> orders = new ArrayList<>();
     private CentroNotifiche notCenter;
     private static Programma instance;
     private Connection c = DBConnection.getInstance();
@@ -101,6 +101,62 @@ public class Programma {
         }
 
         sql = "";
+        for (Clienti customer : customers) {
+            try {
+                sql = "INSERT INTO Customer (id,BusinessName,Country,Email) " + "VALUES ("+customer.getId()+", '"+customer.getBusinessName()+"', '"+customer.getCountry()+"', '"+customer.getEmail()+"');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                try {
+                    stmt.close();
+                    c.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+        }
+
+        sql = "";
+        for (Ordini order : orders) {
+            try {
+                sql = "INSERT INTO OrderHead (idHead,idAgent,Total,Commission) " + "VALUES ("+order.getId()+", '"+order.getAgent().getId()+"', '"+order.getTotal()+"', '"+order.getCommissionTot()+"');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                try {
+                    stmt.close();
+                    c.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+
+            try {
+
+                for (Articolo article : order.getArticles()) {
+                    sql = "INSERT INTO OrderRow (idHead,idArticle) " + "VALUES ("+order.getId()+", "+article.getId()+");";
+                    stmt = c.createStatement();
+                    stmt.executeUpdate(sql);
+                    c.commit();
+                }
+
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                try {
+                    stmt.close();
+                    c.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+
+        }
+
+        sql = "";
         for (Articolo article : articles) {
             sql = "";
             System.out.println(article);
@@ -112,17 +168,6 @@ public class Programma {
             System.out.println(catalog);
         }
 
-        sql = "";
-        for (Clienti customer : customers) {
-            sql = "";
-            System.out.println(customer);
-        }
-
-        sql = "";
-        for (Ordini order : orders) {
-            sql = "";
-            System.out.println(order);
-        }
 
     }
 
