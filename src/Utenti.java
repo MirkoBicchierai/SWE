@@ -34,4 +34,20 @@ public class Utenti {
     private String passwordHash;
     private static int lastID;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public static int getLastID() {
+        return lastID;
+    }
+
 }
