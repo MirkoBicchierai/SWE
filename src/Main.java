@@ -1,18 +1,39 @@
-
 import java.sql.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Connection conn = null;
+
+        Connection c = null;
+        Statement stmt = null;
         try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:db/swe.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
 
-            conn = DriverManager.getConnection("jdbc:sqlite:db/swe.db");
-            System.out.println("Connection to SQLite has been established.");
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM Article;" );
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            while ( rs.next() ) {
+                int id = rs.getInt("id");
+                String  name = rs.getString("name");
+                float price  = rs.getFloat("Price");
+
+
+                System.out.println( "ID = " + id );
+                System.out.println( "NAME = " + name );
+                System.out.println( "PRICE = " + price );
+                System.out.println();
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
         }
 
     }
