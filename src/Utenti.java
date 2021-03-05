@@ -1,5 +1,4 @@
 import java.math.BigInteger;
-import java.util.*;
 import java.security.*;
 
 public class Utenti {
@@ -25,10 +24,10 @@ public class Utenti {
 
     }
 
-
     private int id;
     private String name;
     private String passwordHash;
+    private int type;
     private static int lastID;
 
     public int getId() {

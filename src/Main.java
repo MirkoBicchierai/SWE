@@ -6,6 +6,9 @@ public class Main {
 
         //Connection c = DBConnection.getInstance();
         Statement stmt = null;
+        Agenti A1 = new Agenti("Mirko", "123456",100);
+        Programma.getInstance().users.add(A1);
+        Programma.getInstance().upload();
 
     }
 

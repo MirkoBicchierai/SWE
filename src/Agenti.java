@@ -7,6 +7,10 @@ public class Agenti extends Utenti {
             this.commissionPerc = commissionPerc;
     }
 
+    public float getCommissionPerc() {
+        return commissionPerc;
+    }
+
     private float commissionPerc;
 
     public void viewPersonalStoricOrder() {

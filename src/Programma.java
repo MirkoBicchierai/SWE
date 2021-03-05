@@ -6,7 +6,7 @@ public class Programma {
     private Programma() {}
 
     private int activeID;
-    private ArrayList<Utenti> users = new ArrayList<>();
+    public ArrayList<Utenti> users = new ArrayList<>();
     private ArrayList<Articolo> articles = new ArrayList<>();
     private ArrayList<Catalogo> catalogs = new ArrayList<>();
     private ArrayList<Clienti> customers = new ArrayList<>();
@@ -73,15 +73,24 @@ public class Programma {
         }
 
         sql = "";
+        int type;
+        float perch;
         for (Utenti user : users) {
             try {
-                sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc) " + "VALUES ("+user+", "+user+", "+user+", "+user+", "+user+" );";
+                if(!(user instanceof Agenti)) {
+                    type = 0;
+                    perch = 0;
+                }else{
+                    type = 1;
+                    Agenti  tmp = (Agenti) user;
+                    perch = tmp.getCommissionPerc();
+                }
+                sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc) " + "VALUES ("+user.getId()+", '"+user.getName()+"', '"+user.getPasswordHash()+"', "+type+", "+perch+" );";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
-                System.out.println(user);
+                c.commit();
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-                System.exit(0);
                 try {
                     stmt.close();
                     c.close();
