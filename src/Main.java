@@ -4,8 +4,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
 
-        Connection c = DBConnection.getInstance();
-
+        //Connection c = DBConnection.getInstance();
+        Statement stmt = null;
 
     }
 
