@@ -10,9 +10,25 @@ public abstract class Articolo {
         this.price = price;
     }
 
-    public String name;
-    public int id;
-    public float price;
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public static int getLastID() {
+        return lastID;
+    }
+
+    private String name;
+    private int id;
+    private float price;
     private static int lastID;
     public abstract void display();
 

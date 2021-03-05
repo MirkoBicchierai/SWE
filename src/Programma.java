@@ -6,11 +6,11 @@ public class Programma {
     private Programma() {}
 
     private int activeID;
-    private ArrayList<Utenti> users = new ArrayList<>();
+    public ArrayList<Utenti> users = new ArrayList<>();
     private ArrayList<Articolo> articles = new ArrayList<>();
     private ArrayList<Catalogo> catalogs = new ArrayList<>();
-    private ArrayList<Clienti> customers = new ArrayList<>();
-    private ArrayList<Ordini> orders = new ArrayList<>();
+    public ArrayList<Clienti> customers = new ArrayList<>();
+    public ArrayList<Ordini> orders = new ArrayList<>();
     private CentroNotifiche notCenter;
     private static Programma instance;
     private Connection c = DBConnection.getInstance();
@@ -73,15 +73,24 @@ public class Programma {
         }
 
         sql = "";
+        int type;
+        float perch;
         for (Utenti user : users) {
             try {
-                sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc) " + "VALUES ("+user+", "+user+", "+user+", "+user+", "+user+" );";
+                if(!(user instanceof Agenti)) {
+                    type = 0;
+                    perch = 0;
+                }else{
+                    type = 1;
+                    Agenti  tmp = (Agenti) user;
+                    perch = tmp.getCommissionPerc();
+                }
+                sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc) " + "VALUES ("+user.getId()+", '"+user.getName()+"', '"+user.getPasswordHash()+"', "+type+", "+perch+" );";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
-                System.out.println(user);
+                c.commit();
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-                System.exit(0);
                 try {
                     stmt.close();
                     c.close();
@@ -89,6 +98,62 @@ public class Programma {
                     e2.printStackTrace();
                 }
             }
+        }
+
+        sql = "";
+        for (Clienti customer : customers) {
+            try {
+                sql = "INSERT INTO Customer (id,BusinessName,Country,Email) " + "VALUES ("+customer.getId()+", '"+customer.getBusinessName()+"', '"+customer.getCountry()+"', '"+customer.getEmail()+"');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                try {
+                    stmt.close();
+                    c.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+        }
+
+        sql = "";
+        for (Ordini order : orders) {
+            try {
+                sql = "INSERT INTO OrderHead (idHead,idAgent,Total,Commission) " + "VALUES ("+order.getId()+", '"+order.getAgent().getId()+"', '"+order.getTotal()+"', '"+order.getCommissionTot()+"');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                try {
+                    stmt.close();
+                    c.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+
+            try {
+
+                for (Articolo article : order.getArticles()) {
+                    sql = "INSERT INTO OrderRow (idHead,idArticle) " + "VALUES ("+order.getId()+", "+article.getId()+");";
+                    stmt = c.createStatement();
+                    stmt.executeUpdate(sql);
+                    c.commit();
+                }
+
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                try {
+                    stmt.close();
+                    c.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+
         }
 
         sql = "";
@@ -103,17 +168,6 @@ public class Programma {
             System.out.println(catalog);
         }
 
-        sql = "";
-        for (Clienti customer : customers) {
-            sql = "";
-            System.out.println(customer);
-        }
-
-        sql = "";
-        for (Ordini order : orders) {
-            sql = "";
-            System.out.println(order);
-        }
 
     }
 
