@@ -2,7 +2,9 @@ import java.util.*;
 
 public class Agenti extends Utenti {
 
-    public Agenti() {
+    public Agenti(String name, String password, float commissionPerc) {
+            super(name,password);
+            this.commissionPerc = commissionPerc;
     }
 
     private float commissionPerc;

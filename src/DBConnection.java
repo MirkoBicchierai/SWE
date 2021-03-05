@@ -8,7 +8,6 @@ public class DBConnection {
             try {
                 Class.forName("org.sqlite.JDBC");
                 c = DriverManager.getConnection("jdbc:sqlite:db/swe.db");
-                c.setAutoCommit(false);
             } catch (Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
                 System.exit(-1);

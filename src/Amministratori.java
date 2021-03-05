@@ -2,7 +2,8 @@ import java.util.*;
 
 public class Amministratori extends Utenti {
 
-    public Amministratori() {
+    public Amministratori(String name, String password) {
+        super(name, password);
     }
 
     public void viewGlobalStoricOrder() {
