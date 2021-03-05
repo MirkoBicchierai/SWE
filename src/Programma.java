@@ -2,23 +2,28 @@ import java.util.*;
 
 public class Programma {
 
-    public Programma() {
+    private Programma() {
     }
 
     private int activeID;
 
-    private static Programma Instance;
+    private static Programma instance;
 
     public void login(int id, String psw) {
-        // TODO implement here
+
     }
 
-    public static void getInstance() {
-        // TODO implement here
+    public static Programma getInstance() {
+        if (instance==null) {
+            instance = new Programma();
+            instance.load();
+        }
+        return instance;
     }
 
     public void load() {
-        // TODO implement here
+
+
     }
 
     public void upload() {
