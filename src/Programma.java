@@ -3,7 +3,9 @@ import java.sql.*;
 
 public class Programma {
 
-    private Programma() {}
+    private Programma() {
+        notCenter = CentroNotifiche.getInstance();
+    }
 
     private int activeID;
     public ArrayList<Utenti> users = new ArrayList<>();
@@ -51,7 +53,7 @@ public class Programma {
         while ( rs.next() ) {
             String  message = rs.getString("message");
 
-            notCenter.addNotification(message);
+            notCenter.update(message);
         }
 
         rs = stmt.executeQuery( "SELECT * FROM User;" );
@@ -223,7 +225,16 @@ public class Programma {
 
         }
 
-        // GESTIRE NOTIFICHE
+        for (String notify : notCenter.getNofications()) {
+            try {
+                sql = "INSERT INTO Notification (Message) " + "VALUES ('"+notify+"');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+        }
 
         try {
             stmt.close();

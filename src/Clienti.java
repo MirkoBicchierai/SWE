@@ -43,6 +43,6 @@ public class Clienti {
     private String businessName;
     private String country;
     private String email;
-    private static int lastID;
+    private static int lastID = 0;
 
 }

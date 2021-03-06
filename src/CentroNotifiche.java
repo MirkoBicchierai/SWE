@@ -6,6 +6,10 @@ public class CentroNotifiche implements Observer {
         nofications = new ArrayList<>();
     }
 
+    public ArrayList<String> getNofications() {
+        return nofications;
+    }
+
     private ArrayList<String> nofications;
 
     private static CentroNotifiche instance;
@@ -13,13 +17,9 @@ public class CentroNotifiche implements Observer {
     public void viewNotification() {
     }
 
-    public void addNotification(String newNotification){// non è in uml
-            nofications.add(newNotification);
-    }
-
     public void update(String notification) {
+        nofications.add(notification);
     }
-
 
     public static CentroNotifiche getInstance() {
             if (instance==null){
