@@ -1,15 +1,45 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws Exception{
 
-        //Connection c = DBConnection.getInstance();
+        Programma p = Programma.getInstance();
+        Scanner in = new Scanner(System.in);
+        boolean quit = false;
+        int menuItem;
+        do {
+            System.out.println("Program Menu: ");
+            System.out.println("1--Login");
+            System.out.println("2--First start program (empty DB)");
+            System.out.println("0--Exit");
+            menuItem = in.nextInt();
+            switch (menuItem) {
+                case 1:
+                    System.out.println("Giro non ti arrabbiare!");
+                    break;
+                case 2:
+                    startProgram();
+                    break;
+                case 0:
+                    quit = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } while (!quit);
+
+        System.out.println("Exit");
+
+    }
+
+    private static void startProgram(){
+        long startTime = System.nanoTime();
         Statement stmt = null;
         Agenti A1 = new Agenti("Mirko", "123456",100);
         Clienti C1 = new Clienti("Nexal","Italy","mirko@nexal.it");
-
         Articolo AA1 = new Prodotto("Nexal1",3);
         Articolo AA2 = new Prodotto("Nexal2",5);
         Articolo AA3 = new Prodotto("Nexal3",50);
@@ -40,6 +70,11 @@ public class Main {
         Programma.getInstance().articles.add(AC1);
         Programma.getInstance().articles.add(AC2);
 
+        Programma.getInstance().notCenter.update("Notify 1");
+        Programma.getInstance().notCenter.update("Notify 2");
+        Programma.getInstance().notCenter.update("Notify 3");
+        Programma.getInstance().notCenter.update("Notify 4");
+        Programma.getInstance().notCenter.update("Notify 5");
 
         Programma.getInstance().catalogs.add(Ca1);
         Programma.getInstance().catalogs.add(Ca2);
@@ -48,6 +83,8 @@ public class Main {
         Programma.getInstance().customers.add(C1);
         Programma.getInstance().upload();
 
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime)/1000000;
+        System.out.println("Execution time: "+duration+"ms");
     }
-
 }
