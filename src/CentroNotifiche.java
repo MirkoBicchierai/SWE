@@ -8,7 +8,7 @@ public class CentroNotifiche implements Observer {
 
     private ArrayList<String> nofications;
 
-    private static CentroNotifiche Instance;
+    private static CentroNotifiche instance;
 
     public void viewNotification() {
     }
@@ -20,7 +20,12 @@ public class CentroNotifiche implements Observer {
     public void update(String notification) {
     }
 
-    public static void getInstance() {
+
+    public static CentroNotifiche getInstance() {
+            if (instance==null){
+                instance = new CentroNotifiche();
+            }
+            return instance;
     }
 
     public void loadNotification() {

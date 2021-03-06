@@ -10,6 +10,14 @@ public class Clienti {
         this.id=lastID;
     }
 
+    public Clienti(int id,String businessName, String country, String email) {
+        this.businessName = businessName;
+        this.country = country;
+        this.email = email;
+        this.id=id;
+        lastID = Math.max(lastID, id);
+    }
+
     private int id; // non è in uml
 
     public String getEmail() {
