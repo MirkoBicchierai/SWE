@@ -5,17 +5,23 @@ public class Programma {
 
     private Programma() {
         notCenter = CentroNotifiche.getInstance();
+        users = new ArrayList<>();
+        articles = new ArrayList<>();
+        catalogs = new ArrayList<>();
+        orders = new ArrayList<>();
+        customers = new ArrayList<>();
+        c = DBConnection.getInstance();
     }
 
     private int activeID;
-    public ArrayList<Utenti> users = new ArrayList<>();
-    public ArrayList<Articolo> articles = new ArrayList<>();
-    public ArrayList<Catalogo> catalogs = new ArrayList<>();
-    public ArrayList<Clienti> customers = new ArrayList<>();
-    public ArrayList<Ordini> orders = new ArrayList<>();
+    public ArrayList<Utenti> users;
+    public ArrayList<Articolo> articles;
+    public ArrayList<Catalogo> catalogs;
+    public ArrayList<Clienti> customers;
+    public ArrayList<Ordini> orders;
     public CentroNotifiche notCenter;
     private static Programma instance;
-    private Connection c = DBConnection.getInstance();
+    private Connection c;
 
     public void login(int id, String psw) {
         System.out.println("LOGIN");
@@ -48,7 +54,6 @@ public class Programma {
             customers.add(new Clienti(id,businessName,country,email));
         }
 
-        CentroNotifiche notCenter = CentroNotifiche.getInstance();
         rs = stmt.executeQuery( "SELECT * FROM Notification;" );
         while ( rs.next() ) {
             String  message = rs.getString("message");
@@ -64,33 +69,93 @@ public class Programma {
             int type = rs.getInt("Type");
             float commissionPerc = rs.getFloat("CommissionPerc");
 
-            users.add(type==1?new Agenti(name, passHash, commissionPerc) : new Amministratori(name, passHash));
+            users.add(type==1?new Agenti(name, passHash, commissionPerc, id) : new Amministratori(name, passHash, id));
         }
 
-        rs = stmt.executeQuery( "SELECT * FROM Article;" );
+        rs = stmt.executeQuery( "SELECT * FROM Article WHERE id not in (SELECT IdCompound FROM ArticleCompound );" );
         while ( rs.next() ) {
-            int id = rs.getInt("idHead");
-            String name = rs.getString("Description");
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
             float price = rs.getFloat("Price");
 
-            rs1 = stmt.executeQuery("SELECT * FROM CatalogRow WHERE IdHead = " + id + " ;");
-            while (rs1.next()) {
-                int idArticle = rs.getInt("idArticle");
-            }
+            articles.add(new Prodotto(name, price, id));
         }
+        rs = stmt.executeQuery( "SELECT * FROM Article WHERE id in (SELECT IdCompound FROM ArticleCompound );" );
+        while ( rs.next() ) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            float price = rs.getFloat("Price");
 
+            ArrayList<Articolo> tmp = new ArrayList<>();
+
+            rs1 = stmt.executeQuery("SELECT * FROM ArticleCompound WHERE IdCompound = " + id + " ;");
+            while (rs1.next()) {
+                int idComponent = rs.getInt("idComponent");
+
+                for(Articolo a: articles){
+                    if (a.getId()==idComponent){
+                        tmp.add(a);
+                        break;
+                    }
+                }
+            }
+
+            articles.add(new Composto(name, tmp, id));
+        }
 
         rs = stmt.executeQuery( "SELECT * FROM CatalogHead;" );
         while ( rs.next() ) {
             int id = rs.getInt("idHead");
-            String name = rs.getString("Description");
-            String passHash = rs.getString("MarketZone");
+            String description = rs.getString("Description");
+            String marketZone = rs.getString("MarketZone");
 
+            ArrayList<Articolo> tmp = new ArrayList<>();
             rs1 = stmt.executeQuery( "SELECT * FROM CatalogRow WHERE IdHead = "+id+" ;" );
             while ( rs1.next() ) {
                 int idArticle = rs.getInt("idArticle");
+
+                for(Articolo a: articles){
+                    if (a.getId()==idArticle){
+                        tmp.add(a);
+                        break;
+                    }
+                }
             }
+            catalogs.add(new Catalogo(tmp,description, marketZone, id));
         }
+
+        rs = stmt.executeQuery( "SELECT * FROM OrderHead;" );
+        while ( rs.next() ) {
+            int id = rs.getInt("idHead");
+            int idAgent = rs.getInt("idAgent");
+            float total = rs.getFloat("Total");
+            float commission = rs.getFloat("Commission");
+
+            Agenti tmpAgent = null;
+
+            for(Utenti i: users){
+                if (i.getId() == idAgent){
+                    tmpAgent =(Agenti) i;
+                    break;
+                }
+            }
+
+            ArrayList<Articolo> tmp = new ArrayList<>();
+            rs1 = stmt.executeQuery( "SELECT * FROM OrderRow WHERE IdHead = "+id+" ;" );
+            while ( rs1.next() ) {
+                int idArticle = rs.getInt("idArticle");
+
+                for(Articolo a: articles){
+                    if (a.getId()==idArticle){
+                        tmp.add(a);
+                        break;
+                    }
+                }
+            }
+            orders.add(new Ordini(total,commission, tmpAgent, tmp, id));
+        }
+
+
 
     }
 

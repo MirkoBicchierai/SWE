@@ -11,6 +11,15 @@ public class Ordini extends Observable  {
         this.articles = articles;
     }
 
+    public Ordini(float total, float commissionTot, Agenti agent, ArrayList<Articolo> articles, int id ) {
+        this.total = total;
+        this.commissionTot = commissionTot;
+        this.agent = agent;
+        this.articles = articles;
+        this.id=id;
+        lastID = Math.max(lastID, id);
+    }
+
     public ArrayList<Articolo> getArticles() {
         return articles;
     }

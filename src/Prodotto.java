@@ -6,6 +6,10 @@ public class Prodotto extends Articolo {
         super(name, price);
     }
 
+    public Prodotto(String name, float price, int id) {
+        super(name, price, id);
+    }
+
     public void display() {
 
     }
