@@ -10,13 +10,13 @@ public class Utenti {
             m.update(password.getBytes());
             byte[] digest = m.digest();
             BigInteger bigInt = new BigInteger(1,digest);
-            String hashtext = bigInt.toString(16);
-            while(hashtext.length() < 32 ){
-                hashtext = "0" + hashtext;
+            String hashText = bigInt.toString(16);
+            while(hashText.length() < 32 ){
+                hashText = "0" + hashText;
             }
-            this.passwordHash = hashtext;
+            this.passwordHash = hashText;
         }catch (NoSuchAlgorithmException e) {
-            System.out.println("Errore Generazione Hash");
+            System.out.println("Hash generator error");
         }
         lastID++;
         this.id = lastID;

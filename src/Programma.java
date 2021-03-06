@@ -64,12 +64,6 @@ public class Programma {
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
-            try {
-                stmt.close();
-                c.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
         }
 
         sql = "";
@@ -91,12 +85,6 @@ public class Programma {
                 c.commit();
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-                try {
-                    stmt.close();
-                    c.close();
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
             }
         }
 
@@ -109,12 +97,6 @@ public class Programma {
                 c.commit();
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-                try {
-                    stmt.close();
-                    c.close();
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
             }
         }
 
@@ -127,12 +109,6 @@ public class Programma {
                 c.commit();
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-                try {
-                    stmt.close();
-                    c.close();
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
             }
 
             try {
@@ -146,12 +122,6 @@ public class Programma {
 
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-                try {
-                    stmt.close();
-                    c.close();
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
             }
 
         }
@@ -168,6 +138,12 @@ public class Programma {
             System.out.println(catalog);
         }
 
+        try {
+            stmt.close();
+            c.close();
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
 
     }
 

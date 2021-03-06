@@ -11,7 +11,6 @@ public class CentroNotifiche implements Observer {
     private static CentroNotifiche Instance;
 
     public void viewNotification() {
-        // TODO implement here
     }
 
     public void addNotification(String newNotification){// non è in uml
@@ -19,15 +18,12 @@ public class CentroNotifiche implements Observer {
     }
 
     public void update(String notification) {
-        // TODO implement here
     }
 
     public static void getInstance() {
-        // TODO implement here
     }
 
     public void loadNotification() {
-        // TODO implement here
     }
 
     @Override

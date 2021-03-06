@@ -17,11 +17,9 @@ public class Catalogo {
     private ArrayList<Articolo> articles;
 
     public void viewCatalog() {
-        // TODO implement here
     }
 
     public void getArticle(int id) {
-        // TODO implement here
     }
 
 }

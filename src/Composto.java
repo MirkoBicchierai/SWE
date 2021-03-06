@@ -10,7 +10,6 @@ public class Composto extends Articolo {
     ArrayList<Articolo> components;
 
     public void display() {
-        // TODO implement here
     }
 
 }
