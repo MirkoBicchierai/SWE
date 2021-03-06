@@ -13,22 +13,14 @@ public class Main {
 
         Programma p = Programma.getInstance();
 
-        //Utenti A1 = new Amministratori("Ganjiro", "111");
-        //p.users.add(A1);
         System.out.println(p.articles.size());
         System.out.println(p.users.size());
         System.out.println(p.catalogs.size());
         System.out.println(p.customers.size());
         System.out.println(p.orders.size());
         System.out.println(p.notCenter.getNofications().size());
-        Scanner in = new Scanner(System.in);
-        System.out.println("Inserire Nome Utente:");
-        String name = in.nextLine();
-        System.out.println("Inserire Password:");
-        String psw = in.nextLine();
 
-        p.run(name, psw);
-
+        p.run();
     }
 
     private static void startProgram(){
