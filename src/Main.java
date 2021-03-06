@@ -12,6 +12,7 @@ public class Main {
     private static void realMain(){
 
         Programma p = Programma.getInstance();
+
         //Utenti A1 = new Amministratori("Ganjiro", "111");
         //p.users.add(A1);
         System.out.println(p.articles.size());
@@ -25,6 +26,7 @@ public class Main {
         String name = in.nextLine();
         System.out.println("Inserire Password:");
         String psw = in.nextLine();
+
         p.run(name, psw);
 
     }
@@ -33,25 +35,39 @@ public class Main {
         long startTime = System.nanoTime();
 
         Clienti C1 = new Clienti("Nexal","Italy","mirko@nexal.it");
+        Clienti C2 = new Clienti("Aperion","Italy","andrea@aperion.it");
+        Programma.getInstance().customers.add(C1);
+        Programma.getInstance().customers.add(C2);
+
         Articolo AA1 = new Prodotto("Nexal1",3);
         Articolo AA2 = new Prodotto("Nexal2",5);
         Articolo AA3 = new Prodotto("Nexal3",50);
+        Programma.getInstance().articles.add(AA1);
+        Programma.getInstance().articles.add(AA2);
+        Programma.getInstance().articles.add(AA3);
+
         ArrayList<Articolo> articles = new  ArrayList<>();
         ArrayList<Articolo> articles2 = new  ArrayList<>();
         articles.add(AA1);
         articles.add(AA2);
         articles2.add(AA3);
         articles2.add(AA2);
-
-
         Catalogo Ca1 = new Catalogo(articles,"descrizione1","Italy");
         Catalogo Ca2 = new Catalogo(articles2,"descrizione2","Germany");
-        Agenti A1 = new Agenti("Mirko", "123456",100, Ca1);
+        Programma.getInstance().catalogs.add(Ca1);
+        Programma.getInstance().catalogs.add(Ca2);
+
+        Agenti A1 = new Agenti("Mirko", "111",100, Ca1);
+        Agenti A11 = new Agenti("Mirko2", "111",100, Ca2);
+        Amministratori Admin = new Amministratori("Ganjiro", "111");
+        Programma.getInstance().users.add(A1);
+        Programma.getInstance().users.add(A11);
+        Programma.getInstance().users.add(Admin);
 
         Ordini O1 = new Ordini(5,10,A1,articles);
-        Programma.getInstance().articles.add(AA1);
-        Programma.getInstance().articles.add(AA2);
-        Programma.getInstance().articles.add(AA3);
+        Ordini O2 = new Ordini(5,10,A11,articles2);
+        Programma.getInstance().orders.add(O1);
+        Programma.getInstance().orders.add(O2);
 
         ArrayList<Articolo> articlesComp1 = new  ArrayList<>();
         ArrayList<Articolo> articlesComp2 = new  ArrayList<>();
@@ -71,11 +87,6 @@ public class Main {
         Programma.getInstance().notCenter.update("Notify 4");
         Programma.getInstance().notCenter.update("Notify 5");
 
-        Programma.getInstance().catalogs.add(Ca1);
-        Programma.getInstance().catalogs.add(Ca2);
-
-        Programma.getInstance().orders.add(O1);
-        Programma.getInstance().customers.add(C1);
         Programma.getInstance().upload();
 
         long endTime = System.nanoTime();

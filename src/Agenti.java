@@ -30,6 +30,12 @@ public class Agenti extends Utenti {
     }
 
     public void viewCatalog() {
+
+        System.out.println("Catalog: " + catalog.getDescription() +" MarketZone: " + catalog.getMarketZone());
+        for(Articolo i : catalog.getArticles()){
+            System.out.println("Article: " + i.getName() + "price: " + i.getPrice());
+        }
+
     }
 
     public void createOrder() {
