@@ -1,3 +1,4 @@
+import java.security.PrivilegedAction;
 import java.util.*;
 import java.sql.*;
 
@@ -22,6 +23,19 @@ public class Programma {
     public CentroNotifiche notCenter;
     private static Programma instance;
     private Connection c;
+    private Menu menu;
+
+    private void setMenu(Menu menu){ //forse inutile
+        this.menu = menu;
+    }
+
+    public void run(String name, String psw){
+
+        this.login(name, psw);
+        this.menu.showMenu();
+
+        this.upload();
+    }
 
     public void login(String name, String psw) {
 
@@ -38,11 +52,10 @@ public class Programma {
         }
 
         if (activeUser instanceof Amministratori){
-            //TODO cose da Ammistratori
+            menu = new AdministatorMenu();
         } else  {
-            //TODO cose da Agenti
+            menu = new AgentMenu();
         }
-
     }
 
     public static Programma getInstance() {

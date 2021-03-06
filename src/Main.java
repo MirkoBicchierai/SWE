@@ -34,6 +34,27 @@ public class Main {
 
     }
 
+    private static void realMain(){
+
+        Programma p = Programma.getInstance();
+
+        System.out.println(p.articles.size());
+        System.out.println(p.users.size());
+        System.out.println(p.catalogs.size());
+        System.out.println(p.customers.size());
+        System.out.println(p.orders.size());
+        System.out.println(p.notCenter.getNofications().size());
+
+        Scanner in = new Scanner(System.in);
+        System.out.println("Inserire Nome Utente:");
+        String name = in.nextLine();
+
+        System.out.println("Inserire Password:");
+        String psw = in.nextLine();
+
+        p.run(name, psw);
+    }
+
     private static void startProgram(){
         long startTime = System.nanoTime();
         Agenti A1 = new Agenti("Mirko", "123456",100);
@@ -85,4 +106,5 @@ public class Main {
         long duration = (endTime - startTime)/1000000;
         System.out.println("Execution time: "+duration+"ms");
     }
+
 }
