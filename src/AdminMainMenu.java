@@ -44,12 +44,10 @@ public class AdminMainMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-
                     admin.viewAgent();
                     Programma.getInstance().setMenu(new AgentMainMenu());
                     quit = true;
                     break;
-
                 case 2:
 
                     System.out.println("You've chosen item #2");

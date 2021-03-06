@@ -49,9 +49,11 @@ public class Programma {
 
             this.login(name, psw);
         }
+
         while (!wantClose) {
             this.getState().showMenu(activeUser);
         }
+
         this.upload();
     }
 
