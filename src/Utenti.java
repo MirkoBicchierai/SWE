@@ -20,7 +20,6 @@ public class Utenti {
     protected int id;
     protected String name;
     protected String passwordHash;
-    protected int type;
     protected static int lastID;
 
     public static String getHash(String password){

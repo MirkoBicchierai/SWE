@@ -155,7 +155,7 @@ public class Programma {
             int idCatalog = rs.getInt("IdCatalog");
             float commissionPerc = rs.getFloat("CommissionPerc");
 
-            if (id == 1) {
+            if (type == 1) {
                 Catalogo tmp = null;
                 for(Catalogo i: catalogs) {
                     if (i.getId()==idCatalog){
