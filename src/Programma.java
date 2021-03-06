@@ -84,14 +84,12 @@ public class Programma {
             String  businessName = rs.getString("BusinessName");
             String  country = rs.getString("Country");
             String  email = rs.getString("Email");
-
             customers.add(new Clienti(id,businessName,country,email));
         }
 
         rs = stmt.executeQuery( "SELECT * FROM Notification;" );
         while ( rs.next() ) {
             String  message = rs.getString("message");
-
             notCenter.update(message);
         }
 
@@ -102,7 +100,6 @@ public class Programma {
             String  passHash = rs.getString("Passwordhash");
             int type = rs.getInt("Type");
             float commissionPerc = rs.getFloat("CommissionPerc");
-
             if (id == 1){
                 users.add(new Agenti(name, passHash, commissionPerc, id));
             }else {
@@ -115,7 +112,6 @@ public class Programma {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             float price = rs.getFloat("Price");
-
             articles.add(new Prodotto(name, price, id));
         }
         rs = stmt.executeQuery( "SELECT * FROM Article WHERE id in (SELECT IdCompound FROM ArticleCompound );" );
@@ -123,9 +119,7 @@ public class Programma {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             float price = rs.getFloat("Price");
-
             ArrayList<Articolo> tmp = new ArrayList<>();
-
             rs1 = stmt.executeQuery("SELECT * FROM ArticleCompound WHERE IdCompound = " + id + " ;");
             while (rs1.next()) {
                 int idComponent = rs.getInt("idComponent");
@@ -137,7 +131,6 @@ public class Programma {
                     }
                 }
             }
-
             articles.add(new Composto(name, tmp, id));
         }
 
@@ -146,12 +139,10 @@ public class Programma {
             int id = rs.getInt("idHead");
             String description = rs.getString("Description");
             String marketZone = rs.getString("MarketZone");
-
             ArrayList<Articolo> tmp = new ArrayList<>();
             rs1 = stmt.executeQuery( "SELECT * FROM CatalogRow WHERE IdHead = "+id+" ;" );
             while ( rs1.next() ) {
                 int idArticle = rs.getInt("idArticle");
-
                 for(Articolo a: articles){
                     if (a.getId()==idArticle){
                         tmp.add(a);
@@ -168,9 +159,7 @@ public class Programma {
             int idAgent = rs.getInt("idAgent");
             float total = rs.getFloat("Total");
             float commission = rs.getFloat("Commission");
-
             Agenti tmpAgent = null;
-
             for(Utenti i: users){
                 if (i.getId() == idAgent){
                     tmpAgent =(Agenti) i;
@@ -182,7 +171,6 @@ public class Programma {
             rs1 = stmt.executeQuery( "SELECT * FROM OrderRow WHERE IdHead = "+id+" ;" );
             while ( rs1.next() ) {
                 int idArticle = rs.getInt("idArticle");
-
                 for(Articolo a: articles){
                     if (a.getId()==idArticle){
                         tmp.add(a);
@@ -192,8 +180,6 @@ public class Programma {
             }
             orders.add(new Ordini(total,commission, tmpAgent, tmp, id));
         }
-
-
 
     }
 
@@ -275,20 +261,16 @@ public class Programma {
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
-
             try {
-
                 for (Articolo article : order.getArticles()) {
                     sql = "INSERT INTO OrderRow (idHead,idArticle) " + "VALUES ("+order.getId()+", "+article.getId()+");";
                     stmt = c.createStatement();
                     stmt.executeUpdate(sql);
                     c.commit();
                 }
-
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
-
         }
 
         for (Catalogo catalog : catalogs) {
@@ -300,16 +282,13 @@ public class Programma {
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
-
             try {
-
                 for (Articolo article : catalog.getArticles()) {
                     sql = "INSERT INTO CatalogRow (idHead,idArticle) " + "VALUES ("+catalog.getId()+", "+article.getId()+");";
                     stmt = c.createStatement();
                     stmt.executeUpdate(sql);
                     c.commit();
                 }
-
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
@@ -338,7 +317,6 @@ public class Programma {
             } catch ( Exception e ) {
                 System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             }
-
         }
 
         for (String notify : notCenter.getNofications()) {
