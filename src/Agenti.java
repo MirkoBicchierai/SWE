@@ -14,6 +14,10 @@ public class Agenti extends Utenti {
         this.catalog = catalog;
     }
 
+    public Catalogo getCatalog() {
+        return catalog;
+    }
+
     private Catalogo catalog;
 
     public float getCommissionPerc() {

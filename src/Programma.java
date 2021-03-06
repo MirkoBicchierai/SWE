@@ -241,12 +241,14 @@ public class Programma {
                 if (!(user instanceof Agenti)) {
                     type = 0;
                     perch = 0;
+                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " );";
                 } else {
                     type = 1;
                     Agenti tmp = (Agenti) user;
                     perch = tmp.getCommissionPerc();
+                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,IdCatalog) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ,"+tmp.getCatalog().getId()+");";
                 }
-                sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " );";
+
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();

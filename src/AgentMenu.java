@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import java.util.Scanner;
-
 public class AgentMenu implements Menu {
     //potrebbe essere static?? insieme ad admin
     @Override
@@ -12,14 +10,16 @@ public class AgentMenu implements Menu {
     @Override
     public void showMenu(Utenti activeUser) {
 
+        Agenti activeAgent = (Agenti)activeUser;
+
         Scanner in = new Scanner(System.in);
 
+        System.out.println("Hello "+activeUser.getName()+"!");
         System.out.println("Menu option:");
 
-
-        System.out.println("1. Operation 1");
-        System.out.println("2. Operation 2");
-        System.out.println("3. Operation 3");
+        System.out.println("1. View catalog");
+        System.out.println("2. Historical Order");
+        System.out.println("3. Create Order");
 
         System.out.println("0. Quit");
 
@@ -31,8 +31,7 @@ public class AgentMenu implements Menu {
             menuItem = in.nextInt();
             switch (menuItem) {
                 case 1:
-                    System.out.println("You've chosen item #1");
-                    // do something...
+                    activeAgent.viewCatalog();
                     break;
                 case 2:
                     System.out.println("You've chosen item #2");

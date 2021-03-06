@@ -12,6 +12,8 @@ public class Main {
     private static void realMain(){
 
         Programma p = Programma.getInstance();
+        //Utenti A1 = new Amministratori("Ganjiro", "111");
+        //p.users.add(A1);
         System.out.println(p.articles.size());
         System.out.println(p.users.size());
         System.out.println(p.catalogs.size());
