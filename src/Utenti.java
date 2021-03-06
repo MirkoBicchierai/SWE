@@ -4,6 +4,27 @@ import java.security.*;
 public class Utenti {
 
     public Utenti(String name, String password) {
+        this.passwordHash=getHash(password);
+        lastID++;
+        this.id = lastID;
+        this.name = name;
+    }
+
+    public Utenti(String name, String password, int id) {
+        this.passwordHash=getHash(password);
+        this.id=id;
+        lastID = Math.max(lastID, id);
+        this.name = name;
+    }
+
+    protected int id;
+    protected String name;
+    protected String passwordHash;
+    protected int type;
+    protected static int lastID;
+
+    private String getHash(String password){
+        String retValue = null;
         try {
             MessageDigest m = MessageDigest.getInstance("MD5");
             m.reset();
@@ -14,21 +35,12 @@ public class Utenti {
             while(hashText.length() < 32 ){
                 hashText = "0" + hashText;
             }
-            this.passwordHash = hashText;
+            retValue = hashText;
         }catch (NoSuchAlgorithmException e) {
             System.out.println("Hash generator error");
         }
-        lastID++;
-        this.id = lastID;
-        this.name = name;
-
+        return retValue;
     }
-
-    protected int id;
-    protected String name;
-    protected String passwordHash;
-    protected int type;
-    protected static int lastID;
 
     public int getId() {
         return id;

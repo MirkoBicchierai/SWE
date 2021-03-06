@@ -9,6 +9,13 @@ public class Catalogo {
         lastID++;
         this.id=lastID;
     }
+    public Catalogo(ArrayList<Articolo> articles,String description , String marketZone, int id) {
+        this.articles = articles;
+        this.description = description;
+        this.marketZone = marketZone;
+        this.id=id;
+        lastID = Math.max(lastID, id);
+    }
 
     private int id;
     private String description;

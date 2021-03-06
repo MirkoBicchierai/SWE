@@ -5,6 +5,9 @@ public class Amministratori extends Utenti {
     public Amministratori(String name, String password) {
         super(name, password);
     }
+    public Amministratori(String name, String password, int id) {
+        super(name, password, id);
+    }
 
     public void viewGlobalStoricOrder() {
     }

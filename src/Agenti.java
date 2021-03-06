@@ -7,6 +7,11 @@ public class Agenti extends Utenti {
             this.commissionPerc = commissionPerc;
     }
 
+    public Agenti(String name, String password, float commissionPerc, int id) {
+        super(name,password, id);
+        this.commissionPerc = commissionPerc;
+    }
+
     public float getCommissionPerc() {
         return commissionPerc;
     }
