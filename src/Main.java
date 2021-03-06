@@ -28,6 +28,19 @@ public class Main {
         Programma.getInstance().articles.add(AA2);
         Programma.getInstance().articles.add(AA3);
 
+        ArrayList<Articolo> articlesComp1 = new  ArrayList<>();
+        ArrayList<Articolo> articlesComp2 = new  ArrayList<>();
+        articlesComp1.add(AA1);
+        articlesComp1.add(AA2);
+        articlesComp2.add(AA2);
+        articlesComp2.add(AA3);
+
+        Articolo AC1 = new Composto("NexalComp1",articlesComp1);
+        Articolo AC2 = new Composto("NexalComp2",articlesComp2);
+        Programma.getInstance().articles.add(AC1);
+        Programma.getInstance().articles.add(AC2);
+
+
         Programma.getInstance().catalogs.add(Ca1);
         Programma.getInstance().catalogs.add(Ca2);
 

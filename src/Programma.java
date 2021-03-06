@@ -152,9 +152,31 @@ public class Programma {
         }
 
         for (Articolo article : articles) {
-            sql = "";
-            System.out.println(article);
+            if(article instanceof Composto) {
+                Composto  tmp = (Composto) article;
+                for (Articolo a : tmp.getComponents()) {
+                    try {
+                        sql = "INSERT INTO ArticleCompound (IdCompound,IdComponent) " + "VALUES ("+article.getId()+", "+a.getId()+");";
+                        stmt = c.createStatement();
+                        stmt.executeUpdate(sql);
+                        c.commit();
+                    } catch ( Exception e ) {
+                        System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                    }
+                }
+            }
+            try {
+                sql = "INSERT INTO Article (Id,Name,Price) " + "VALUES ("+article.getId()+", '"+article.getName()+"', '"+article.getPrice()+"');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+
         }
+
+        // GESTIRE NOTIFICHE
 
         try {
             stmt.close();
