@@ -69,9 +69,9 @@ public class Programma {
         }
 
         if (activeUser instanceof Amministratori) {
-            this.setMenu(new AdministatorMenu());
+            this.setMenu(new AdminMainMenu());
         } else {
-            this.setMenu(new AgentMenu());
+            this.setMenu(new AgentMainMenu());
         }
     }
 

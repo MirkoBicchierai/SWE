@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class AdministatorMenu implements Menu{
+public class AdminMainMenu implements Menu{
 
     @Override
     public Menu getCurrentState() {
@@ -46,7 +46,7 @@ public class AdministatorMenu implements Menu{
                 case 1:
 
                     admin.viewAgent();
-                    Programma.getInstance().setMenu(new AgentMenu());
+                    Programma.getInstance().setMenu(new AgentMainMenu());
                     quit = true;
                     break;
 

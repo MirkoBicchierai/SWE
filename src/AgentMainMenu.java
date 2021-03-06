@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class AgentMenu implements Menu {
+public class AgentMainMenu implements Menu {
     //potrebbe essere static?? insieme ad admin
     @Override
     public Menu getCurrentState() {
@@ -23,7 +23,6 @@ public class AgentMenu implements Menu {
 
         System.out.println("0. Quit");
 
-        // handle user commands
         boolean quit = false;
         int menuItem;
         do {
@@ -35,18 +34,15 @@ public class AgentMenu implements Menu {
                     break;
                 case 2:
                     System.out.println("You've chosen item #2");
-                    // do something...
                     break;
                 case 3:
                     System.out.println("You've chosen item #3");
-                    // do something...
                     break;
                 case 0:
                     quit = true;
                     Programma.getInstance().close();
                     break;
                 default:
-
                     System.out.println("Invalid choice.");
             }
         } while (!quit);
