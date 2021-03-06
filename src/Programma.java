@@ -23,6 +23,7 @@ public class Programma {
     private static Programma instance;
     private Connection c;
 
+
     public void login(int id, String psw) {
         System.out.println("LOGIN");
     }
@@ -69,7 +70,11 @@ public class Programma {
             int type = rs.getInt("Type");
             float commissionPerc = rs.getFloat("CommissionPerc");
 
-            users.add(type==1?new Agenti(name, passHash, commissionPerc, id) : new Amministratori(name, passHash, id));
+            if (id == 1){
+                users.add(new Agenti(name, passHash, commissionPerc, id));
+            }else {
+                users.add( new Amministratori(name, passHash, id));
+            }
         }
 
         rs = stmt.executeQuery( "SELECT * FROM Article WHERE id not in (SELECT IdCompound FROM ArticleCompound );" );
