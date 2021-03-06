@@ -23,19 +23,17 @@ public class Programma {
     private static Programma instance;
     private Connection c;
 
-
     public void login(String name, String psw) {
 
         for(Utenti i : users){
-            String a=Utenti.getHash(psw);
             if (name.equals(i.name) && Utenti.getHash(psw).equals(i.passwordHash)) {
-                    activeUser = i;
-                    break;
-                }
+                activeUser = i;
+                break;
+            }
         }
 
         if (activeUser == null){
-            System.err.println("Password Errata!");
+            System.err.println("Password e/o Nome utente Errati!");
             return;
         }
 
@@ -44,6 +42,7 @@ public class Programma {
         } else  {
             //TODO cose da Agenti
         }
+
     }
 
     public static Programma getInstance() {
@@ -51,8 +50,8 @@ public class Programma {
             instance = new Programma();
             try {
                 instance.load();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return instance;
