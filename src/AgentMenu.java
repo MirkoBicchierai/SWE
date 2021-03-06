@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
-public class AgentMenu implements Menu{
-                                                //potrebbe essere static?? insieme ad admin
+import java.util.Scanner;
+
+public class AgentMenu implements Menu {
+    //potrebbe essere static?? insieme ad admin
     @Override
     public Menu getCurrentState() {
         return this;
