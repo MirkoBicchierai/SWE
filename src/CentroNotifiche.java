@@ -13,11 +13,9 @@ public class CentroNotifiche implements Observer {
     public void viewNotification() {
     }
 
-    public void addNotification(String newNotification){// non è in uml
-            nofications.add(newNotification);
-    }
 
     public void update(String notification) {
+        nofications.add(notification);
     }
 
 
