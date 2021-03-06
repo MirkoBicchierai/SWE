@@ -22,7 +22,11 @@ public class Programma {
     public static Programma getInstance() {
         if (instance==null) {
             instance = new Programma();
-            instance.load();
+            try {
+                instance.load();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
         return instance;
     }
