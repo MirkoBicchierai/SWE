@@ -29,7 +29,7 @@ public class Main {
 
     private static void startProgram(){
         long startTime = System.nanoTime();
-        Agenti A1 = new Agenti("Mirko", "123456",100);
+
         Clienti C1 = new Clienti("Nexal","Italy","mirko@nexal.it");
         Articolo AA1 = new Prodotto("Nexal1",3);
         Articolo AA2 = new Prodotto("Nexal2",5);
@@ -40,11 +40,13 @@ public class Main {
         articles.add(AA2);
         articles2.add(AA3);
         articles2.add(AA2);
-        Ordini O1 = new Ordini(5,10,A1,articles);
+
 
         Catalogo Ca1 = new Catalogo(articles,"descrizione1","Italy");
         Catalogo Ca2 = new Catalogo(articles2,"descrizione2","Germany");
+        Agenti A1 = new Agenti("Mirko", "123456",100, Ca1);
 
+        Ordini O1 = new Ordini(5,10,A1,articles);
         Programma.getInstance().articles.add(AA1);
         Programma.getInstance().articles.add(AA2);
         Programma.getInstance().articles.add(AA3);

@@ -11,12 +11,25 @@ public class AdministatorMenu implements Menu{
     public void showMenu(Utenti activeUser) {
 
         Scanner in = new Scanner(System.in);
-        
-        System.out.println("5. Operation 1");
-        System.out.println("4. Operation 1");
-        System.out.println("3. Operation 1");
+
+        System.out.println("Hello "+activeUser.getName()+"!");
+
+        System.out.println("");
+
+        for (String i: CentroNotifiche.getInstance().getNofications()){
+            System.out.println(i);
+        }
+
+        System.out.println("");
+
+        System.out.println("Menu Option:");
+
+        System.out.println("1. ");
         System.out.println("2. Operation 1");
-        System.out.println("1. Operation 1");
+        System.out.println("3. Operation 1");
+        System.out.println("4. Operation 1");
+        System.out.println("5. Operation 1");
+
         System.out.println("0. Quit");
 
 
@@ -85,6 +98,7 @@ public class AdministatorMenu implements Menu{
             }
 
         } while (!quit);
+
 
         System.out.println("Bye-bye!");
 

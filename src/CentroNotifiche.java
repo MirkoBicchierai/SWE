@@ -28,6 +28,10 @@ public class CentroNotifiche implements Observer {
             return instance;
     }
 
+    public void resetNotification(){
+        nofications = new ArrayList<>();
+    }
+
     public void loadNotification() {
     }
 
