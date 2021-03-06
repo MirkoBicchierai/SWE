@@ -10,6 +10,7 @@ public class Programma {
         catalogs = new ArrayList<>();
         orders = new ArrayList<>();
         customers = new ArrayList<>();
+        activeUser= null;
         c = DBConnection.getInstance();
     }
 
@@ -37,9 +38,17 @@ public class Programma {
         return this.menu.getCurrentState();
     }
 
-    public void run(String name, String psw) {
+    public void run() {
+        while (activeUser == null) {
+            Scanner in = new Scanner(System.in);
+            System.out.println("Inserire Nome Utente:");
+            String name = in.nextLine();
 
-        this.login(name, psw);
+            System.out.println("Inserire Password:");
+            String psw = in.nextLine();
+
+            this.login(name, psw);
+        }
         while (!wantClose) {
             this.getState().showMenu(activeUser);
         }

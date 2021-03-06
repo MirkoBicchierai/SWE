@@ -43,6 +43,7 @@ public class AgentMenu implements Menu {
                     break;
                 case 0:
                     quit = true;
+                    Programma.getInstance().close();
                     break;
                 default:
 
