@@ -10,7 +10,11 @@ public class Composto extends Articolo {
         this.components = components;
     }
 
-    ArrayList<Articolo> components;
+    public ArrayList<Articolo> getComponents() {
+        return components;
+    }
+
+    private ArrayList<Articolo> components;
 
     public void display() {
     }
