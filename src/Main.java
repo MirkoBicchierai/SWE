@@ -1,4 +1,3 @@
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
 
-        Programma p = Programma.getInstance();
+        Programma.getInstance();
         Scanner in = new Scanner(System.in);
         boolean quit = false;
         int menuItem;
@@ -37,7 +36,6 @@ public class Main {
 
     private static void startProgram(){
         long startTime = System.nanoTime();
-        Statement stmt = null;
         Agenti A1 = new Agenti("Mirko", "123456",100);
         Clienti C1 = new Clienti("Nexal","Italy","mirko@nexal.it");
         Articolo AA1 = new Prodotto("Nexal1",3);
