@@ -16,7 +16,7 @@ public class Programma {
     private Connection c = DBConnection.getInstance();
 
     public void login(int id, String psw) {
-
+        System.out.println("LOGIN");
     }
 
     public static Programma getInstance() {
