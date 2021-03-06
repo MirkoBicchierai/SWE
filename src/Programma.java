@@ -27,8 +27,51 @@ public class Programma {
         return instance;
     }
 
-    public void load() {
+    public void load() throws SQLException {
 
+        Statement stmt = c.createStatement();
+        ResultSet rs,rs1 = null;
+
+        rs = stmt.executeQuery( "SELECT * FROM Customer;" );
+        while ( rs.next() ) {
+            int id = rs.getInt("id");
+            String  businessName = rs.getString("BusinessName");
+            String  country = rs.getString("Country");
+            String  email = rs.getString("Email");
+
+            customers.add(new Clienti(id,businessName,country,email));
+        }
+
+        CentroNotifiche notCenter = CentroNotifiche.getInstance();
+        rs = stmt.executeQuery( "SELECT * FROM Notification;" );
+        while ( rs.next() ) {
+            String  message = rs.getString("message");
+
+            notCenter.addNotification(message);
+        }
+
+        rs = stmt.executeQuery( "SELECT * FROM User;" );
+        while ( rs.next() ) {
+            int id = rs.getInt("id");                             //1 agente - 0 amministratore
+            String  name = rs.getString("Name");
+            String  passHash = rs.getString("Passwordhash");
+            int type = rs.getInt("Type");
+            float commissionPerc = rs.getFloat("CommissionPerc");
+
+            users.add(type==1?new Agenti(name, passHash, commissionPerc) : new Amministratori(name, passHash));
+        }
+
+        rs = stmt.executeQuery( "SELECT * FROM CatalogHead;" );
+        while ( rs.next() ) {
+            int id = rs.getInt("idHead");
+            String name = rs.getString("Description");
+            String passHash = rs.getString("MarketZone");
+
+            rs1 = stmt.executeQuery( "SELECT * FROM CatalogRow WHERE IdHead = "+id+" ;" );
+            while ( rs1.next() ) {
+                int idArticle = rs.getInt("idArticle");
+            }
+        }
 
     }
 
