@@ -5,53 +5,24 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
 
-        Programma.getInstance();
-        Scanner in = new Scanner(System.in);
-        boolean quit = false;
-        int menuItem;
-        do {
-            System.out.println("Program Menu: ");
-            System.out.println("1--Login");
-            System.out.println("2--First start program (empty DB)");
-            System.out.println("0--Exit");
-            menuItem = in.nextInt();
-            switch (menuItem) {
-                case 1:
-                    System.out.println("Giro non ti arrabbiare!");
-                    break;
-                case 2:
-                    startProgram();
-                    break;
-                case 0:
-                    quit = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
-        } while (!quit);
-
-        System.out.println("Exit");
+        realMain();
 
     }
 
     private static void realMain(){
 
         Programma p = Programma.getInstance();
-
         System.out.println(p.articles.size());
         System.out.println(p.users.size());
         System.out.println(p.catalogs.size());
         System.out.println(p.customers.size());
         System.out.println(p.orders.size());
         System.out.println(p.notCenter.getNofications().size());
-
         Scanner in = new Scanner(System.in);
         System.out.println("Inserire Nome Utente:");
         String name = in.nextLine();
-
         System.out.println("Inserire Password:");
         String psw = in.nextLine();
-
         p.run(name, psw);
     }
 

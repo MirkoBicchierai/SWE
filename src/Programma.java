@@ -29,11 +29,14 @@ public class Programma {
         this.menu = menu;
     }
 
+    private Menu getState(){ //forse inutile
+        return this.menu.getCurrentState();
+    }
+
     public void run(String name, String psw){
 
         this.login(name, psw);
-        this.menu.showMenu();
-
+        this.getState().showMenu();
         this.upload();
     }
 
@@ -52,9 +55,9 @@ public class Programma {
         }
 
         if (activeUser instanceof Amministratori){
-            menu = new AdministatorMenu();
+            this.setMenu(new AdministatorMenu());
         } else  {
-            menu = new AgentMenu();
+            this.setMenu(new AgentMenu());
         }
     }
 
