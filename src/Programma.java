@@ -23,8 +23,13 @@ public class Programma {
     private static Programma instance;
     private Connection c;
     private Menu menu;
+    private Boolean wantClose = false;
 
-    private void setMenu(Menu menu) { //forse inutile
+    public void close(){
+        wantClose = true;
+    }
+
+    public void setMenu(Menu menu) { //forse inutile
         this.menu = menu;
     }
 
@@ -35,9 +40,10 @@ public class Programma {
     public void run(String name, String psw) {
 
         this.login(name, psw);
-        this.getState().showMenu(activeUser);
+        while (!wantClose) {
+            this.getState().showMenu(activeUser);
+        }
         this.upload();
-
     }
 
     public void login(String name, String psw) {
@@ -76,6 +82,7 @@ public class Programma {
     public void load() throws SQLException {
 
         Statement stmt = c.createStatement();
+        Statement stmt1 = c.createStatement();
         ResultSet rs, rs1 = null;
 
         rs = stmt.executeQuery("SELECT * FROM Customer;");
@@ -106,9 +113,9 @@ public class Programma {
             String name = rs.getString("name");
             float price = rs.getFloat("Price");
             ArrayList<Articolo> tmp = new ArrayList<>();
-            rs1 = stmt.executeQuery("SELECT * FROM ArticleCompound WHERE IdCompound = " + id + " ;");
+            rs1 = stmt1.executeQuery("SELECT * FROM ArticleCompound WHERE IdCompound = " + id + " ;");
             while (rs1.next()) {
-                int idComponent = rs.getInt("idComponent");
+                int idComponent = rs1.getInt("idComponent");
 
                 for (Articolo a : articles) {
                     if (a.getId() == idComponent) {
@@ -126,9 +133,9 @@ public class Programma {
             String description = rs.getString("Description");
             String marketZone = rs.getString("MarketZone");
             ArrayList<Articolo> tmp = new ArrayList<>();
-            rs1 = stmt.executeQuery("SELECT * FROM CatalogRow WHERE IdHead = " + id + " ;");
+            rs1 = stmt1.executeQuery("SELECT * FROM CatalogRow WHERE IdHead = " + id + " ;");
             while (rs1.next()) {
-                int idArticle = rs.getInt("idArticle");
+                int idArticle = rs1.getInt("idArticle");
                 for (Articolo a : articles) {
                     if (a.getId() == idArticle) {
                         tmp.add(a);
@@ -182,9 +189,9 @@ public class Programma {
             }
 
             ArrayList<Articolo> tmp = new ArrayList<>();
-            rs1 = stmt.executeQuery("SELECT * FROM OrderRow WHERE IdHead = " + id + " ;");
+            rs1 = stmt1.executeQuery("SELECT * FROM OrderRow WHERE IdHead = " + id + " ;");
             while (rs1.next()) {
-                int idArticle = rs.getInt("idArticle");
+                int idArticle = rs1.getInt("idArticle");
                 for (Articolo a : articles) {
                     if (a.getId() == idArticle) {
                         tmp.add(a);

@@ -10,6 +10,7 @@ public class AdministatorMenu implements Menu{
     @Override
     public void showMenu(Utenti activeUser) {
 
+        Amministratori admin = (Amministratori)activeUser;
         Scanner in = new Scanner(System.in);
 
         System.out.println("Hello "+activeUser.getName()+"!");
@@ -24,8 +25,8 @@ public class AdministatorMenu implements Menu{
 
         System.out.println("Menu Option:");
 
-        System.out.println("1. ");
-        System.out.println("2. Operation 1");
+        System.out.println("1. View Agents");
+        System.out.println("2. View Catalogs");
         System.out.println("3. Operation 1");
         System.out.println("4. Operation 1");
         System.out.println("5. Operation 1");
@@ -38,19 +39,15 @@ public class AdministatorMenu implements Menu{
         int menuItem;
 
         do {
-
             System.out.print("Choose menu item: ");
-
             menuItem = in.nextInt();
-
             switch (menuItem) {
 
                 case 1:
 
-                    System.out.println("You've chosen item #1");
-
-                    // do something...
-
+                    admin.viewAgent();
+                    Programma.getInstance().setMenu(new AgentMenu());
+                    quit = true;
                     break;
 
                 case 2:
@@ -89,6 +86,7 @@ public class AdministatorMenu implements Menu{
 
                     quit = true;
 
+                    Programma.getInstance().close();
                     break;
 
                 default:
@@ -98,6 +96,7 @@ public class AdministatorMenu implements Menu{
             }
 
         } while (!quit);
+
 
 
         System.out.println("Bye-bye!");
