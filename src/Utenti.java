@@ -24,11 +24,11 @@ public class Utenti {
 
     }
 
-    private int id;
-    private String name;
-    private String passwordHash;
-    private int type;
-    private static int lastID;
+    protected int id;
+    protected String name;
+    protected String passwordHash;
+    protected int type;
+    protected static int lastID;
 
     public int getId() {
         return id;

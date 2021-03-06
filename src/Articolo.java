@@ -26,10 +26,10 @@ public abstract class Articolo {
         return lastID;
     }
 
-    private String name;
-    private int id;
-    private float price;
-    private static int lastID;
+    protected String name;
+    protected int id;
+    protected float price;
+    protected static int lastID;
     public abstract void display();
 
 }
