@@ -10,16 +10,35 @@ public class Catalogo {
         this.id=lastID;
     }
 
-    public int id;
-    public String description;
-    public String marketZone;
-    private static int lastID;
+    private int id;
+    private String description;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getMarketZone() {
+        return marketZone;
+    }
+
+    private String marketZone;
+    private static int lastID = 0;
+
+    public static int getLastID() {
+        return lastID;
+    }
+
+    public ArrayList<Articolo> getArticles() {
+        return articles;
+    }
+
     private ArrayList<Articolo> articles;
 
     public void viewCatalog() {
-    }
-
-    public void getArticle(int id) {
     }
 
 }

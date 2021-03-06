@@ -7,11 +7,11 @@ public class Programma {
 
     private int activeID;
     public ArrayList<Utenti> users = new ArrayList<>();
-    private ArrayList<Articolo> articles = new ArrayList<>();
-    private ArrayList<Catalogo> catalogs = new ArrayList<>();
+    public ArrayList<Articolo> articles = new ArrayList<>();
+    public ArrayList<Catalogo> catalogs = new ArrayList<>();
     public ArrayList<Clienti> customers = new ArrayList<>();
     public ArrayList<Ordini> orders = new ArrayList<>();
-    private CentroNotifiche notCenter;
+    public CentroNotifiche notCenter;
     private static Programma instance;
     private Connection c = DBConnection.getInstance();
 
@@ -43,6 +43,9 @@ public class Programma {
             sql = "DELETE FROM OrderHead WHERE 1=1;";
             stmt.executeUpdate(sql);
             c.commit();
+            sql = "DELETE FROM OrderRow WHERE 1=1;";
+            stmt.executeUpdate(sql);
+            c.commit();
             sql = "DELETE FROM Notification WHERE 1=1;";
             stmt.executeUpdate(sql);
             c.commit();
@@ -66,7 +69,6 @@ public class Programma {
             System.exit(0);
         }
 
-        sql = "";
         int type;
         float perch;
         for (Utenti user : users) {
@@ -88,7 +90,6 @@ public class Programma {
             }
         }
 
-        sql = "";
         for (Clienti customer : customers) {
             try {
                 sql = "INSERT INTO Customer (id,BusinessName,Country,Email) " + "VALUES ("+customer.getId()+", '"+customer.getBusinessName()+"', '"+customer.getCountry()+"', '"+customer.getEmail()+"');";
@@ -100,7 +101,6 @@ public class Programma {
             }
         }
 
-        sql = "";
         for (Ordini order : orders) {
             try {
                 sql = "INSERT INTO OrderHead (idHead,idAgent,Total,Commission) " + "VALUES ("+order.getId()+", '"+order.getAgent().getId()+"', '"+order.getTotal()+"', '"+order.getCommissionTot()+"');";
@@ -126,16 +126,34 @@ public class Programma {
 
         }
 
-        sql = "";
+        for (Catalogo catalog : catalogs) {
+            try {
+                sql = "INSERT INTO CatalogHead (idHead,Description,MarketZone) " + "VALUES ("+catalog.getId()+", '"+catalog.getDescription()+"', '"+catalog.getMarketZone()+"');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+
+            try {
+
+                for (Articolo article : catalog.getArticles()) {
+                    sql = "INSERT INTO CatalogRow (idHead,idArticle) " + "VALUES ("+catalog.getId()+", "+article.getId()+");";
+                    stmt = c.createStatement();
+                    stmt.executeUpdate(sql);
+                    c.commit();
+                }
+
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+
+        }
+
         for (Articolo article : articles) {
             sql = "";
             System.out.println(article);
-        }
-
-        sql = "";
-        for (Catalogo catalog : catalogs) {
-            sql = "";
-            System.out.println(catalog);
         }
 
         try {

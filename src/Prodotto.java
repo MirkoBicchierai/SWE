@@ -7,6 +7,7 @@ public class Prodotto extends Articolo {
     }
 
     public void display() {
+
     }
 
 }
