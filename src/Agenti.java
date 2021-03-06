@@ -44,4 +44,7 @@ public class Agenti extends Utenti {
     public void deleteOrder() {
     }
 
+    @Override
+    public void viewOrders() {
+    }
 }
