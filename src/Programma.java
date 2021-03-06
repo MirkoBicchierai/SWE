@@ -49,9 +49,11 @@ public class Programma {
 
             this.login(name, psw);
         }
+
         while (!wantClose) {
             this.getState().showMenu(activeUser);
         }
+
         this.upload();
     }
 
@@ -69,9 +71,9 @@ public class Programma {
         }
 
         if (activeUser instanceof Amministratori) {
-            this.setMenu(new AdministatorMenu());
+            this.setMenu(new AdminMainMenu());
         } else {
-            this.setMenu(new AgentMenu());
+            this.setMenu(new AgentMainMenu());
         }
     }
 
