@@ -5,8 +5,8 @@ public class Amministratori extends Utenti {
     public Amministratori(String name, String password) {
         super(name, password);
     }
-    public Amministratori(String name, String password, int id) {
-        super(name, password, id);
+    public Amministratori(String name, String passwordHash, int id) {
+        super(name, passwordHash, id);
     }
 
     public void viewGlobalStoricOrder() {

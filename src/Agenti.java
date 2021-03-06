@@ -7,8 +7,8 @@ public class Agenti extends Utenti {
             this.commissionPerc = commissionPerc;
     }
 
-    public Agenti(String name, String password, float commissionPerc, int id) {
-        super(name,password, id);
+    public Agenti(String name, String passwordHash, float commissionPerc, int id) {
+        super(name,passwordHash, id);
         this.commissionPerc = commissionPerc;
     }
 

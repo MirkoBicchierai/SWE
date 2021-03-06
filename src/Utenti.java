@@ -10,8 +10,8 @@ public class Utenti {
         this.name = name;
     }
 
-    public Utenti(String name, String password, int id) {
-        this.passwordHash=getHash(password);
+    public Utenti(String name, String passwordHash, int id) {
+        this.passwordHash=passwordHash;
         this.id=id;
         lastID = Math.max(lastID, id);
         this.name = name;
@@ -23,23 +23,30 @@ public class Utenti {
     protected int type;
     protected static int lastID;
 
-    private String getHash(String password){
-        String retValue = null;
+    public static String getHash(String password){
+        String generatedPassword = null;
         try {
-            MessageDigest m = MessageDigest.getInstance("MD5");
-            m.reset();
-            m.update(password.getBytes());
-            byte[] digest = m.digest();
-            BigInteger bigInt = new BigInteger(1,digest);
-            String hashText = bigInt.toString(16);
-            while(hashText.length() < 32 ){
-                hashText = "0" + hashText;
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            //Add password bytes to digest
+            md.update(password.getBytes());
+            //Get the hash's bytes
+            byte[] bytes = md.digest();
+            //This bytes[] has bytes in decimal format;
+            //Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
-            retValue = hashText;
-        }catch (NoSuchAlgorithmException e) {
-            System.out.println("Hash generator error");
+            //Get complete hashed password in hex format
+            generatedPassword = sb.toString();
         }
-        return retValue;
+        catch (NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 
     public int getId() {

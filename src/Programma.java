@@ -13,7 +13,7 @@ public class Programma {
         c = DBConnection.getInstance();
     }
 
-    private int activeID;
+    private Utenti activeUser;
     public ArrayList<Utenti> users;
     public ArrayList<Articolo> articles;
     public ArrayList<Catalogo> catalogs;
@@ -24,8 +24,26 @@ public class Programma {
     private Connection c;
 
 
-    public void login(int id, String psw) {
-        System.out.println("LOGIN");
+    public void login(String name, String psw) {
+
+        for(Utenti i : users){
+            String a=Utenti.getHash(psw);
+            if (name.equals(i.name) && Utenti.getHash(psw).equals(i.passwordHash)) {
+                    activeUser = i;
+                    break;
+                }
+        }
+
+        if (activeUser == null){
+            System.err.println("Password Errata!");
+            return;
+        }
+
+        if (activeUser instanceof Amministratori){
+            //TODO cose da Ammistratori
+        } else  {
+            //TODO cose da Agenti
+        }
     }
 
     public static Programma getInstance() {
