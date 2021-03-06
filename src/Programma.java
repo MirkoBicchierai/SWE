@@ -47,7 +47,6 @@ public class Programma {
     }
 
     public void login(String name, String psw) {
-
         for (Utenti i : users) {
             if (name.equals(i.name) && Utenti.getHash(psw).equals(i.passwordHash)) {
                 activeUser = i;
