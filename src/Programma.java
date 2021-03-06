@@ -67,6 +67,19 @@ public class Programma {
             users.add(type==1?new Agenti(name, passHash, commissionPerc) : new Amministratori(name, passHash));
         }
 
+        rs = stmt.executeQuery( "SELECT * FROM Article;" );
+        while ( rs.next() ) {
+            int id = rs.getInt("idHead");
+            String name = rs.getString("Description");
+            float price = rs.getFloat("Price");
+
+            rs1 = stmt.executeQuery("SELECT * FROM CatalogRow WHERE IdHead = " + id + " ;");
+            while (rs1.next()) {
+                int idArticle = rs.getInt("idArticle");
+            }
+        }
+
+
         rs = stmt.executeQuery( "SELECT * FROM CatalogHead;" );
         while ( rs.next() ) {
             int id = rs.getInt("idHead");
