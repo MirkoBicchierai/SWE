@@ -303,7 +303,16 @@ public class Programma {
 
         }
 
-        // GESTIRE NOTIFICHE
+        for (String notify : notCenter.getNofications()) {
+            try {
+                sql = "INSERT INTO Notification (Message) " + "VALUES ('"+notify+"');";
+                stmt = c.createStatement();
+                stmt.executeUpdate(sql);
+                c.commit();
+            } catch ( Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            }
+        }
 
         try {
             stmt.close();
