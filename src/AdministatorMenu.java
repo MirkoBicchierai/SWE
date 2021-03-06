@@ -85,7 +85,6 @@ public class AdministatorMenu implements Menu{
                 case 0:
 
                     quit = true;
-
                     Programma.getInstance().close();
                     break;
 

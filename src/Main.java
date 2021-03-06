@@ -25,7 +25,7 @@ public class Main {
         String name = in.nextLine();
         System.out.println("Inserire Password:");
         String psw = in.nextLine();
-        p.run(name, psw);
+        p.run();
 
     }
 
