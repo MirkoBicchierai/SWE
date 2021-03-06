@@ -1,7 +1,7 @@
 import java.util.*;
 
 public abstract class Articolo {
-
+//uml è astratta non interfaccia
 
     public Articolo(String name, float price) {
         this.name = name;
