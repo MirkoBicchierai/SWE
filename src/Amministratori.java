@@ -9,6 +9,11 @@ public class Amministratori extends Utenti {
         super(name, passwordHash, id);
     }
 
+    @Override
+    public void viewOrders() {
+
+    }
+
     public void viewGlobalStoricOrder() {
     }
 

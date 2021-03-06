@@ -27,9 +27,8 @@ public class AdminMainMenu implements Menu{
 
         System.out.println("1. View Agents");
         System.out.println("2. View Catalogs");
-        System.out.println("3. Operation 1");
-        System.out.println("4. Operation 1");
-        System.out.println("5. Operation 1");
+        System.out.println("3. View Customers");
+        System.out.println("4. View Storic Orders");
 
         System.out.println("0. Quit");
 
@@ -49,37 +48,17 @@ public class AdminMainMenu implements Menu{
                     quit = true;
                     break;
                 case 2:
+                    admin.viewCatalog();
 
-                    System.out.println("You've chosen item #2");
-
-                    // do something...
-
+                    quit = true;
                     break;
-
                 case 3:
-
-                    System.out.println("You've chosen item #3");
-
-                    // do something...
+                    admin.viewClient();
 
                     break;
-
                 case 4:
-
-                    System.out.println("You've chosen item #4");
-
-                    // do something...
-
+                    admin.viewOrders();
                     break;
-
-                case 5:
-
-                    System.out.println("You've chosen item #5");
-
-                    // do something...
-
-                    break;
-
                 case 0:
 
                     quit = true;

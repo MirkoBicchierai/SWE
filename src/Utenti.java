@@ -1,7 +1,7 @@
 import java.math.BigInteger;
 import java.security.*;
 
-public class Utenti {
+public abstract class Utenti {
 
     public Utenti(String name, String password) {
         this.passwordHash=getHash(password);
@@ -54,5 +54,7 @@ public class Utenti {
     public static int getLastID() {
         return lastID;
     }
+
+    public abstract void viewOrders();
 
 }
