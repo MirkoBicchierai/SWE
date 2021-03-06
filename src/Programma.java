@@ -35,8 +35,9 @@ public class Programma {
     public void run(String name, String psw){
 
         this.login(name, psw);
-        this.getState().showMenu();
+        this.getState().showMenu(activeUser);
         this.upload();
+
     }
 
     public void login(String name, String psw) {

@@ -6,7 +6,7 @@ public class AdministatorMenu implements Menu{
     }
 
     @Override
-    public void showMenu() {
+    public void showMenu(Utenti activeUser) {
         System.out.println("SOno un Admin");
     }
 }

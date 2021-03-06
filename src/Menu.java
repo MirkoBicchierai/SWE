@@ -1,4 +1,4 @@
 public interface Menu {
     Menu getCurrentState();
-    void showMenu();
+    void showMenu(Utenti activeUser);
 }

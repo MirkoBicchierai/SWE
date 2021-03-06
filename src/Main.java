@@ -24,6 +24,7 @@ public class Main {
         System.out.println("Inserire Password:");
         String psw = in.nextLine();
         p.run(name, psw);
+
     }
 
     private static void startProgram(){
