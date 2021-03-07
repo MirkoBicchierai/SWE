@@ -26,10 +26,12 @@ public class AdminCustomersMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    admin.addClient();
+                    admin.addClient();//todo mai cosi
                     break;
                 case 2:
-                    admin.deleteClient();
+                    System.out.println("Enter the code of the Customer to Delete");
+                    int idC = in.nextInt();
+                    admin.deleteClient(idC);
                     break;
                 case 3:
                     System.out.println("Enter the code of the Customer for which to view the Orders");
