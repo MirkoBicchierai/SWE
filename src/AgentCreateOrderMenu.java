@@ -11,8 +11,10 @@ public class AgentCreateOrderMenu implements Menu{
         Scanner in = new Scanner(System.in);
         boolean quit = false;
         int menuItem;
-        int idC;
+        int idS;
         do {
+
+            activeUser.viewCustomers();
 
             System.out.println("Menu option:");
             System.out.println("1. Create new customers");
@@ -30,12 +32,21 @@ public class AgentCreateOrderMenu implements Menu{
 
             switch (menuItem) {
                 case 1:
-                    idC = createCustomers(activeUser);
-                    System.out.println(idC);
+                    createCustomers(activeUser);
                     break;
                 case 2:
                     // TODO prendere idc
-                    quit = subMenuSelectCustomer();
+                    do{
+                        System.out.println("Insert an id:");
+                        try {
+                            idS = Integer.parseInt(in.next());
+                        }catch (Exception e){
+                            idS = -1;
+                        }
+                    }while( !Programma.getInstance().checkCustomersExist( idS ) );
+
+                    subMenuSelectArticles( (Agenti) activeUser , idS );
+
                     break;
                 case 9:
                     Programma.getInstance().setMenu(new AgentMainMenu());
@@ -51,7 +62,7 @@ public class AgentCreateOrderMenu implements Menu{
         } while (!quit);
     }
 
-    private int createCustomers(Utenti activeUser){
+    private void createCustomers(Utenti activeUser){
 
         Scanner in = new Scanner(System.in);
 
@@ -62,52 +73,11 @@ public class AgentCreateOrderMenu implements Menu{
         System.out.println("Insert Business-Name :");
         String name = in.nextLine();
 
-        return  activeUser.createCustomer(name,country,email);
+        activeUser.createCustomer(name,country,email);
     }
 
-    private boolean subMenuSelectCustomer(){
-        Scanner in = new Scanner(System.in);
-        boolean quit = false;
-        boolean retQuit = false;
-        int menuItem;
-        do {
+    private void subMenuSelectArticles(Agenti agent, int idSelectedCustomers){
 
-            System.out.println("Menu option:");
-            System.out.println("1. ");
-            System.out.println("2. ");
-
-            System.out.println("9. Back");
-            System.out.println("0. Quit");
-            System.out.print("Choose menu item: ");
-
-            try {
-                menuItem = Integer.parseInt(in.next());
-            }catch (Exception e){
-                menuItem = -1;
-            }
-
-            switch (menuItem) {
-                case 1:
-
-                    break;
-                case 2:
-                    System.out.println("Do something");
-                    break;
-                case 9:
-                    Programma.getInstance().setMenu(new AgentCreateOrderMenu());
-                    retQuit = true;
-                    quit = true;
-                    break;
-                case 0:
-                    retQuit = true;
-                    quit = true;
-                    Programma.getInstance().close();
-                    break;
-                default:
-                    System.err.println("Invalid choice.");
-            }
-        } while (!quit);
-        return retQuit;
     }
 
 }
