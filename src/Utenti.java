@@ -55,6 +55,11 @@ public abstract class Utenti {
         return lastID;
     }
 
+    public int createCustomer(String businessName, String country, String email){
+        Programma.getInstance().getCustomers().add(new Clienti(businessName,country,email));
+        return Clienti.getLastID();
+    }
+
     public abstract void viewOrders();
     public abstract void viewCatalog();
 
