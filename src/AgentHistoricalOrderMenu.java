@@ -9,7 +9,6 @@ public class AgentHistoricalOrderMenu implements Menu{
     @Override
     public void showMenu(Utenti activeUser) {
 
-        activeUser.viewOrders();
         Agenti agent = (Agenti)activeUser;
         Scanner in = new Scanner(System.in);
 
@@ -21,15 +20,25 @@ public class AgentHistoricalOrderMenu implements Menu{
             System.out.println("Menu option:");
             System.out.println("1. Delete an order");
             System.out.println("9. Back");
-            System.out.println("0. Back");
+            System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
-            menuItem = in.nextInt();
+
+            try {
+                menuItem = Integer.parseInt(in.next());
+            }catch (Exception e){
+                menuItem = -1;
+            }
+
             switch (menuItem) {
 
                 case 1:
                     do {
                         System.out.println("Insert order ID");
-                        idOrder = in.nextInt();
+                        try {
+                            idOrder = Integer.parseInt(in.next());
+                        }catch (Exception e){
+                            idOrder = -1;
+                        }
                     }while(!agent.deleteOrder(idOrder));
                     break;
 
@@ -44,7 +53,7 @@ public class AgentHistoricalOrderMenu implements Menu{
                     break;
 
                 default:
-                    System.out.println("Invalid choice.");
+                    System.err.println("Invalid choice.");
 
             }
         } while (!quit);

@@ -21,7 +21,11 @@ public class LoginMenu implements Menu{
             System.out.println("2. Debug");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
-            menuItem = in.nextInt();
+            try {
+                menuItem = Integer.parseInt(in.next());
+            }catch (Exception e){
+                menuItem = -1;
+            }
             switch (menuItem) {
                 case 1:
                     while (activeUser == null) {
@@ -46,7 +50,7 @@ public class LoginMenu implements Menu{
                     Programma.getInstance().close();
                     break;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.err.println("Invalid choice.");
             }
         } while (!quit);
     }

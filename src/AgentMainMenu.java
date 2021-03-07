@@ -25,7 +25,13 @@ public class AgentMainMenu implements Menu {
             System.out.println("9. Logout");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
-            menuItem = in.nextInt();
+
+            try {
+                menuItem = Integer.parseInt(in.next());
+            }catch (Exception e){
+                menuItem = -1;
+            }
+
             switch (menuItem) {
                 case 1:
                     activeAgent.viewCatalog();
@@ -47,7 +53,7 @@ public class AgentMainMenu implements Menu {
                     Programma.getInstance().close();
                     break;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.err.println("Invalid choice.");
             }
         } while (!quit);
 

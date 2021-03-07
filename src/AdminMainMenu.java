@@ -39,6 +39,7 @@ public class AdminMainMenu implements Menu{
             System.out.println("9. Logout");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
+
             try {
                 menuItem = Integer.parseInt(in.next());
             }catch (Exception e){
