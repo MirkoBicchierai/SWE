@@ -2,6 +2,12 @@ import java.util.*;
 
 public class Catalogo {
 
+    private int id;
+    private String description;
+    private String marketZone;
+    private static int lastID = 0;
+    private ArrayList<Articolo> articles;
+
     public Catalogo(ArrayList<Articolo> articles,String description , String marketZone) {
         this.articles = articles;
         this.description = description;
@@ -17,9 +23,6 @@ public class Catalogo {
         lastID = Math.max(lastID, id);
     }
 
-    private int id;
-    private String description;
-
     public int getId() {
         return id;
     }
@@ -32,9 +35,6 @@ public class Catalogo {
         return marketZone;
     }
 
-    private String marketZone;
-    private static int lastID = 0;
-
     public static int getLastID() {
         return lastID;
     }
@@ -43,9 +43,11 @@ public class Catalogo {
         return articles;
     }
 
-    private ArrayList<Articolo> articles;
-
-    public void viewCatalog() {
+    public void printCatalog() {
+        System.out.println("Catalog: " + description +" MarketZone: " + marketZone);
+        for(Articolo i : articles){
+            System.out.println("Article: " + i.getName() + "price: " + i.getPrice());
+        }
     }
 
 }

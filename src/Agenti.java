@@ -1,5 +1,8 @@
 public class Agenti extends Utenti {
 
+    private Catalogo catalog;
+    private float commissionPerc;
+
     public Agenti(String name, String password, float commissionPerc, Catalogo catalog) {
             super(name,password);
             this.commissionPerc = commissionPerc;
@@ -16,24 +19,12 @@ public class Agenti extends Utenti {
         return catalog;
     }
 
-    private Catalogo catalog;
-
     public float getCommissionPerc() {
         return commissionPerc;
     }
 
-    private float commissionPerc;
-
-    public void viewPersonalStoricOrder() {
-    }
-
     public void viewCatalog() {
-
-        System.out.println("Catalog: " + catalog.getDescription() +" MarketZone: " + catalog.getMarketZone());
-        for(Articolo i : catalog.getArticles()){
-            System.out.println("Article: " + i.getName() + "price: " + i.getPrice());
-        }
-
+        catalog.printCatalog();
     }
 
     public void createOrder() {

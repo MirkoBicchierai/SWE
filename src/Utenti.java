@@ -3,6 +3,11 @@ import java.security.*;
 
 public abstract class Utenti {
 
+    protected int id;
+    protected String name;
+    protected String passwordHash;
+    protected static int lastID;
+
     public Utenti(String name, String password) {
         this.passwordHash=getHash(password);
         lastID++;
@@ -16,11 +21,6 @@ public abstract class Utenti {
         lastID = Math.max(lastID, id);
         this.name = name;
     }
-
-    protected int id;
-    protected String name;
-    protected String passwordHash;
-    protected static int lastID;
 
     public static String getHash(String password){
         String generatedPassword = null;

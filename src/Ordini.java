@@ -2,6 +2,14 @@ import java.util.*;
 
 public class Ordini extends Observable  {
 
+    private ArrayList<Articolo> articles;
+    private int id;
+    private static int lastID;
+    private Agenti agent;
+    private float total;
+    private float commissionTot;
+    private Clienti client;
+
     public Ordini(float total, float commissionTot, Agenti agent, ArrayList<Articolo> articles , Clienti client ) {
         this.total = total;
         this.commissionTot = commissionTot;
@@ -26,16 +34,9 @@ public class Ordini extends Observable  {
         return articles;
     }
 
-    private ArrayList<Articolo> articles;
-
     public Clienti getClient() {
         return client;
     }
-
-    private Clienti client;
-
-    private int id;
-    private static int lastID;
 
     public int getId() {
         return id;
@@ -53,14 +54,8 @@ public class Ordini extends Observable  {
         return commissionTot;
     }
 
-
     public Agenti getAgent() {
         return agent;
     }
-
-    private Agenti agent;
-
-    private float total;
-    private float commissionTot;
 
 }

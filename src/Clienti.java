@@ -2,6 +2,12 @@ import java.util.*;
 
 public class Clienti {
 
+    private String businessName;
+    private String country;
+    private String email;
+    private static int lastID = 0;
+    private int id; // non è in uml
+
     public Clienti(String businessName, String country, String email) {
         this.businessName = businessName;
         this.country = country;
@@ -17,8 +23,6 @@ public class Clienti {
         this.id=id;
         lastID = Math.max(lastID, id);
     }
-
-    private int id; // non è in uml
 
     public String getEmail() {
         return email;
@@ -40,9 +44,5 @@ public class Clienti {
         return lastID;
     }
 
-    private String businessName;
-    private String country;
-    private String email;
-    private static int lastID = 0;
 
 }

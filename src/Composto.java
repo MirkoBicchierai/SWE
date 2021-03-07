@@ -2,6 +2,8 @@ import java.util.*;
 
 public class Composto extends Articolo {
 
+    private ArrayList<Articolo> components;
+
     public Composto(String name,ArrayList<Articolo> components) {
         super( name, 0);
         for(Articolo i:components) {
@@ -21,8 +23,6 @@ public class Composto extends Articolo {
     public ArrayList<Articolo> getComponents() {
         return components;
     }
-
-    private ArrayList<Articolo> components;
 
     public void display() {
     }

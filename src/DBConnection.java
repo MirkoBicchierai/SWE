@@ -17,8 +17,6 @@ public class DBConnection {
         return c;
     }
 
-    private DBConnection(){
-
-    }
+    private DBConnection(){}
 
 }

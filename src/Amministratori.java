@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Amministratori extends Utenti {
 
     public Amministratori(String name, String password) {
@@ -11,10 +9,6 @@ public class Amministratori extends Utenti {
 
     @Override
     public void viewOrders() {
-
-    }
-
-    public void viewGlobalStoricOrder() {
     }
 
     public void viewClient() {
@@ -51,18 +45,15 @@ public class Amministratori extends Utenti {
     }
 
     public void viewCatalogAgent(int idAgent){
-
     }
 
     public void viewCustomerOrders(int idAgent){
-
     }
 
     public void addCatalog(){
     }
 
     public void deleteCatalog(int IdCatalog){
-
     }
 
     public void deleteClient(int idCLient) {

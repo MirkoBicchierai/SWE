@@ -3,6 +3,18 @@ import java.sql.*;
 
 public class Programma {
 
+    private Utenti activeUser;
+    private ArrayList<Utenti> users;
+    private ArrayList<Articolo> articles;
+    private ArrayList<Catalogo> catalogs;
+    private ArrayList<Clienti> customers;
+    private ArrayList<Ordini> orders;
+    private CentroNotifiche notCenter;
+    private static Programma instance;
+    private Connection c;
+    private Menu menu;
+    private Boolean wantClose = false;
+
     private Programma() {
         notCenter = CentroNotifiche.getInstance();
         users = new ArrayList<>();
@@ -13,15 +25,6 @@ public class Programma {
         activeUser= null;
         c = DBConnection.getInstance();
     }
-
-
-    private Utenti activeUser;
-
-    private ArrayList<Utenti> users;
-    private ArrayList<Articolo> articles;
-    private ArrayList<Catalogo> catalogs;
-    private ArrayList<Clienti> customers;
-    private ArrayList<Ordini> orders;
 
     public Utenti getActiveUser() {
         return activeUser;
@@ -46,13 +49,6 @@ public class Programma {
     public ArrayList<Ordini> getOrders() {
         return orders;
     }
-
-    private CentroNotifiche notCenter;
-
-    private static Programma instance;
-    private Connection c;
-    private Menu menu;
-    private Boolean wantClose = false;
 
     public void close(){
         wantClose = true;

@@ -1,7 +1,10 @@
-import java.util.*;
-
 public abstract class Articolo {
-//uml è astratta non interfaccia
+    //uml è astratta non interfaccia
+
+    protected String name;
+    protected int id;
+    protected float price;
+    protected static int lastID;
 
     public Articolo(String name, float price) {
         this.name = name;
@@ -33,10 +36,6 @@ public abstract class Articolo {
         return lastID;
     }
 
-    protected String name;
-    protected int id;
-    protected float price;
-    protected static int lastID;
     public abstract void display();
 
 }
