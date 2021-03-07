@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-public class AdminAgentMenu implements Menu{
+public class AdminCatalogMenu implements Menu{
+
     @Override
     public Menu getCurrentState() {
         return this;
@@ -16,9 +17,8 @@ public class AdminAgentMenu implements Menu{
         int menuItem;
 
         do {
-            System.out.println("1. Add Agent");
-            System.out.println("2. Delete Agent");
-            System.out.println("3. View Catalog Agent");
+            System.out.println("1. Add Catalog");
+            System.out.println("2. Delete Catalog");
             System.out.println("9. Back");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
@@ -26,17 +26,12 @@ public class AdminAgentMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    admin.addAgent(); //todo mai cosi
+                    admin.addCatalog();//todo la signature mai cosi
                     break;
                 case 2:
-                    System.out.println("Enter the code of the Agent to Delete");
-                    int idA = in.nextInt();
-                    admin.deleteAgent(idA);
-                    break;
-                case 3:
-                    System.out.println("Enter the code of the agent for which to view the catalog");
-                    int idAgent = in.nextInt();
-                    admin.viewCatalogAgent(idAgent);
+                    System.out.println("Enter the code of the Catalog to Delete");
+                    int idCatalog = in.nextInt();
+                    admin.deleteCatalog(idCatalog);
                     break;
                 case 9:
                     quit = true;

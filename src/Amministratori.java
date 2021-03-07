@@ -44,7 +44,7 @@ public class Amministratori extends Utenti {
     public void addAgent() {
     }
 
-    public void deleteAgent(){
+    public void deleteAgent(int idAgent){
     }
 
     public void viewAgent() {
@@ -58,7 +58,14 @@ public class Amministratori extends Utenti {
 
     }
 
-    public void deleteClient() {
+    public void addCatalog(){
+    }
+
+    public void deleteCatalog(int IdCatalog){
+
+    }
+
+    public void deleteClient(int idCLient) {
     }
 
     public void deleteProduct() {
