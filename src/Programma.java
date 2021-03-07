@@ -54,6 +54,7 @@ public class Programma {
             this.getState().showMenu(activeUser);
         }
 
+        System.out.println("Bye Bye!");
         this.upload();
     }
 
