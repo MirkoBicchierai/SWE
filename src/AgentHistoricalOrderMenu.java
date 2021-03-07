@@ -11,6 +11,8 @@ public class AgentHistoricalOrderMenu implements Menu{
 
         activeUser.viewOrders();
 
+        Agenti agent = (Agenti)activeUser;
+
         Scanner in = new Scanner(System.in);
 
         System.out.println("Menu option:");
@@ -19,6 +21,7 @@ public class AgentHistoricalOrderMenu implements Menu{
         System.out.println("0. Back");
 
         boolean quit = false;
+        int idOrder;
         int menuItem;
         do {
             System.out.print("Choose menu item: ");
@@ -26,18 +29,25 @@ public class AgentHistoricalOrderMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    System.out.println("richiesta id");
+                    do {
+                        System.out.println("Insert order ID");
+                        idOrder = in.nextInt();
+                    }while(!agent.deleteOrder(idOrder));
                     break;
+
                 case 9:
                     Programma.getInstance().setMenu(new AgentMainMenu());
                     quit = true;
                     break;
+
                 case 0:
                     quit = true;
                     Programma.getInstance().close();
                     break;
+
                 default:
                     System.out.println("Invalid choice.");
+
             }
         } while (!quit);
 

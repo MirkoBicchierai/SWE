@@ -39,16 +39,31 @@ public class Agenti extends Utenti {
     public void createOrder() {
     }
 
-    public void deleteOrder() {
+    public boolean deleteOrder(int id) {
+
+        boolean check = false;
+        for(Ordini i : Programma.getInstance().getOrders()) {
+            if(i.getId() == id){
+                Programma.getInstance().getOrders().remove(i);
+                check=true;
+            }
+        }
+        if(!check)
+            System.err.println("Wrong ID! Re-insert it");
+        return check;
     }
 
     @Override
     public void viewOrders() {
-
+        int k = 0;
         for(Ordini i : Programma.getInstance().getOrders()){
-            if(i.getAgent().getId() == this.id)
-                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot()+ "€ CLIENT:" + i.getCommissionTot());
+            if(i.getAgent().getId() == this.id) {
+                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+                k++;
+            }
         }
+        if(k==0)
+            System.out.println("There are no orders.");
 
     }
 
