@@ -58,8 +58,8 @@ public class Main {
         Programma.getInstance().getUsers().add(A11);
         Programma.getInstance().getUsers().add(Admin);
 
-        Ordini O1 = new Ordini(5,10,A1,articles);
-        Ordini O2 = new Ordini(5,10,A11,articles2);
+        Ordini O1 = new Ordini(5,10,A1,articles,C1);
+        Ordini O2 = new Ordini(5,10,A11,articles2,C2);
         Programma.getInstance().getOrders().add(O1);
         Programma.getInstance().getOrders().add(O2);
 
