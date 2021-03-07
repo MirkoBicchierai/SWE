@@ -8,13 +8,14 @@ public class Main {
             startProgram();
         else
             realMain();
+
     }
 
     private static void realMain(){
 
-        Programma p = Programma.getInstance();
-        p.run();
-
+            Programma p = Programma.getInstance();
+            p.run();
+            //todo Essere sicuri di upload Alla fine del programma
     }
 
     private static void startProgram(){

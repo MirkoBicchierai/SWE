@@ -22,11 +22,15 @@ public class AdminAgentMenu implements Menu{
             System.out.println("9. Back");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
-            menuItem = in.nextInt();
+            try {
+                menuItem = Integer.parseInt(in.next());
+            }catch (Exception e){
+                menuItem = -1;
+            }
             switch (menuItem) {
 
                 case 1:
-                    admin.addAgent(); //todo mai cosi
+                    admin.createAgent(); //todo mai cosi
                     break;
                 case 2:
                     System.out.println("Enter the code of the Agent to Delete");
@@ -50,7 +54,7 @@ public class AdminAgentMenu implements Menu{
 
                 default:
 
-                    System.out.println("Invalid choice.");
+                    System.err.println("Invalid choice.");
 
             }
 

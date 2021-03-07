@@ -52,12 +52,6 @@ public class Amministratori extends Utenti {
     public void selectProduct(int id) {
     }
 
-    public void addClient() {
-    }
-
-    public void addAgent() {
-    }
-
     public void deleteAgent(int idAgent){
     }
 
@@ -74,12 +68,87 @@ public class Amministratori extends Utenti {
     }
 
     public void deleteCatalog(int IdCatalog){//controllo se utente collegato
+        Catalogo tmp = null;
+
+        for(Utenti i:Programma.getInstance().getUsers()){
+            if(i instanceof Agenti && ((Agenti) i).getCatalog().getId()==IdCatalog){
+                System.err.println("Catalog Can't be Deleted! It's Linked to an User!");
+                return;
+            }
+        }
+
+        for(Catalogo i:Programma.getInstance().getCatalogs()){
+            if(i.getId()==IdCatalog){
+                tmp = i;
+            }
+        }
+
+        if (tmp == null){
+            System.err.println("Wrong ID! Re-insert it");
+            return;
+        }
+
+        Programma.getInstance().getCatalogs().remove(tmp);
+        System.out.println("Deleted!");
     }
 
     public void deleteClient(int idCLient) {
+        Clienti tmp = null;
+        for(Clienti i:Programma.getInstance().getCustomers()){
+            if(i.getId()==idCLient){
+                tmp = i;
+            }
+        }
+
+        if (tmp == null){
+            System.err.println("Wrong ID! Re-insert it");
+            return;
+        }
+
+        Programma.getInstance().getCustomers().remove(tmp);
+        System.out.println("Deleted!");
     }
 
-    public void deleteProduct() {
+    public void deleteProduct(int idArticle) {
+        Articolo tmp = null;
+
+        for(Ordini i:Programma.getInstance().getOrders()){      //todo testare listino vuoto
+            for(Articolo j:i.getArticles()){
+                if (j.getId()==idArticle){
+                    System.err.println("This Article is Already Ordered! It can't be Deleted!");
+                    return;
+                }
+            }
+        }
+
+        for(Articolo i:Programma.getInstance().getArticles()){
+            if(i instanceof Composto ){
+                for(Articolo j : ((Composto) i).getComponents()){
+                    if (j.getId()==idArticle){
+                        System.err.println("This Article is a Component Of Another Article! It can't be Deleted!");
+                        return;
+                    }
+                }
+            }
+        }
+
+        for(Articolo i:Programma.getInstance().getArticles()){
+            if(i.getId()==idArticle){
+                tmp = i;
+            }
+        }
+
+        if (tmp == null){
+            System.err.println("Wrong ID! Re-insert it");
+            return;
+        }
+
+        for(Catalogo i:Programma.getInstance().getCatalogs())
+            i.getArticles().removeIf(j -> j.getId() == idArticle); //rimuove j se j.getid == article
+
+
+        Programma.getInstance().getArticles().remove(tmp);
+        System.out.println("Deleted!");
     }
 
     public void createProduct() {

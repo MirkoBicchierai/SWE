@@ -22,7 +22,11 @@ public class AdminCatalogMenu implements Menu{
             System.out.println("9. Back");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
-            menuItem = in.nextInt();
+            try {
+                menuItem = Integer.parseInt(in.next());
+            }catch (Exception e){
+                menuItem = -1;
+            }
             switch (menuItem) {
 
                 case 1:
@@ -30,8 +34,12 @@ public class AdminCatalogMenu implements Menu{
                     break;
                 case 2:
                     System.out.println("Enter the code of the Catalog to Delete");
-                    int idCatalog = in.nextInt(); //todo gestire
-
+                    int idCatalog;
+                    try {
+                        idCatalog = Integer.parseInt(in.next());
+                    }catch (Exception e){
+                        idCatalog = -1;
+                    }
                     admin.deleteCatalog(idCatalog);
                     break;
                 case 9:
@@ -46,7 +54,7 @@ public class AdminCatalogMenu implements Menu{
 
                 default:
 
-                    System.out.println("Invalid choice.");
+                    System.err.println("Invalid choice.");
 
             }
 

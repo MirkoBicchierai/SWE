@@ -35,6 +35,7 @@ public class AdminMainMenu implements Menu{
             System.out.println("2. View Catalogs");
             System.out.println("3. View Customers");
             System.out.println("4. View Storic Orders");
+            System.out.println("5. View Articles");
 
             System.out.println("9. Logout");
             System.out.println("0. Quit");
@@ -44,7 +45,6 @@ public class AdminMainMenu implements Menu{
             }catch (Exception e){
                 menuItem = -1;
             }
-
             switch (menuItem) {
 
                 case 1:
@@ -67,6 +67,12 @@ public class AdminMainMenu implements Menu{
 
                 case 4:
                     activeUser.viewOrders();
+                    break;
+
+                case 5:
+                    admin.viewProduct();
+                    Programma.getInstance().setMenu(new AdminArticleMenu());
+                    quit = true;
                     break;
 
                 case 9:
