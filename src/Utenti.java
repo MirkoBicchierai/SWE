@@ -57,6 +57,7 @@ public abstract class Utenti {
 
     public int createCustomer(String businessName, String country, String email){
         Programma.getInstance().getCustomers().add(new Clienti(businessName,country,email));
+        System.out.println("Created!");
         return Clienti.getLastID();
     }
 

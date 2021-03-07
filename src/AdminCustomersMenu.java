@@ -30,7 +30,7 @@ public class AdminCustomersMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    //admin.createCustomer();//todo CHiedi A mirko
+                    createCustomers(admin);
                     break;
                 case 2:
                     System.out.println("Enter the code of the Customer to Delete");
@@ -59,5 +59,20 @@ public class AdminCustomersMenu implements Menu{
             }
 
         } while (!quit);
+    }
+
+
+    private int createCustomers(Utenti activeUser){
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Insert Email:");
+        String email = in.nextLine();
+        System.out.println("Insert country :");
+        String country = in.nextLine();
+        System.out.println("Insert Business-Name :");
+        String name = in.nextLine();
+
+        return  activeUser.createCustomer(name,country,email);
     }
 }

@@ -61,7 +61,7 @@ public class AdminMainMenu implements Menu{
                     break;
 
                 case 3:
-                    admin.viewClient();
+                    admin.viewCustomer();
                     Programma.getInstance().setMenu(new AdminCustomersMenu());
                     quit = true;
                     break;

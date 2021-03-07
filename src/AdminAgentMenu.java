@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AdminAgentMenu implements Menu{
@@ -59,5 +60,28 @@ public class AdminAgentMenu implements Menu{
             }
 
         } while (!quit);
+    }
+
+    private void createAgent(Amministratori activeUser){
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Insert Name:");
+        String Name = in.nextLine();
+        System.out.println("Insert Password :");
+        String Password = in.nextLine();
+        float percComm ;
+        do{
+            System.out.println("Insert Percentage of Commission :");
+            try {
+                percComm = Math.abs(Float.parseFloat(in.next()));
+            }catch (Exception e){
+                System.err.println("You must insert a number!");
+                percComm = -1;
+            }
+        }while (percComm==-1);
+
+
+        //activeUser.createAgent(description,marketZone); //todo da sistemare
     }
 }

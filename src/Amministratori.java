@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Amministratori extends Utenti {
 
     public Amministratori(String name, String password) {
@@ -34,16 +36,16 @@ public class Amministratori extends Utenti {
         System.out.println("----------------------------------");
     }
 
-    public void viewClient() {
-    }
-
     public void viewProduct() {
     }
 
     public void createAgent() {
     }
 
-    public void createCatlog() {
+    public void createCatlog(String descr, String marketZone, ArrayList<Articolo> articles) {
+
+        Programma.getInstance().getCatalogs().add(new Catalogo(articles,descr,marketZone));
+        System.out.println("Created!");
     }
 
     public void selectCatalog(int id) {
@@ -61,11 +63,9 @@ public class Amministratori extends Utenti {
     public void viewCatalogAgent(int idAgent){
     }
 
-    public void viewCustomerOrders(int idAgent){
+    public void viewCustomerOrders(int IdCustomer){
     }
 
-    public void addCatalog(){
-    }
 
     public void deleteCatalog(int IdCatalog){//controllo se utente collegato
         Catalogo tmp = null;
