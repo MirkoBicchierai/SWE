@@ -39,7 +39,12 @@ public class AdminMainMenu implements Menu{
             System.out.println("9. Logout");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
-            menuItem = in.nextInt();
+            try {
+                menuItem = Integer.parseInt(in.next());
+            }catch (Exception e){
+                menuItem = -1;
+            }
+
             switch (menuItem) {
 
                 case 1:
@@ -50,6 +55,8 @@ public class AdminMainMenu implements Menu{
 
                 case 2:
                     activeUser.viewCatalog();
+                    Programma.getInstance().setMenu(new AdminCatalogMenu());
+                    quit = true;
                     break;
 
                 case 3:
@@ -73,7 +80,7 @@ public class AdminMainMenu implements Menu{
                     break;
 
                 default:
-                    System.out.println("Invalid choice.");
+                    System.err.println("Invalid choice.");
 
             }
 

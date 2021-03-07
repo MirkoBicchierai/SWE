@@ -73,7 +73,7 @@ public class Amministratori extends Utenti {
     public void addCatalog(){
     }
 
-    public void deleteCatalog(int IdCatalog){
+    public void deleteCatalog(int IdCatalog){//controllo se utente collegato
     }
 
     public void deleteClient(int idCLient) {

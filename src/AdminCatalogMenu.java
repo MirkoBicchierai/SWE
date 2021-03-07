@@ -30,7 +30,8 @@ public class AdminCatalogMenu implements Menu{
                     break;
                 case 2:
                     System.out.println("Enter the code of the Catalog to Delete");
-                    int idCatalog = in.nextInt();
+                    int idCatalog = in.nextInt(); //todo gestire
+
                     admin.deleteCatalog(idCatalog);
                     break;
                 case 9:
