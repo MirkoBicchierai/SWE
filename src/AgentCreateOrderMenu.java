@@ -8,15 +8,15 @@ public class AgentCreateOrderMenu implements Menu{
 
     @Override
     public void showMenu(Utenti activeUser) {
-        Programma p = Programma.getInstance();
         Scanner in = new Scanner(System.in);
         boolean quit = false;
         int menuItem;
+        int idC;
         do {
 
             System.out.println("Menu option:");
-            System.out.println("1. Create");
-            System.out.println("2. Do something");
+            System.out.println("1. Create new customers");
+            System.out.println("2. Select a existing customers");
 
             System.out.println("9. Back");
             System.out.println("0. Quit");
@@ -30,18 +30,20 @@ public class AgentCreateOrderMenu implements Menu{
 
             switch (menuItem) {
                 case 1:
-                    quit = subMenuCreateOrder(p);
+                    idC = createCustomers(activeUser);
+                    System.out.println(idC);
                     break;
                 case 2:
-                    System.out.println("Do something");
+                    // TODO prendere idc
+                    quit = subMenuSelectCustomer();
                     break;
                 case 9:
-                    p.setMenu(new AgentMainMenu());
+                    Programma.getInstance().setMenu(new AgentMainMenu());
                     quit = true;
                     break;
                 case 0:
                     quit = true;
-                    p.close();
+                    Programma.getInstance().close();
                     break;
                 default:
                     System.err.println("Invalid choice.");
@@ -49,7 +51,21 @@ public class AgentCreateOrderMenu implements Menu{
         } while (!quit);
     }
 
-    private boolean subMenuCreateOrder(Programma p){
+    private int createCustomers(Utenti activeUser){
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Insert Email:");
+        String email = in.nextLine();
+        System.out.println("Insert country :");
+        String country = in.nextLine();
+        System.out.println("Insert Business-Name :");
+        String name = in.nextLine();
+
+        return  activeUser.createCustomer(name,country,email);
+    }
+
+    private boolean subMenuSelectCustomer(){
         Scanner in = new Scanner(System.in);
         boolean quit = false;
         boolean retQuit = false;
@@ -78,14 +94,14 @@ public class AgentCreateOrderMenu implements Menu{
                     System.out.println("Do something");
                     break;
                 case 9:
-                    Programma.getInstance().setMenu(new AgentMainMenu());
+                    Programma.getInstance().setMenu(new AgentCreateOrderMenu());
                     retQuit = true;
                     quit = true;
                     break;
                 case 0:
                     retQuit = true;
                     quit = true;
-                    p.close();
+                    Programma.getInstance().close();
                     break;
                 default:
                     System.err.println("Invalid choice.");
