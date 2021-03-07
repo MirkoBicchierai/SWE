@@ -9,6 +9,29 @@ public class Amministratori extends Utenti {
 
     @Override
     public void viewOrders() {
+        System.out.println("----------------------------------");
+        boolean check = false;
+        for(Ordini i : Programma.getInstance().getOrders()){
+            System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+            check=true;
+        }
+        if(!check)
+            System.out.println("There are no orders.");
+        System.out.println("----------------------------------");
+    }
+
+    @Override
+    public void viewCatalog() {
+        System.out.println("----------------------------------");
+        if (Programma.getInstance().getCatalogs().size()>0){
+            System.out.println("");
+            for (Catalogo i : Programma.getInstance().getCatalogs()) {
+                i.printCatalog();
+                System.out.println("");
+            }
+        }else
+            System.out.println("There are no catalogs!.");
+        System.out.println("----------------------------------");
     }
 
     public void viewClient() {
@@ -27,13 +50,6 @@ public class Amministratori extends Utenti {
     }
 
     public void selectProduct(int id) {
-    }
-
-    @Override
-    public void viewCatalog() {
-        for (Catalogo i : Programma.getInstance().getCatalogs()){
-            i.printCatalog();
-        }
     }
 
     public void addClient() {

@@ -59,7 +59,7 @@ public class AdminMainMenu implements Menu{
                     break;
 
                 case 4:
-                    admin.viewOrders();
+                    activeUser.viewOrders();
                     break;
 
                 case 9:

@@ -11,7 +11,7 @@ public class Prodotto extends Articolo {
     }
 
     public void display() {
-        System.out.println("Article: " + name + "price: " + price);
+        System.out.println("--Article: " + name + "price: " + price);
     }
 
 }

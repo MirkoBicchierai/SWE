@@ -25,7 +25,9 @@ public class Agenti extends Utenti {
 
     @Override
     public void viewCatalog() {
+        System.out.println("----------------------------------");
         catalog.printCatalog();
+        System.out.println("----------------------------------");
     }
 
     public void createOrder() {
