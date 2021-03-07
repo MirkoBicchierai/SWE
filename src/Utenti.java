@@ -56,5 +56,6 @@ public abstract class Utenti {
     }
 
     public abstract void viewOrders();
+    public abstract void viewCatalog();
 
 }

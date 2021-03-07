@@ -46,7 +46,7 @@ public class Catalogo {
     public void printCatalog() {
         System.out.println("Catalog: " + description +" MarketZone: " + marketZone);
         for(Articolo i : articles){
-            System.out.println("Article: " + i.getName() + "price: " + i.getPrice());
+            i.display();
         }
     }
 

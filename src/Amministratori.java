@@ -29,7 +29,11 @@ public class Amministratori extends Utenti {
     public void selectProduct(int id) {
     }
 
+    @Override
     public void viewCatalog() {
+        for (Catalogo i : Programma.getInstance().getCatalogs()){
+            i.printCatalog();
+        }
     }
 
     public void addClient() {

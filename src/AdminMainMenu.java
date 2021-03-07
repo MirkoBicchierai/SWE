@@ -19,6 +19,7 @@ public class AdminMainMenu implements Menu{
 
         for (String i: CentroNotifiche.getInstance().getNofications()){
             System.out.println(i);
+            //CentroNotifiche.getInstance().getNofications().remove(i);
         }
 
         System.out.println("");
@@ -46,15 +47,17 @@ public class AdminMainMenu implements Menu{
                     Programma.getInstance().setMenu(new AdminAgentMenu());
                     quit = true;
                     break;
-                case 2:
-                    admin.viewCatalog();
 
-                    quit = true;
+                case 2:
+                    activeUser.viewCatalog();
                     break;
+
                 case 3:
                     admin.viewClient();
                     Programma.getInstance().setMenu(new AdminCustomersMenu());
+                    quit = true;
                     break;
+
                 case 4:
                     admin.viewOrders();
                     break;
@@ -70,7 +73,6 @@ public class AdminMainMenu implements Menu{
                     break;
 
                 default:
-
                     System.out.println("Invalid choice.");
 
             }

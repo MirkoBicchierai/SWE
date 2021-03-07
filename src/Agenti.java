@@ -23,6 +23,7 @@ public class Agenti extends Utenti {
         return commissionPerc;
     }
 
+    @Override
     public void viewCatalog() {
         catalog.printCatalog();
     }
