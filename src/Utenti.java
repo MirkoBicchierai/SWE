@@ -55,9 +55,19 @@ public abstract class Utenti {
         return lastID;
     }
 
-    public int createCustomer(String businessName, String country, String email){
+    public void createCustomer(String businessName, String country, String email){
         Programma.getInstance().getCustomers().add(new Clienti(businessName,country,email));
-        return Clienti.getLastID();
+    }
+
+    public void viewCustomers(){
+        System.out.println("");
+        System.out.println("----------------------------------");
+        for(Clienti c : Programma.getInstance().getCustomers()){
+            System.out.println("CUSTOMERS -> ID: " + c.getId() + " Name: " + c.getBusinessName() + "€ Email: " + c.getEmail() + "€ Country: " + c.getCountry());
+        }
+        System.out.println("----------------------------------");
+        System.out.println("");
+
     }
 
     public abstract void viewOrders();

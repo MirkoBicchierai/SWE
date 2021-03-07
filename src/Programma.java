@@ -80,6 +80,15 @@ public class Programma {
         this.setMenu(new LoginMenu());
     }
 
+    public boolean checkCustomersExist(int id){
+        for(Clienti c :customers){
+            if(c.getId()==id)
+                return true;
+        }
+        System.err.println("Wrong ID re-insert it!.");
+        return false;
+    }
+
     public void debug(){
         System.out.println("----------------------------------");
         System.out.println("Articoli: " + getArticles().size());
