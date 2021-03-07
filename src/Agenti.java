@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Agenti extends Utenti {
 
     public Agenti(String name, String password, float commissionPerc, Catalogo catalog) {
@@ -46,5 +44,12 @@ public class Agenti extends Utenti {
 
     @Override
     public void viewOrders() {
+
+        for(Ordini i : Programma.getInstance().getOrders()){
+            if(i.getAgent().getId() == this.id)
+                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot()+ "€ CLIENT:" + i.getCommissionTot());
+        }
+
     }
+
 }

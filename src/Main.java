@@ -1,24 +1,25 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws Exception{
-
-        realMain();
-
+        boolean debug = false;
+        if(debug)
+            startProgram();
+        else
+            realMain();
     }
 
     private static void realMain(){
 
         Programma p = Programma.getInstance();
 
-        System.out.println(p.articles.size());
-        System.out.println(p.users.size());
-        System.out.println(p.catalogs.size());
-        System.out.println(p.customers.size());
-        System.out.println(p.orders.size());
-        System.out.println(p.notCenter.getNofications().size());
+        System.out.println("Articoli: " + p.getArticles().size());
+        System.out.println("Utenti: " + p.getUsers().size());
+        System.out.println("Cataloghi: " + p.getCatalogs().size());
+        System.out.println("Clienti: " + p.getCustomers().size());
+        System.out.println("Ordini: " + p.getOrders().size());
+        System.out.println("Notifiche: " + CentroNotifiche.getInstance().getNofications().size());
 
         p.run();
     }
@@ -28,15 +29,16 @@ public class Main {
 
         Clienti C1 = new Clienti("Nexal","Italy","mirko@nexal.it");
         Clienti C2 = new Clienti("Aperion","Italy","andrea@aperion.it");
-        Programma.getInstance().customers.add(C1);
-        Programma.getInstance().customers.add(C2);
+
+        Programma.getInstance().getCustomers().add(C1);
+        Programma.getInstance().getCustomers().add(C2);
 
         Articolo AA1 = new Prodotto("Nexal1",3);
         Articolo AA2 = new Prodotto("Nexal2",5);
         Articolo AA3 = new Prodotto("Nexal3",50);
-        Programma.getInstance().articles.add(AA1);
-        Programma.getInstance().articles.add(AA2);
-        Programma.getInstance().articles.add(AA3);
+        Programma.getInstance().getArticles().add(AA1);
+        Programma.getInstance().getArticles().add(AA2);
+        Programma.getInstance().getArticles().add(AA3);
 
         ArrayList<Articolo> articles = new  ArrayList<>();
         ArrayList<Articolo> articles2 = new  ArrayList<>();
@@ -46,20 +48,20 @@ public class Main {
         articles2.add(AA2);
         Catalogo Ca1 = new Catalogo(articles,"descrizione1","Italy");
         Catalogo Ca2 = new Catalogo(articles2,"descrizione2","Germany");
-        Programma.getInstance().catalogs.add(Ca1);
-        Programma.getInstance().catalogs.add(Ca2);
+        Programma.getInstance().getCatalogs().add(Ca1);
+        Programma.getInstance().getCatalogs().add(Ca2);
 
         Agenti A1 = new Agenti("Mirko", "111",100, Ca1);
         Agenti A11 = new Agenti("Mirko2", "111",100, Ca2);
         Amministratori Admin = new Amministratori("Ganjiro", "111");
-        Programma.getInstance().users.add(A1);
-        Programma.getInstance().users.add(A11);
-        Programma.getInstance().users.add(Admin);
+        Programma.getInstance().getUsers().add(A1);
+        Programma.getInstance().getUsers().add(A11);
+        Programma.getInstance().getUsers().add(Admin);
 
         Ordini O1 = new Ordini(5,10,A1,articles);
         Ordini O2 = new Ordini(5,10,A11,articles2);
-        Programma.getInstance().orders.add(O1);
-        Programma.getInstance().orders.add(O2);
+        Programma.getInstance().getOrders().add(O1);
+        Programma.getInstance().getOrders().add(O2);
 
         ArrayList<Articolo> articlesComp1 = new  ArrayList<>();
         ArrayList<Articolo> articlesComp2 = new  ArrayList<>();
@@ -70,14 +72,14 @@ public class Main {
 
         Articolo AC1 = new Composto("NexalComp1",articlesComp1);
         Articolo AC2 = new Composto("NexalComp2",articlesComp2);
-        Programma.getInstance().articles.add(AC1);
-        Programma.getInstance().articles.add(AC2);
+        Programma.getInstance().getArticles().add(AC1);
+        Programma.getInstance().getArticles().add(AC2);
 
-        Programma.getInstance().notCenter.update("Notify 1");
-        Programma.getInstance().notCenter.update("Notify 2");
-        Programma.getInstance().notCenter.update("Notify 3");
-        Programma.getInstance().notCenter.update("Notify 4");
-        Programma.getInstance().notCenter.update("Notify 5");
+        CentroNotifiche.getInstance().update("Notify 1");
+        CentroNotifiche.getInstance().update("Notify 2");
+        CentroNotifiche.getInstance().update("Notify 3");
+        CentroNotifiche.getInstance().update("Notify 4");
+        CentroNotifiche.getInstance().update("Notify 5");
 
         Programma.getInstance().upload();
 

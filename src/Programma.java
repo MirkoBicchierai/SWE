@@ -15,12 +15,39 @@ public class Programma {
     }
 
     private Utenti activeUser;
-    public ArrayList<Utenti> users;
-    public ArrayList<Articolo> articles;
-    public ArrayList<Catalogo> catalogs;
-    public ArrayList<Clienti> customers;
-    public ArrayList<Ordini> orders;
-    public CentroNotifiche notCenter;
+
+    private ArrayList<Utenti> users;
+    private ArrayList<Articolo> articles;
+    private ArrayList<Catalogo> catalogs;
+    private ArrayList<Clienti> customers;
+    private ArrayList<Ordini> orders;
+
+    public Utenti getActiveUser() {
+        return activeUser;
+    }
+
+    public ArrayList<Utenti> getUsers() {
+        return users;
+    }
+
+    public ArrayList<Articolo> getArticles() {
+        return articles;
+    }
+
+    public ArrayList<Catalogo> getCatalogs() {
+        return catalogs;
+    }
+
+    public ArrayList<Clienti> getCustomers() {
+        return customers;
+    }
+
+    public ArrayList<Ordini> getOrders() {
+        return orders;
+    }
+
+    private CentroNotifiche notCenter;
+
     private static Programma instance;
     private Connection c;
     private Menu menu;
@@ -287,7 +314,7 @@ public class Programma {
 
         for (Ordini order : orders) {
             try {
-                sql = "INSERT INTO OrderHead (idHead,idAgent,Total,Commission) " + "VALUES (" + order.getId() + ", '" + order.getAgent().getId() + "', '" + order.getTotal() + "', '" + order.getCommissionTot() + "');";
+                sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomers,Total,Commission) " + "VALUES (" + order.getId() + ", '" + order.getAgent().getId() + "', "+order.getClient().getId()+" ,'" + order.getTotal() + "', '" + order.getCommissionTot() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();

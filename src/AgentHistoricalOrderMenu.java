@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
-public class AgentMainMenu implements Menu {
-    //potrebbe essere static?? insieme ad admin
+public class AgentHistoricalOrderMenu implements Menu{
     @Override
     public Menu getCurrentState() {
         return this;
@@ -10,18 +9,14 @@ public class AgentMainMenu implements Menu {
     @Override
     public void showMenu(Utenti activeUser) {
 
-        Agenti activeAgent = (Agenti)activeUser;
+        activeUser.viewOrders();
 
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Hello "+activeUser.getName()+"!");
         System.out.println("Menu option:");
-
-        System.out.println("1. View catalog");
-        System.out.println("2. Historical Order");
-        System.out.println("3. Create Order");
-
-        System.out.println("0. Quit");
+        System.out.println("1. Delete an order");
+        System.out.println("9. Back");
+        System.out.println("0. Back");
 
         boolean quit = false;
         int menuItem;
@@ -29,15 +24,13 @@ public class AgentMainMenu implements Menu {
             System.out.print("Choose menu item: ");
             menuItem = in.nextInt();
             switch (menuItem) {
+
                 case 1:
-                    activeAgent.viewCatalog();
+                    System.out.println("richiesta id");
                     break;
-                case 2:
-                    Programma.getInstance().setMenu(new AgentHistoricalOrderMenu());
+                case 9:
+                    Programma.getInstance().setMenu(new AgentMainMenu());
                     quit = true;
-                    break;
-                case 3:
-                    System.out.println("You've chosen item #3");
                     break;
                 case 0:
                     quit = true;
@@ -49,5 +42,4 @@ public class AgentMainMenu implements Menu {
         } while (!quit);
 
     }
-
 }
