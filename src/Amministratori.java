@@ -41,7 +41,21 @@ public class Amministratori extends Utenti {
     public void addClient() {
     }
 
+    public void addAgent() {
+    }
+
+    public void deleteAgent(){
+    }
+
     public void viewAgent() {
+    }
+
+    public void viewCatalogAgent(int idAgent){
+
+    }
+
+    public void viewCustomerOrders(int idAgent){
+
     }
 
     public void deleteClient() {

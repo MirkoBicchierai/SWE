@@ -23,28 +23,26 @@ public class AdminMainMenu implements Menu{
 
         System.out.println("");
 
-        System.out.println("Menu Option:");
-
-        System.out.println("1. View Agents");
-        System.out.println("2. View Catalogs");
-        System.out.println("3. View Customers");
-        System.out.println("4. View Storic Orders");
-
-        System.out.println("0. Quit");
-
-
         boolean quit = false;
 
         int menuItem;
 
         do {
+            System.out.println("Menu Option:");
+
+            System.out.println("1. View Agents");
+            System.out.println("2. View Catalogs");
+            System.out.println("3. View Customers");
+            System.out.println("4. View Storic Orders");
+
+            System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
             menuItem = in.nextInt();
             switch (menuItem) {
 
                 case 1:
                     admin.viewAgent();
-                    Programma.getInstance().setMenu(new AgentMainMenu());
+                    Programma.getInstance().setMenu(new AdminAgentMenu());
                     quit = true;
                     break;
                 case 2:
@@ -54,7 +52,7 @@ public class AdminMainMenu implements Menu{
                     break;
                 case 3:
                     admin.viewClient();
-
+                    Programma.getInstance().setMenu(new AdminCustomersMenu());
                     break;
                 case 4:
                     admin.viewOrders();
@@ -72,10 +70,6 @@ public class AdminMainMenu implements Menu{
             }
 
         } while (!quit);
-
-
-
-        System.out.println("Bye-bye!");
 
     }
 }
