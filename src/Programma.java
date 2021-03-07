@@ -216,14 +216,34 @@ public class Programma {
         while (rs.next()) {
             int id = rs.getInt("idHead");
             int idAgent = rs.getInt("idAgent");
+            int idCustomers = rs.getInt("IdCustomer");
             float total = rs.getFloat("Total");
             float commission = rs.getFloat("Commission");
+
             Agenti tmpAgent = null;
             for (Utenti i : users) {
                 if (i.getId() == idAgent) {
                     tmpAgent = (Agenti) i;
                     break;
                 }
+            }
+
+            if(tmpAgent == null){
+                System.err.println("Agente Non Presente!");
+                break;
+            }
+
+            Clienti tmpCustomer = null;
+            for (Clienti i : customers) {
+                if (i.getId() == idCustomers) {
+                    tmpCustomer = i;
+                    break;
+                }
+            }
+
+            if(tmpCustomer == null){
+                System.err.println("Cliente Non Presente!");
+                break;
             }
 
             ArrayList<Articolo> tmp = new ArrayList<>();
@@ -237,7 +257,7 @@ public class Programma {
                     }
                 }
             }
-            orders.add(new Ordini(total, commission, tmpAgent, tmp, id));
+            orders.add(new Ordini(total, commission, tmpAgent, tmp, tmpCustomer, id));
         }
 
     }
