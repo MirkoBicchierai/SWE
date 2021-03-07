@@ -13,15 +13,8 @@ public class Main {
     private static void realMain(){
 
         Programma p = Programma.getInstance();
-
-        System.out.println("Articoli: " + p.getArticles().size());
-        System.out.println("Utenti: " + p.getUsers().size());
-        System.out.println("Cataloghi: " + p.getCatalogs().size());
-        System.out.println("Clienti: " + p.getCustomers().size());
-        System.out.println("Ordini: " + p.getOrders().size());
-        System.out.println("Notifiche: " + CentroNotifiche.getInstance().getNofications().size());
-
         p.run();
+
     }
 
     private static void startProgram(){

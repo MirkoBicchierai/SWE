@@ -14,6 +14,7 @@ public class Programma {
         c = DBConnection.getInstance();
     }
 
+
     private Utenti activeUser;
 
     private ArrayList<Utenti> users;
@@ -66,16 +67,8 @@ public class Programma {
     }
 
     public void run() {
-        while (activeUser == null) {
-            Scanner in = new Scanner(System.in);
-            System.out.println("Inserire Nome Utente:");
-            String name = in.nextLine();
 
-            System.out.println("Inserire Password:");
-            String psw = in.nextLine();
-
-            this.login(name, psw);
-        }
+        this.setMenu(new LoginMenu());
 
         while (!wantClose) {
             this.getState().showMenu(activeUser);
@@ -83,9 +76,26 @@ public class Programma {
 
         System.out.println("Bye Bye!");
         this.upload();
+
     }
 
-    public void login(String name, String psw) {
+    public void logout(){
+        activeUser = null;
+        this.setMenu(new LoginMenu());
+    }
+
+    public void debug(){
+        System.out.println("----------------------------------");
+        System.out.println("Articoli: " + getArticles().size());
+        System.out.println("Utenti: " + getUsers().size());
+        System.out.println("Cataloghi: " + getCatalogs().size());
+        System.out.println("Clienti: " + getCustomers().size());
+        System.out.println("Ordini: " + getOrders().size());
+        System.out.println("Notifiche: " + notCenter.getNofications().size());
+        System.out.println("----------------------------------");
+    }
+
+    public Utenti login(String name, String psw) {
         for (Utenti i : users) {
             if (name.equals(i.name) && Utenti.getHash(psw).equals(i.passwordHash)) {
                 activeUser = i;
@@ -95,7 +105,7 @@ public class Programma {
 
         if (activeUser == null) {
             System.err.println("Password e/o Nome utente Errati!");
-            return;
+            return activeUser;
         }
 
         if (activeUser instanceof Amministratori) {
@@ -103,6 +113,9 @@ public class Programma {
         } else {
             this.setMenu(new AgentMainMenu());
         }
+
+        return activeUser;
+
     }
 
     public static Programma getInstance() {

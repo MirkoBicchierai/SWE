@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class AgentMainMenu implements Menu {
+public class LoginMenu implements Menu{
 
     @Override
     public Menu getCurrentState() {
@@ -9,38 +9,38 @@ public class AgentMainMenu implements Menu {
 
     @Override
     public void showMenu(Utenti activeUser) {
-
-        Agenti activeAgent = (Agenti)activeUser;
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello "+activeUser.getName()+"!");
-
+        Scanner inLog = new Scanner(System.in);
+        String name;
+        String psw;
         boolean quit = false;
         int menuItem;
         do {
             System.out.println("Menu option:");
-            System.out.println("1. View catalog");
-            System.out.println("2. Historical Order");
-            System.out.println("3. Create Order");
-
-            System.out.println("9. Logout");
+            System.out.println("1. Login");
+            System.out.println("2. Debug");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
             menuItem = in.nextInt();
             switch (menuItem) {
                 case 1:
-                    activeAgent.viewCatalog();
+                    while (activeUser == null) {
+
+                        System.out.println("Inserire Nome Utente:");
+                        name = inLog.nextLine();
+                        System.out.println("Inserire Password:");
+                        psw = inLog.nextLine();
+                        activeUser = Programma.getInstance().login(name, psw);
+
+                    }
+                    quit = true;
                     break;
+
                 case 2:
-                    Programma.getInstance().setMenu(new AgentHistoricalOrderMenu());
                     quit = true;
+                    Programma.getInstance().debug();
                     break;
-                case 3:
-                    System.out.println("You've chosen item #3");
-                    break;
-                case 9:
-                    Programma.getInstance().logout();
-                    quit = true;
-                    break;
+
                 case 0:
                     quit = true;
                     Programma.getInstance().close();
@@ -49,7 +49,6 @@ public class AgentMainMenu implements Menu {
                     System.out.println("Invalid choice.");
             }
         } while (!quit);
-
     }
 
 }

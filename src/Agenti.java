@@ -43,7 +43,7 @@ public class Agenti extends Utenti {
 
         boolean check = false;
         for(Ordini i : Programma.getInstance().getOrders()) {
-            if(i.getId() == id){
+            if(i.getId() == id && i.getAgent().getId() == this.id){
                 Programma.getInstance().getOrders().remove(i);
                 check=true;
             }
@@ -55,16 +55,17 @@ public class Agenti extends Utenti {
 
     @Override
     public void viewOrders() {
-        int k = 0;
+        System.out.println("----------------------------------");
+        boolean check = false;
         for(Ordini i : Programma.getInstance().getOrders()){
             if(i.getAgent().getId() == this.id) {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
-                k++;
+                check=true;
             }
         }
-        if(k==0)
+        if(!check)
             System.out.println("There are no orders.");
-
+        System.out.println("----------------------------------");
     }
 
 }

@@ -10,20 +10,18 @@ public class AgentHistoricalOrderMenu implements Menu{
     public void showMenu(Utenti activeUser) {
 
         activeUser.viewOrders();
-
         Agenti agent = (Agenti)activeUser;
-
         Scanner in = new Scanner(System.in);
-
-        System.out.println("Menu option:");
-        System.out.println("1. Delete an order");
-        System.out.println("9. Back");
-        System.out.println("0. Back");
 
         boolean quit = false;
         int idOrder;
         int menuItem;
         do {
+            activeUser.viewOrders();
+            System.out.println("Menu option:");
+            System.out.println("1. Delete an order");
+            System.out.println("9. Back");
+            System.out.println("0. Back");
             System.out.print("Choose menu item: ");
             menuItem = in.nextInt();
             switch (menuItem) {
