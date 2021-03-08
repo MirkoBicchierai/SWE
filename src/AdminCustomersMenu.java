@@ -62,7 +62,7 @@ public class AdminCustomersMenu implements Menu{
     }
 
 
-    private int createCustomers(Utenti activeUser){
+    private void createCustomers(Utenti activeUser){
 
         Scanner in = new Scanner(System.in);
 
@@ -73,6 +73,6 @@ public class AdminCustomersMenu implements Menu{
         System.out.println("Insert Business-Name :");
         String name = in.nextLine();
 
-        return  activeUser.createCustomer(name,country,email);
+        activeUser.createCustomer(name,country,email);
     }
 }
