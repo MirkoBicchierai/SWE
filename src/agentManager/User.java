@@ -1,6 +1,7 @@
 package agentManager;
 
-import java.security.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public abstract class User {
 

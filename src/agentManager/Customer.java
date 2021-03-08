@@ -1,7 +1,5 @@
 package agentManager;
 
-import java.util.*;
-
 public class Customer {
 
     private String businessName;

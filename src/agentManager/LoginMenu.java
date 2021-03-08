@@ -20,7 +20,6 @@ public class LoginMenu implements Menu{
         do {
             System.out.println("Menu option:");
             System.out.println("1. Login");
-            System.out.println("2. Debug");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");
             try {
@@ -33,19 +32,14 @@ public class LoginMenu implements Menu{
                 case 1:
                     while (activeUser == null) {
 
-                        System.out.println("Inserire Nome Utente:");
+                        System.out.println("Insert Username:");
                         name = inLog.nextLine();
-                        System.out.println("Inserire Password:");
+                        System.out.println("Insert Password:");
                         psw = inLog.nextLine();
                         activeUser = Program.getInstance().login(name, psw);
 
                     }
                     quit = true;
-                    break;
-
-                case 2:
-                    quit = true;
-                    Program.getInstance().debug();
                     break;
 
                 case 0:

@@ -1,7 +1,6 @@
 package agentManager;
 
 import org.javatuples.Pair;
-
 import java.util.ArrayList;
 
 public class Agent extends User implements Observable{

@@ -1,6 +1,8 @@
 package agentManager;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class DBConnection {
 
     private static Connection c = null;

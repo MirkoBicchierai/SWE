@@ -2,8 +2,12 @@ package agentManager;
 
 import org.javatuples.Pair;
 
-import java.util.*;
-import java.sql.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.Statement;
+
 
 public class Program {
 
@@ -91,17 +95,6 @@ public class Program {
         }
         System.err.println("Wrong ID re-insert it!.");
         return false;
-    }
-
-    public void debug(){
-        System.out.println("----------------------------------");
-        System.out.println("Articoli: " + getArticles().size());
-        System.out.println("agentManager.User: " + getUsers().size());
-        System.out.println("Cataloghi: " + getCatalogs().size());
-        System.out.println("agentManager.Customer: " + getCustomers().size());
-        System.out.println("agentManager.Order: " + getOrders().size());
-        System.out.println("Notifiche: " + notCenter.getNofications().size());
-        System.out.println("----------------------------------");
     }
 
     public User login(String name, String psw) {

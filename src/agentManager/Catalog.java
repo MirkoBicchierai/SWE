@@ -1,6 +1,6 @@
 package agentManager;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Catalog {
 
