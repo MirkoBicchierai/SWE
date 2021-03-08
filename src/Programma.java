@@ -1,3 +1,5 @@
+import org.javatuples.Pair;
+
 import java.util.*;
 import java.sql.*;
 
@@ -264,13 +266,14 @@ public class Programma {
                 break;
             }
 
-            ArrayList<Articolo> tmp = new ArrayList<>();
+            ArrayList<Pair<Articolo, Integer>> tmp = new ArrayList<>();
             rs1 = stmt1.executeQuery("SELECT * FROM OrderRow WHERE IdHead = " + id + " ;");
             while (rs1.next()) {
                 int idArticle = rs1.getInt("idArticle");
+                int qta = rs1.getInt("qta");
                 for (Articolo a : articles) {
                     if (a.getId() == idArticle) {
-                        tmp.add(a);
+                        tmp.add(new Pair<>(a,qta));
                         break;
                     }
                 }

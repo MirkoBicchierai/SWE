@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class Amministratori extends Utenti {
 
+
+
     public Amministratori(String name, String password) {
         super(name, password);
     }
