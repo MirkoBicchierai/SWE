@@ -24,6 +24,7 @@ public class Administrator extends User {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Agent: DELETED");
             }
             i.printArticle();
+            System.out.println("");
             check=true;
         }
         if(!check)
