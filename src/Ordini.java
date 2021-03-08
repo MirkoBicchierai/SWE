@@ -2,9 +2,7 @@ import org.javatuples.Pair;
 
 import java.util.*;
 
-public class Ordini extends Observable  {
-
-    //private ArrayList<Articolo> articles;
+public class Ordini {
 
     private ArrayList<Pair<Articolo, Integer>> pairArticles;
 

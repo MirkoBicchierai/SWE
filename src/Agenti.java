@@ -2,7 +2,7 @@ import org.javatuples.Pair;
 
 import java.util.ArrayList;
 
-public class Agenti extends Utenti {
+public class Agenti extends Utenti implements Observable{
 
     private Catalogo catalog;
     private float commissionPerc;
@@ -36,6 +36,13 @@ public class Agenti extends Utenti {
 
     public void createOrder(Clienti c, ArrayList<Pair<Articolo,Integer>> articles) {
         Programma.getInstance().getOrders().add(new Ordini(this,articles,c));
+        System.out.println("Created!");
+        notify(CentroNotifiche.getInstance(),"Sio merda");
+    }
+
+    @Override
+    public void notify(Observer o,String notification) {
+        o.update(notification);
     }
 
     public boolean deleteOrder(int id) {
@@ -44,6 +51,7 @@ public class Agenti extends Utenti {
         for(Ordini i : Programma.getInstance().getOrders()) {
             if(i.getId() == id && i.getAgent().getId() == this.id){
                 Programma.getInstance().getOrders().remove(i);
+                i.printArticle();
                 check=true;
             }
         }
@@ -66,5 +74,6 @@ public class Agenti extends Utenti {
             System.out.println("There are no orders.");
         System.out.println("----------------------------------");
     }
+
 
 }

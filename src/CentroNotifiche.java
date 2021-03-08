@@ -15,8 +15,11 @@ public class CentroNotifiche implements Observer {
     private static CentroNotifiche instance;
 
     public void viewNotification() {
+        //TODO STAMPA
+        resetNotification();
     }
 
+    @Override
     public void update(String notification) {
         nofications.add(notification);
     }
@@ -28,15 +31,8 @@ public class CentroNotifiche implements Observer {
             return instance;
     }
 
-    public void resetNotification(){
+    private void resetNotification(){
         nofications = new ArrayList<>();
     }
 
-    public void loadNotification() {
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
 }
