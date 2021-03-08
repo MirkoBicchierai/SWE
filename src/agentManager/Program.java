@@ -1,24 +1,26 @@
+package agentManager;
+
 import org.javatuples.Pair;
 
 import java.util.*;
 import java.sql.*;
 
-public class Programma {
+public class Program {
 
-    private Utenti activeUser;
-    private ArrayList<Utenti> users;
-    private ArrayList<Articolo> articles;
-    private ArrayList<Catalogo> catalogs;
-    private ArrayList<Clienti> customers;
-    private ArrayList<Ordini> orders;
-    private CentroNotifiche notCenter;
-    private static Programma instance;
+    private User activeUser;
+    private ArrayList<User> users;
+    private ArrayList<Article> articles;
+    private ArrayList<Catalog> catalogs;
+    private ArrayList<Customer> customers;
+    private ArrayList<Order> orders;
+    private NotificationCenter notCenter;
+    private static Program instance;
     private Connection c;
     private Menu menu;
     private Boolean wantClose = false;
 
-    private Programma() {
-        notCenter = CentroNotifiche.getInstance();
+    private Program() {
+        notCenter = NotificationCenter.getInstance();
         users = new ArrayList<>();
         articles = new ArrayList<>();
         catalogs = new ArrayList<>();
@@ -28,27 +30,27 @@ public class Programma {
         c = DBConnection.getInstance();
     }
 
-    public Utenti getActiveUser() {
+    public User getActiveUser() {
         return activeUser;
     }
 
-    public ArrayList<Utenti> getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 
-    public ArrayList<Articolo> getArticles() {
+    public ArrayList<Article> getArticles() {
         return articles;
     }
 
-    public ArrayList<Catalogo> getCatalogs() {
+    public ArrayList<Catalog> getCatalogs() {
         return catalogs;
     }
 
-    public ArrayList<Clienti> getCustomers() {
+    public ArrayList<Customer> getCustomers() {
         return customers;
     }
 
-    public ArrayList<Ordini> getOrders() {
+    public ArrayList<Order> getOrders() {
         return orders;
     }
 
@@ -83,7 +85,7 @@ public class Programma {
     }
 
     public boolean checkCustomersExist(int id){
-        for(Clienti c :customers){
+        for(Customer c :customers){
             if(c.getId()==id)
                 return true;
         }
@@ -94,17 +96,17 @@ public class Programma {
     public void debug(){
         System.out.println("----------------------------------");
         System.out.println("Articoli: " + getArticles().size());
-        System.out.println("Utenti: " + getUsers().size());
+        System.out.println("agentManager.User: " + getUsers().size());
         System.out.println("Cataloghi: " + getCatalogs().size());
-        System.out.println("Clienti: " + getCustomers().size());
-        System.out.println("Ordini: " + getOrders().size());
+        System.out.println("agentManager.Customer: " + getCustomers().size());
+        System.out.println("agentManager.Order: " + getOrders().size());
         System.out.println("Notifiche: " + notCenter.getNofications().size());
         System.out.println("----------------------------------");
     }
 
-    public Utenti login(String name, String psw) {
-        for (Utenti i : users) {
-            if (name.equals(i.name) && Utenti.getHash(psw).equals(i.passwordHash)) {
+    public User login(String name, String psw) {
+        for (User i : users) {
+            if (name.equals(i.name) && User.getHash(psw).equals(i.passwordHash)) {
                 activeUser = i;
                 break;
             }
@@ -115,7 +117,7 @@ public class Programma {
             return activeUser;
         }
 
-        if (activeUser instanceof Amministratori) {
+        if (activeUser instanceof Administrator) {
             this.setMenu(new AdminMainMenu());
         } else {
             this.setMenu(new AgentMainMenu());
@@ -125,9 +127,9 @@ public class Programma {
 
     }
 
-    public static Programma getInstance() {
+    public static Program getInstance() {
         if (instance == null) {
-            instance = new Programma();
+            instance = new Program();
             try {
                 instance.load();
             } catch (SQLException e) {
@@ -149,7 +151,7 @@ public class Programma {
             String businessName = rs.getString("BusinessName");
             String country = rs.getString("Country");
             String email = rs.getString("Email");
-            customers.add(new Clienti(id, businessName, country, email));
+            customers.add(new Customer(id, businessName, country, email));
         }
 
         rs = stmt.executeQuery("SELECT * FROM Notification;");
@@ -163,26 +165,26 @@ public class Programma {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             float price = rs.getFloat("Price");
-            articles.add(new Prodotto(name, price, id));
+            articles.add(new Product(name, price, id));
         }
         rs = stmt.executeQuery("SELECT * FROM Article WHERE id in (SELECT IdCompound FROM ArticleCompound );");
         while (rs.next()) {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             float price = rs.getFloat("Price");
-            ArrayList<Articolo> tmp = new ArrayList<>();
+            ArrayList<Article> tmp = new ArrayList<>();
             rs1 = stmt1.executeQuery("SELECT * FROM ArticleCompound WHERE IdCompound = " + id + " ;");
             while (rs1.next()) {
                 int idComponent = rs1.getInt("idComponent");
 
-                for (Articolo a : articles) {
+                for (Article a : articles) {
                     if (a.getId() == idComponent) {
                         tmp.add(a);
                         break;
                     }
                 }
             }
-            articles.add(new Composto(name, tmp, id));
+            articles.add(new Compound(name, tmp, id));
         }
 
         rs = stmt.executeQuery("SELECT * FROM CatalogHead;");
@@ -190,18 +192,18 @@ public class Programma {
             int id = rs.getInt("idHead");
             String description = rs.getString("Description");
             String marketZone = rs.getString("MarketZone");
-            ArrayList<Articolo> tmp = new ArrayList<>();
+            ArrayList<Article> tmp = new ArrayList<>();
             rs1 = stmt1.executeQuery("SELECT * FROM CatalogRow WHERE IdHead = " + id + " ;");
             while (rs1.next()) {
                 int idArticle = rs1.getInt("idArticle");
-                for (Articolo a : articles) {
+                for (Article a : articles) {
                     if (a.getId() == idArticle) {
                         tmp.add(a);
                         break;
                     }
                 }
             }
-            catalogs.add(new Catalogo(tmp, description, marketZone, id));
+            catalogs.add(new Catalog(tmp, description, marketZone, id));
         }
 
         rs = stmt.executeQuery("SELECT * FROM User;");
@@ -214,21 +216,21 @@ public class Programma {
             float commissionPerc = rs.getFloat("CommissionPerc");
 
             if (type == 1) {
-                Catalogo tmp = null;
-                for(Catalogo i: catalogs) {
+                Catalog tmp = null;
+                for(Catalog i: catalogs) {
                     if (i.getId()==idCatalog){
                         tmp = i;
                     }
                 }
 
                 if(tmp == null){
-                    System.err.println("Catalogo Non Presente!");
+                    System.err.println("agentManager.Catalog Non Presente!");
                     break;
                 }
 
-                users.add(new Agenti(name, passHash, commissionPerc, tmp,id));
+                users.add(new Agent(name, passHash, commissionPerc, tmp,id));
             } else {
-                users.add(new Amministratori(name, passHash, id));
+                users.add(new Administrator(name, passHash, id));
             }
         }
 
@@ -240,10 +242,10 @@ public class Programma {
             float total = rs.getFloat("Total");
             float commission = rs.getFloat("Commission");
 
-            Agenti tmpAgent = null;
-            for (Utenti i : users) {
+            Agent tmpAgent = null;
+            for (User i : users) {
                 if (i.getId() == idAgent) {
-                    tmpAgent = (Agenti) i;
+                    tmpAgent = (Agent) i;
                     break;
                 }
             }
@@ -253,8 +255,8 @@ public class Programma {
                 break;
             }*/
 
-            Clienti tmpCustomer = null;
-            for (Clienti i : customers) {
+            Customer tmpCustomer = null;
+            for (Customer i : customers) {
                 if (i.getId() == idCustomers) {
                     tmpCustomer = i;
                     break;
@@ -266,19 +268,19 @@ public class Programma {
                 break;
             }
 
-            ArrayList<Pair<Articolo, Integer>> tmp = new ArrayList<>();
+            ArrayList<Pair<Article, Integer>> tmp = new ArrayList<>();
             rs1 = stmt1.executeQuery("SELECT * FROM OrderRow WHERE IdHead = " + id + " ;");
             while (rs1.next()) {
                 int idArticle = rs1.getInt("idArticle");
                 int qta = rs1.getInt("qta");
-                for (Articolo a : articles) {
+                for (Article a : articles) {
                     if (a.getId() == idArticle) {
                         tmp.add(new Pair<>(a,qta));
                         break;
                     }
                 }
             }
-            orders.add(new Ordini(total, commission, tmpAgent, tmp, tmpCustomer, id));
+            orders.add(new Order(total, commission, tmpAgent, tmp, tmpCustomer, id));
         }
 
     }
@@ -322,15 +324,15 @@ public class Programma {
 
         int type;
         float perch;
-        for (Utenti user : users) {
+        for (User user : users) {
             try {
-                if (!(user instanceof Agenti)) {
+                if (!(user instanceof Agent)) {
                     type = 0;
                     perch = 0;
                     sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " );";
                 } else {
                     type = 1;
-                    Agenti tmp = (Agenti) user;
+                    Agent tmp = (Agent) user;
                     perch = tmp.getCommissionPerc();
                     sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,IdCatalog) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ,"+tmp.getCatalog().getId()+");";
                 }
@@ -343,7 +345,7 @@ public class Programma {
             }
         }
 
-        for (Clienti customer : customers) {
+        for (Customer customer : customers) {
             try {
                 sql = "INSERT INTO Customer (id,BusinessName,Country,Email) " + "VALUES (" + customer.getId() + ", '" + customer.getBusinessName() + "', '" + customer.getCountry() + "', '" + customer.getEmail() + "');";
                 stmt = c.createStatement();
@@ -354,7 +356,7 @@ public class Programma {
             }
         }
 
-        for (Ordini order : orders) {
+        for (Order order : orders) {
             try {
                 if(order.getAgent()!=null)
                     sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + order.getId() + ", '" + order.getAgent().getId() + "', "+order.getClient().getId()+" ,'" + order.getTotal() + "', '" + order.getCommissionTot() + "');";
@@ -367,7 +369,7 @@ public class Programma {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
             try {
-                for (Pair<Articolo,Integer>  i: order.getRows()) {
+                for (Pair<Article,Integer>  i: order.getRows()) {
                     sql = "INSERT INTO OrderRow (idHead,idArticle,qta) " + "VALUES (" + order.getId() + ", " + i.getValue0().getId() + ","+i.getValue1()+");";
                     stmt = c.createStatement();
                     stmt.executeUpdate(sql);
@@ -378,7 +380,7 @@ public class Programma {
             }
         }
 
-        for (Catalogo catalog : catalogs) {
+        for (Catalog catalog : catalogs) {
             try {
                 sql = "INSERT INTO CatalogHead (idHead,Description,MarketZone) " + "VALUES (" + catalog.getId() + ", '" + catalog.getDescription() + "', '" + catalog.getMarketZone() + "');";
                 stmt = c.createStatement();
@@ -388,7 +390,7 @@ public class Programma {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
             try {
-                for (Articolo article : catalog.getArticles()) {
+                for (Article article : catalog.getArticles()) {
                     sql = "INSERT INTO CatalogRow (idHead,idArticle) " + "VALUES (" + catalog.getId() + ", " + article.getId() + ");";
                     stmt = c.createStatement();
                     stmt.executeUpdate(sql);
@@ -400,10 +402,10 @@ public class Programma {
 
         }
 
-        for (Articolo article : articles) {
-            if (article instanceof Composto) {
-                Composto tmp = (Composto) article;
-                for (Articolo a : tmp.getComponents()) {
+        for (Article article : articles) {
+            if (article instanceof Compound) {
+                Compound tmp = (Compound) article;
+                for (Article a : tmp.getComponents()) {
                     try {
                         sql = "INSERT INTO ArticleCompound (IdCompound,IdComponent) " + "VALUES (" + article.getId() + ", " + a.getId() + ");";
                         stmt = c.createStatement();

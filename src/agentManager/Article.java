@@ -1,18 +1,20 @@
-public abstract class Articolo {
+package agentManager;
+
+public abstract class Article {
 
     protected String name;
     protected int id;
     protected float price;
     protected static int lastID;
 
-    public Articolo(String name, float price) {
+    public Article(String name, float price) {
         this.name = name;
         lastID++;
         this.id = lastID;
         this.price = price;
     }
 
-    public Articolo(String name, float price, int id) {
+    public Article(String name, float price, int id) {
         this.name = name;
         this.price = price;
         this.id=id;

@@ -1,3 +1,5 @@
+package agentManager;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,8 +11,8 @@ public class AdminCatalogMenu implements Menu{
     }
 
     @Override
-    public void showMenu(Utenti activeUser) {
-        Amministratori admin = (Amministratori)activeUser;
+    public void showMenu(User activeUser) {
+        Administrator admin = (Administrator)activeUser;
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;               //finito!!
@@ -46,12 +48,12 @@ public class AdminCatalogMenu implements Menu{
                     break;
                 case 9:
                     quit = true;
-                    Programma.getInstance().setMenu(new AdminMainMenu());
+                    Program.getInstance().setMenu(new AdminMainMenu());
                     break;
                 case 0:
 
                     quit = true;
-                    Programma.getInstance().close();
+                    Program.getInstance().close();
                     break;
 
                 default:
@@ -63,7 +65,7 @@ public class AdminCatalogMenu implements Menu{
         } while (!quit);
     }
 
-    private void createCatalog(Amministratori activeUser){
+    private void createCatalog(Administrator activeUser){
 
         Scanner in = new Scanner(System.in);
 
@@ -72,7 +74,7 @@ public class AdminCatalogMenu implements Menu{
         System.out.println("Insert Market Zone :");
         String marketZone = in.nextLine();
 
-        ArrayList<Articolo> articles = new ArrayList<>();
+        ArrayList<Article> articles = new ArrayList<>();
         boolean agg;
         while (true){
             agg = false;
@@ -90,7 +92,7 @@ public class AdminCatalogMenu implements Menu{
                     }
                 }
 
-                for (Articolo i : Programma.getInstance().getArticles()) {
+                for (Article i : Program.getInstance().getArticles()) {
                     if (i.getId() == idArticle) {
                         articles.add(i);
                         agg = true;

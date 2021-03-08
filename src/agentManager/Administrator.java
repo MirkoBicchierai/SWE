@@ -1,15 +1,15 @@
-import org.javatuples.Pair;
+package agentManager;
 
 import java.util.ArrayList;
 
-public class Amministratori extends Utenti {
+public class Administrator extends User {
 
 
 
-    public Amministratori(String name, String password) {
+    public Administrator(String name, String password) {
         super(name, password);
     }
-    public Amministratori(String name, String passwordHash, int id) {
+    public Administrator(String name, String passwordHash, int id) {
         super(name, passwordHash, id);
     }
 
@@ -17,7 +17,7 @@ public class Amministratori extends Utenti {
     public void viewOrders() {
         System.out.println("----------------------------------");
         boolean check = false;
-        for(Ordini i : Programma.getInstance().getOrders()){
+        for(Order i : Program.getInstance().getOrders()){
             if (i.getAgent()!=null) {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Agent: "+i.getAgent().getName());
             }else{
@@ -34,9 +34,9 @@ public class Amministratori extends Utenti {
     @Override
     public void viewCatalog() {
         System.out.println("----------------------------------");
-        if (Programma.getInstance().getCatalogs().size()>0){
+        if (Program.getInstance().getCatalogs().size()>0){
             System.out.println("");
-            for (Catalogo i : Programma.getInstance().getCatalogs()) {
+            for (Catalog i : Program.getInstance().getCatalogs()) {
                 i.printCatalog();
                 System.out.println("");
             }
@@ -47,28 +47,28 @@ public class Amministratori extends Utenti {
 
     public void viewProduct() {
         System.out.println("----------------------------------");
-        for(Articolo i :Programma.getInstance().getArticles()){
+        for(Article i : Program.getInstance().getArticles()){
             i.display();
         }
         System.out.println("----------------------------------");
     }
 
-    public void createAgent(String name, String password, float percCommission, Catalogo catalogo) {
-        Programma.getInstance().getUsers().add(new Agenti(name,password,percCommission,catalogo));
+    public void createAgent(String name, String password, float percCommission, Catalog catalog) {
+        Program.getInstance().getUsers().add(new Agent(name,password,percCommission, catalog));
         System.out.println("Created!");
     }
 
-    public void createCatlog(String descr, String marketZone, ArrayList<Articolo> articles) {
+    public void createCatlog(String descr, String marketZone, ArrayList<Article> articles) {
 
-        Programma.getInstance().getCatalogs().add(new Catalogo(articles,descr,marketZone));
+        Program.getInstance().getCatalogs().add(new Catalog(articles,descr,marketZone));
         System.out.println("Created!");
     }
 
     public void deleteAgent(int idAgent){
-        Agenti agent=null;
-        for(Utenti i : Programma.getInstance().getUsers()){
-            if (i instanceof Agenti&& i.getId()==idAgent){
-                agent = (Agenti) i;
+        Agent agent=null;
+        for(User i : Program.getInstance().getUsers()){
+            if (i instanceof Agent && i.getId()==idAgent){
+                agent = (Agent) i;
                 break;
             }
         }
@@ -78,24 +78,24 @@ public class Amministratori extends Utenti {
             return;
         }
 
-        for(Ordini i : Programma.getInstance().getOrders()){
+        for(Order i : Program.getInstance().getOrders()){
             if (i.getAgent()==agent){
                 i.agentDeleted();
             }
         }
 
-        Programma.getInstance().getUsers().remove(agent);
+        Program.getInstance().getUsers().remove(agent);
         System.out.println("Deleted!");
     }
 
     public void viewAgent() {
         System.out.println("----------------------------------");
-        Agenti a;
+        Agent a;
         boolean check = false;
-        for (Utenti u : Programma.getInstance().getUsers()){
-            if(u instanceof Agenti){
+        for (User u : Program.getInstance().getUsers()){
+            if(u instanceof Agent){
                 check = true;
-                a = (Agenti)u;
+                a = (Agent)u;
                 System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPerc()+"%");
             }
         }
@@ -106,12 +106,12 @@ public class Amministratori extends Utenti {
 
     public void viewCatalogAgent(int idAgent){
         System.out.println("----------------------------------");
-        Agenti a;
+        Agent a;
         boolean check = false;
-        for (Utenti u : Programma.getInstance().getUsers()){
-            if((u instanceof Agenti) && u.getId() == idAgent){
+        for (User u : Program.getInstance().getUsers()){
+            if((u instanceof Agent) && u.getId() == idAgent){
                 check = true;
-                a = (Agenti)u;
+                a = (Agent)u;
                 System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPerc()+"%");
                 a.getCatalog().printCatalog();
             }
@@ -125,7 +125,7 @@ public class Amministratori extends Utenti {
 
         System.out.println("----------------------------------");
         boolean check = false;
-        for(Ordini i : Programma.getInstance().getOrders()){
+        for(Order i : Program.getInstance().getOrders()){
             if (i.getAgent()!=null&&i.getAgent().getId()==idCustomer) {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
                 i.printArticle();
@@ -140,16 +140,16 @@ public class Amministratori extends Utenti {
 
 
     public void deleteCatalog(int IdCatalog){//controllo se utente collegato
-        Catalogo tmp = null;
+        Catalog tmp = null;
 
-        for(Utenti i:Programma.getInstance().getUsers()){
-            if(i instanceof Agenti && ((Agenti) i).getCatalog().getId()==IdCatalog){
+        for(User i: Program.getInstance().getUsers()){
+            if(i instanceof Agent && ((Agent) i).getCatalog().getId()==IdCatalog){
                 System.err.println("Catalog Can't be Deleted! It's Linked to an User!");
                 return;
             }
         }
 
-        for(Catalogo i:Programma.getInstance().getCatalogs()){
+        for(Catalog i: Program.getInstance().getCatalogs()){
             if(i.getId()==IdCatalog){
                 tmp = i;
             }
@@ -160,13 +160,13 @@ public class Amministratori extends Utenti {
             return;
         }
 
-        Programma.getInstance().getCatalogs().remove(tmp);
+        Program.getInstance().getCatalogs().remove(tmp);
         System.out.println("Deleted!");
     }
 
     public void deleteClient(int idCLient) {
-        Clienti tmp = null;
-        for(Clienti i:Programma.getInstance().getCustomers()){
+        Customer tmp = null;
+        for(Customer i: Program.getInstance().getCustomers()){
             if(i.getId()==idCLient){
                 tmp = i;
             }
@@ -177,15 +177,15 @@ public class Amministratori extends Utenti {
             return;
         }
 
-        Programma.getInstance().getCustomers().remove(tmp);
+        Program.getInstance().getCustomers().remove(tmp);
         System.out.println("Deleted!");
     }
 
     public void deleteProduct(int idArticle) {
-        Articolo tmp = null;
+        Article tmp = null;
 
-        for(Ordini i:Programma.getInstance().getOrders()){
-            for(Articolo j:i.getArticles()){
+        for(Order i: Program.getInstance().getOrders()){
+            for(Article j:i.getArticles()){
                 if (j.getId()==idArticle){
                     System.err.println("This Article is Already Ordered! It can't be Deleted!");
                     return;
@@ -193,9 +193,9 @@ public class Amministratori extends Utenti {
             }
         }
 
-        for(Articolo i:Programma.getInstance().getArticles()){
-            if(i instanceof Composto ){
-                for(Articolo j : ((Composto) i).getComponents()){
+        for(Article i: Program.getInstance().getArticles()){
+            if(i instanceof Compound){
+                for(Article j : ((Compound) i).getComponents()){
                     if (j.getId()==idArticle){
                         System.err.println("This Article is a Component Of Another Article! It can't be Deleted!");
                         return;
@@ -204,7 +204,7 @@ public class Amministratori extends Utenti {
             }
         }
 
-        for(Articolo i:Programma.getInstance().getArticles()){
+        for(Article i: Program.getInstance().getArticles()){
             if(i.getId()==idArticle){
                 tmp = i;
             }
@@ -215,19 +215,19 @@ public class Amministratori extends Utenti {
             return;
         }
 
-        for(Catalogo i:Programma.getInstance().getCatalogs())
+        for(Catalog i: Program.getInstance().getCatalogs())
             i.getArticles().removeIf(j -> j.getId() == idArticle); //rimuove j se j.getid == article
 
 
-        Programma.getInstance().getArticles().remove(tmp);
+        Program.getInstance().getArticles().remove(tmp);
         System.out.println("Deleted!");
     }
 
-    public void createProduct(String name, float price, ArrayList<Articolo> a) {
+    public void createProduct(String name, float price, ArrayList<Article> a) {
         if (a.size()==0){
-            Programma.getInstance().getArticles().add(new Prodotto(name, price));
+            Program.getInstance().getArticles().add(new Product(name, price));
         }else {
-            Programma.getInstance().getArticles().add(new Composto(name, a));
+            Program.getInstance().getArticles().add(new Compound(name, a));
         }
 
 

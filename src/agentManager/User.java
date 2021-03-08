@@ -1,21 +1,22 @@
-import java.math.BigInteger;
+package agentManager;
+
 import java.security.*;
 
-public abstract class Utenti {
+public abstract class User {
 
     protected int id;
     protected String name;
     protected String passwordHash;
     protected static int lastID;
 
-    public Utenti(String name, String password) {
+    public User(String name, String password) {
         this.passwordHash=getHash(password);
         lastID++;
         this.id = lastID;
         this.name = name;
     }
 
-    public Utenti(String name, String passwordHash, int id) {
+    public User(String name, String passwordHash, int id) {
         this.passwordHash=passwordHash;
         this.id=id;
         lastID = Math.max(lastID, id);
@@ -56,14 +57,14 @@ public abstract class Utenti {
     }
 
     public void createCustomer(String businessName, String country, String email){
-        Programma.getInstance().getCustomers().add(new Clienti(businessName,country,email));
+        Program.getInstance().getCustomers().add(new Customer(businessName,country,email));
         System.out.println("Created!");
     }
 
     public void viewCustomers(){
         System.out.println("");
         System.out.println("----------------------------------");
-        for(Clienti c : Programma.getInstance().getCustomers()){
+        for(Customer c : Program.getInstance().getCustomers()){
             System.out.println("CUSTOMERS -> ID: " + c.getId() + " Name: " + c.getBusinessName() + " Email: " + c.getEmail() + " Country: " + c.getCountry());
         }
         System.out.println("----------------------------------");

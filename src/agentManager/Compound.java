@@ -1,32 +1,34 @@
+package agentManager;
+
 import java.util.*;
 
-public class Composto extends Articolo {
+public class Compound extends Article {
 
-    private ArrayList<Articolo> components;
+    private ArrayList<Article> components;
 
-    public Composto(String name,ArrayList<Articolo> components) {
+    public Compound(String name, ArrayList<Article> components) {
         super( name, 0);
-        for(Articolo i:components) {
+        for(Article i:components) {
             this.price += i.price;
         }
         this.components = components;
     }
 
-    public Composto(String name,ArrayList<Articolo> components, int id) {
+    public Compound(String name, ArrayList<Article> components, int id) {
         super( name, 0, id);
-        for(Articolo i:components) {
+        for(Article i:components) {
             this.price += i.price;
         }
         this.components = components;
     }
 
-    public ArrayList<Articolo> getComponents() {
+    public ArrayList<Article> getComponents() {
         return components;
     }
 
     public void display() {
         System.out.println("--Id: "+this.id+" Article compound: " + name + " Price: " + price);
-        for(Articolo i : components)
+        for(Article i : components)
             System.out.println("  ||Compound: " + i.getName() + " Price: " + i.getPrice());
     }
 

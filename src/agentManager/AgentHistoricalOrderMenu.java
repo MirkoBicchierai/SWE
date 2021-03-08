@@ -1,3 +1,5 @@
+package agentManager;
+
 import java.util.Scanner;
 
 public class AgentHistoricalOrderMenu implements Menu{
@@ -7,9 +9,9 @@ public class AgentHistoricalOrderMenu implements Menu{
     }
 
     @Override
-    public void showMenu(Utenti activeUser) {
+    public void showMenu(User activeUser) {
 
-        Agenti agent = (Agenti)activeUser;
+        Agent agent = (Agent)activeUser;
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
@@ -17,7 +19,7 @@ public class AgentHistoricalOrderMenu implements Menu{
         int menuItem;
         do {
             activeUser.viewOrders();
-            System.out.println("Menu option:");
+            System.out.println("agentManager.Menu option:");
             System.out.println("1. Delete an order");
             System.out.println("9. Back");
             System.out.println("0. Quit");
@@ -42,13 +44,13 @@ public class AgentHistoricalOrderMenu implements Menu{
                     break;
 
                 case 9:
-                    Programma.getInstance().setMenu(new AgentMainMenu());
+                    Program.getInstance().setMenu(new AgentMainMenu());
                     quit = true;
                     break;
 
                 case 0:
                     quit = true;
-                    Programma.getInstance().close();
+                    Program.getInstance().close();
                     break;
 
                 default:

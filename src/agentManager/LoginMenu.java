@@ -1,3 +1,5 @@
+package agentManager;
+
 import java.util.Scanner;
 
 public class LoginMenu implements Menu{
@@ -8,7 +10,7 @@ public class LoginMenu implements Menu{
     }
 
     @Override
-    public void showMenu(Utenti activeUser) {
+    public void showMenu(User activeUser) {
         Scanner in = new Scanner(System.in);
         Scanner inLog = new Scanner(System.in);
         String name;
@@ -16,7 +18,7 @@ public class LoginMenu implements Menu{
         boolean quit = false;
         int menuItem;
         do {
-            System.out.println("Menu option:");
+            System.out.println("agentManager.Menu option:");
             System.out.println("1. Login");
             System.out.println("2. Debug");
             System.out.println("0. Quit");
@@ -35,7 +37,7 @@ public class LoginMenu implements Menu{
                         name = inLog.nextLine();
                         System.out.println("Inserire Password:");
                         psw = inLog.nextLine();
-                        activeUser = Programma.getInstance().login(name, psw);
+                        activeUser = Program.getInstance().login(name, psw);
 
                     }
                     quit = true;
@@ -43,12 +45,12 @@ public class LoginMenu implements Menu{
 
                 case 2:
                     quit = true;
-                    Programma.getInstance().debug();
+                    Program.getInstance().debug();
                     break;
 
                 case 0:
                     quit = true;
-                    Programma.getInstance().close();
+                    Program.getInstance().close();
                     break;
 
                 default:

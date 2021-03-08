@@ -1,3 +1,5 @@
+package agentManager;
+
 import java.util.Scanner;
 
 public class AgentMainMenu implements Menu {
@@ -8,16 +10,16 @@ public class AgentMainMenu implements Menu {
     }
 
     @Override
-    public void showMenu(Utenti activeUser) {
+    public void showMenu(User activeUser) {
 
-        Agenti activeAgent = (Agenti)activeUser;
+        Agent activeAgent = (Agent)activeUser;
         Scanner in = new Scanner(System.in);
         System.out.println("Hello "+activeUser.getName()+"!");
 
         boolean quit = false;
         int menuItem;
         do {
-            System.out.println("Menu option:");
+            System.out.println("agentManager.Menu option:");
             System.out.println("1. View catalog");
             System.out.println("2. Historical Order");
             System.out.println("3. Create Order");
@@ -36,20 +38,20 @@ public class AgentMainMenu implements Menu {
                     activeAgent.viewCatalog();
                     break;
                 case 2:
-                    Programma.getInstance().setMenu(new AgentHistoricalOrderMenu());
+                    Program.getInstance().setMenu(new AgentHistoricalOrderMenu());
                     quit = true;
                     break;
                 case 3:
-                    Programma.getInstance().setMenu(new AgentCreateOrderMenu());
+                    Program.getInstance().setMenu(new AgentCreateOrderMenu());
                     quit = true;
                     break;
                 case 9:
-                    Programma.getInstance().logout();
+                    Program.getInstance().logout();
                     quit = true;
                     break;
                 case 0:
                     quit = true;
-                    Programma.getInstance().close();
+                    Program.getInstance().close();
                     break;
                 default:
                     System.err.println("Invalid choice.");

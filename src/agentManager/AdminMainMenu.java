@@ -1,3 +1,5 @@
+package agentManager;
+
 import java.util.Scanner;
 
 public class AdminMainMenu implements Menu{
@@ -8,19 +10,19 @@ public class AdminMainMenu implements Menu{
     }
 
     @Override
-    public void showMenu(Utenti activeUser) {
+    public void showMenu(User activeUser) {
 
-        Amministratori admin = (Amministratori)activeUser;
+        Administrator admin = (Administrator)activeUser;
         Scanner in = new Scanner(System.in);
 
         System.out.println("Hello "+activeUser.getName()+"!");
 
         boolean quit = false;
-        CentroNotifiche.getInstance().viewNotification();
+        NotificationCenter.getInstance().viewNotification();
         int menuItem;
 
         do {
-            System.out.println("Menu Option:");
+            System.out.println("agentManager.Menu Option:");
 
             System.out.println("1. View Agents");
             System.out.println("2. View Catalogs");
@@ -41,19 +43,19 @@ public class AdminMainMenu implements Menu{
 
                 case 1:
 
-                    Programma.getInstance().setMenu(new AdminAgentMenu());
+                    Program.getInstance().setMenu(new AdminAgentMenu());
                     quit = true;
                     break;
 
                 case 2:
 
-                    Programma.getInstance().setMenu(new AdminCatalogMenu());
+                    Program.getInstance().setMenu(new AdminCatalogMenu());
                     quit = true;
                     break;
 
                 case 3:
 
-                    Programma.getInstance().setMenu(new AdminCustomersMenu());
+                    Program.getInstance().setMenu(new AdminCustomersMenu());
                     quit = true;
                     break;
 
@@ -63,18 +65,18 @@ public class AdminMainMenu implements Menu{
 
                 case 5:
 
-                    Programma.getInstance().setMenu(new AdminArticleMenu());
+                    Program.getInstance().setMenu(new AdminArticleMenu());
                     quit = true;
                     break;
 
                 case 9:
-                    Programma.getInstance().logout();
+                    Program.getInstance().logout();
                     quit = true;
                     break;
 
                 case 0:
                     quit = true;
-                    Programma.getInstance().close();
+                    Program.getInstance().close();
                     break;
 
                 default:

@@ -1,12 +1,12 @@
-import java.util.*;
+package agentManager;
 
-public class Prodotto extends Articolo {
+public class Product extends Article {
 
-    public Prodotto(String name, float price) {
+    public Product(String name, float price) {
         super(name, price);
     }
 
-    public Prodotto(String name, float price, int id) {
+    public Product(String name, float price, int id) {
         super(name, price, id);
     }
 

@@ -1,25 +1,27 @@
+package agentManager;
+
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
 
-public class Agenti extends Utenti implements Observable{
+public class Agent extends User implements Observable{
 
-    private Catalogo catalog;
+    private Catalog catalog;
     private float commissionPerc;
 
-    public Agenti(String name, String password, float commissionPerc, Catalogo catalog) {
+    public Agent(String name, String password, float commissionPerc, Catalog catalog) {
             super(name,password);
             this.commissionPerc = commissionPerc;
             this.catalog = catalog;
     }
 
-    public Agenti(String name, String passwordHash, float commissionPerc, Catalogo catalog, int id) {
+    public Agent(String name, String passwordHash, float commissionPerc, Catalog catalog, int id) {
         super(name,passwordHash, id);
         this.commissionPerc = commissionPerc;
         this.catalog = catalog;
     }
 
-    public Catalogo getCatalog() {
+    public Catalog getCatalog() {
         return catalog;
     }
 
@@ -34,10 +36,10 @@ public class Agenti extends Utenti implements Observable{
         System.out.println("----------------------------------");
     }
 
-    public void createOrder(Clienti c, ArrayList<Pair<Articolo,Integer>> articles) {
-        Programma.getInstance().getOrders().add(new Ordini(this,articles,c));
+    public void createOrder(Customer c, ArrayList<Pair<Article,Integer>> articles) {
+        Program.getInstance().getOrders().add(new Order(this,articles,c));
         System.out.println("Created!");
-        notify(CentroNotifiche.getInstance(),"A new order has been issued by for customer " + c.getBusinessName() + " from " + this.name);
+        notify(NotificationCenter.getInstance(),"A new order has been issued by for customer " + c.getBusinessName() + " from " + this.name);
     }
 
     @Override
@@ -48,9 +50,9 @@ public class Agenti extends Utenti implements Observable{
     public boolean deleteOrder(int id) {
 
         boolean check = false;
-        for(Ordini i : Programma.getInstance().getOrders()) {
+        for(Order i : Program.getInstance().getOrders()) {
             if(i.getId() == id && i.getAgent().getId() == this.id){
-                Programma.getInstance().getOrders().remove(i);
+                Program.getInstance().getOrders().remove(i);
                 i.printArticle();
                 check=true;
             }
@@ -64,7 +66,7 @@ public class Agenti extends Utenti implements Observable{
     public void viewOrders() {
         System.out.println("----------------------------------");
         boolean check = false;
-        for(Ordini i : Programma.getInstance().getOrders()){
+        for(Order i : Program.getInstance().getOrders()){
             if(i.getAgent().getId() == this.id) {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
                 i.printArticle();

@@ -1,3 +1,5 @@
+package agentManager;
+
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ public class AgentCreateOrderMenu implements Menu{
     }
 
     @Override
-    public void showMenu(Utenti activeUser) {
+    public void showMenu(User activeUser) {
         Scanner in = new Scanner(System.in);
         boolean quit = false;
         int menuItem;
@@ -19,7 +21,7 @@ public class AgentCreateOrderMenu implements Menu{
 
             activeUser.viewCustomers();
 
-            System.out.println("Menu option:");
+            System.out.println("agentManager.Menu option:");
             System.out.println("1. Create new customers");
             System.out.println("2. Select a existing customers");
 
@@ -40,7 +42,6 @@ public class AgentCreateOrderMenu implements Menu{
                     break;
 
                 case 2:
-                    // TODO prendere idc
                     do{
                         System.out.println("Insert an id:");
                         try {
@@ -48,19 +49,19 @@ public class AgentCreateOrderMenu implements Menu{
                         }catch (Exception e){
                             idS = -1;
                         }
-                    }while( !Programma.getInstance().checkCustomersExist( idS ) );
+                    }while( !Program.getInstance().checkCustomersExist( idS ) );
 
-                    subMenuSelectArticles( (Agenti) activeUser , idS );
+                    subMenuSelectArticles( (Agent) activeUser , idS );
                     break;
 
                 case 9:
-                    Programma.getInstance().setMenu(new AgentMainMenu());
+                    Program.getInstance().setMenu(new AgentMainMenu());
                     quit = true;
                     break;
 
                 case 0:
                     quit = true;
-                    Programma.getInstance().close();
+                    Program.getInstance().close();
                     break;
 
                 default:
@@ -69,7 +70,7 @@ public class AgentCreateOrderMenu implements Menu{
         } while (!quit);
     }
 
-    private void createCustomers(Utenti activeUser){
+    private void createCustomers(User activeUser){
         Scanner in = new Scanner(System.in);
         System.out.println("Insert Email:");
         String email = in.nextLine();
@@ -80,11 +81,11 @@ public class AgentCreateOrderMenu implements Menu{
         activeUser.createCustomer(name,country,email);
     }
 
-    private void subMenuSelectArticles(Agenti agent, int idSelectedCustomers){
+    private void subMenuSelectArticles(Agent agent, int idSelectedCustomers){
 
         Scanner in = new Scanner(System.in);
-        ArrayList<Pair<Articolo,Integer>> articlespair = new ArrayList<>();
-        Catalogo c = agent.getCatalog();
+        ArrayList<Pair<Article,Integer>> articlespair = new ArrayList<>();
+        Catalog c = agent.getCatalog();
 
         boolean agg;
         int qtaArticle = 0;
@@ -101,7 +102,7 @@ public class AgentCreateOrderMenu implements Menu{
                         System.err.println("Select at least an Article!");
                         continue;
                     }
-                for (Articolo i : c.getArticles()) {
+                for (Article i : c.getArticles()) {
                     if (i.getId() == idArticle) {
 
                         do {
@@ -128,7 +129,7 @@ public class AgentCreateOrderMenu implements Menu{
             }
         }
 
-        for(Clienti i : Programma.getInstance().getCustomers()){
+        for(Customer i : Program.getInstance().getCustomers()){
             if(i.getId() == idSelectedCustomers) {
                 agent.createOrder(i, articlespair);
                 return;

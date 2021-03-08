@@ -1,3 +1,5 @@
+package agentManager;
+
 import java.sql.*;
 public class DBConnection {
 

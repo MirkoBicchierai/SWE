@@ -1,21 +1,23 @@
+package agentManager;
+
 import java.util.*;
 
-public class Catalogo {
+public class Catalog {
 
     private int id;
     private String description;
     private String marketZone;
     private static int lastID = 0;
-    private ArrayList<Articolo> articles;
+    private ArrayList<Article> articles;
 
-    public Catalogo(ArrayList<Articolo> articles,String description , String marketZone) {
+    public Catalog(ArrayList<Article> articles, String description , String marketZone) {
         this.articles = articles;
         this.description = description;
         this.marketZone = marketZone;
         lastID++;
         this.id=lastID;
     }
-    public Catalogo(ArrayList<Articolo> articles,String description , String marketZone, int id) {
+    public Catalog(ArrayList<Article> articles, String description , String marketZone, int id) {
         this.articles = articles;
         this.description = description;
         this.marketZone = marketZone;
@@ -35,13 +37,13 @@ public class Catalogo {
         return marketZone;
     }
 
-    public ArrayList<Articolo> getArticles() {
+    public ArrayList<Article> getArticles() {
         return articles;
     }
 
     public void printCatalog() {
         System.out.println("Id: "+id+" Catalog: " + description +" MarketZone: " + marketZone);
-        for(Articolo i : articles){
+        for(Article i : articles){
             i.display();
         }
     }

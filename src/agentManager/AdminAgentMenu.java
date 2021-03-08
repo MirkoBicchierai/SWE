@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package agentManager;
+
 import java.util.Scanner;
 
 public class AdminAgentMenu implements Menu{
@@ -8,8 +9,8 @@ public class AdminAgentMenu implements Menu{
     }
 
     @Override
-    public void showMenu(Utenti activeUser) {
-        Amministratori admin = (Amministratori)activeUser;
+    public void showMenu(User activeUser) {
+        Administrator admin = (Administrator)activeUser;
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
@@ -54,12 +55,12 @@ public class AdminAgentMenu implements Menu{
                     break;
                 case 9:
                     quit = true;
-                    Programma.getInstance().setMenu(new AdminMainMenu());
+                    Program.getInstance().setMenu(new AdminMainMenu());
                     break;
                 case 0:
 
                     quit = true;
-                    Programma.getInstance().close();
+                    Program.getInstance().close();
                     break;
 
                 default:
@@ -71,7 +72,7 @@ public class AdminAgentMenu implements Menu{
         } while (!quit);
     }
 
-    private void createAgent(Amministratori activeUser){
+    private void createAgent(Administrator activeUser){
 
         Scanner in = new Scanner(System.in);
 
@@ -90,7 +91,7 @@ public class AdminAgentMenu implements Menu{
             }
         }while (percComm==-1);
 
-        Catalogo catalogo = null;
+        Catalog catalog = null;
 
         int idCatalog;
         do{
@@ -99,19 +100,19 @@ public class AdminAgentMenu implements Menu{
             try {
                 idCatalog = Integer.parseInt(in.next());
 
-                for(Catalogo i:Programma.getInstance().getCatalogs()){
+                for(Catalog i: Program.getInstance().getCatalogs()){
                     if (i.getId()==idCatalog){
-                        catalogo=i;
+                        catalog =i;
                     }
                 }
 
             }catch (Exception e){}
 
-            if (catalogo==null) System.err.println("You must insert a number!");
+            if (catalog ==null) System.err.println("You must insert a number!");
 
-        }while (catalogo==null);
+        }while (catalog ==null);
 
 
-        activeUser.createAgent(name,password,percComm,catalogo);
+        activeUser.createAgent(name,password,percComm, catalog);
     }
 }

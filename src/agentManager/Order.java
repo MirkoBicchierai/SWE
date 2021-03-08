@@ -1,23 +1,25 @@
+package agentManager;
+
 import org.javatuples.Pair;
 
 import java.util.*;
 
-public class Ordini {
+public class Order {
 
-    private ArrayList<Pair<Articolo, Integer>> pairArticles;
+    private ArrayList<Pair<Article, Integer>> pairArticles;
 
     private int id;
     private static int lastID;
-    private Agenti agent;
+    private Agent agent;
     private float total;
     private float commissionTot;
-    private Clienti client;
+    private Customer client;
 
-    public Ordini(Agenti agent, ArrayList<Pair<Articolo, Integer>> pairArticles , Clienti client ) {
+    public Order(Agent agent, ArrayList<Pair<Article, Integer>> pairArticles , Customer client ) {
 
         this.total = 0;
 
-        for (Pair<Articolo, Integer> a : pairArticles){
+        for (Pair<Article, Integer> a : pairArticles){
             this.total = this.total + a.getValue0().getPrice() * a.getValue1();
         }
 
@@ -29,7 +31,7 @@ public class Ordini {
         this.client = client;
     }
 
-    public Ordini(float total, float commissionTot, Agenti agent, ArrayList<Pair<Articolo, Integer>> pairArticles , Clienti client ) {
+    public Order(float total, float commissionTot, Agent agent, ArrayList<Pair<Article, Integer>> pairArticles , Customer client ) {
         this.total = total;
         this.commissionTot = commissionTot;
         lastID++;
@@ -39,7 +41,7 @@ public class Ordini {
         this.client = client;
     }
 
-    public Ordini(float total, float commissionTot, Agenti agent, ArrayList<Pair<Articolo, Integer>> pairArticles, Clienti client ,int id ) {
+    public Order(float total, float commissionTot, Agent agent, ArrayList<Pair<Article, Integer>> pairArticles, Customer client , int id ) {
         this.total = total;
         this.commissionTot = commissionTot;
         this.agent = agent;
@@ -49,21 +51,21 @@ public class Ordini {
         this.client = client;
     }
 
-    public ArrayList<Articolo> getArticles() {
+    public ArrayList<Article> getArticles() {
 
-        ArrayList<Articolo> tmp = new ArrayList<>();
-        for (Pair<Articolo, Integer> a : pairArticles){
+        ArrayList<Article> tmp = new ArrayList<>();
+        for (Pair<Article, Integer> a : pairArticles){
             tmp.add(a.getValue0());
         }
 
         return tmp;
     }
 
-    public ArrayList<Pair<Articolo, Integer>> getRows() {
+    public ArrayList<Pair<Article, Integer>> getRows() {
         return pairArticles;
     }
 
-    public Clienti getClient() {
+    public Customer getClient() {
         return client;
     }
 
@@ -80,7 +82,7 @@ public class Ordini {
     }
 
     public void printArticle() {
-        for(Pair<Articolo,Integer> i:pairArticles){
+        for(Pair<Article,Integer> i:pairArticles){
             System.out.println("    • Id: "+i.getValue0().getId()+" Article: "+i.getValue0().getName()+" Price: "+i.getValue0().getPrice()+" Qta: "+i.getValue1());
         }
     }
@@ -93,7 +95,7 @@ public class Ordini {
         agent=null;
     }
 
-    public Agenti getAgent() {
+    public Agent getAgent() {
         return agent;
     }
 

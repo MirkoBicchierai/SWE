@@ -1,6 +1,8 @@
+package agentManager;
+
 import java.util.*;
 
-public class Clienti {
+public class Customer {
 
     private String businessName;
     private String country;
@@ -8,7 +10,7 @@ public class Clienti {
     private static int lastID = 0;
     private int id;
 
-    public Clienti(String businessName, String country, String email) {
+    public Customer(String businessName, String country, String email) {
         this.businessName = businessName;
         this.country = country;
         this.email = email;
@@ -16,7 +18,7 @@ public class Clienti {
         this.id=lastID;
     }
 
-    public Clienti(int id,String businessName, String country, String email) {
+    public Customer(int id, String businessName, String country, String email) {
         this.businessName = businessName;
         this.country = country;
         this.email = email;

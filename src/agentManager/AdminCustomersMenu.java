@@ -1,3 +1,5 @@
+package agentManager;
+
 import java.util.Scanner;
 
 public class AdminCustomersMenu implements Menu{
@@ -7,8 +9,8 @@ public class AdminCustomersMenu implements Menu{
     }
 
     @Override
-    public void showMenu(Utenti activeUser) {
-        Amministratori admin = (Amministratori)activeUser;
+    public void showMenu(User activeUser) {
+        Administrator admin = (Administrator)activeUser;
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;           //finito da testare
@@ -53,12 +55,12 @@ public class AdminCustomersMenu implements Menu{
                     break;
                 case 9:
                     quit = true;
-                    Programma.getInstance().setMenu(new AdminMainMenu());
+                    Program.getInstance().setMenu(new AdminMainMenu());
                     break;
                 case 0:
 
                     quit = true;
-                    Programma.getInstance().close();
+                    Program.getInstance().close();
                     break;
 
                 default:
@@ -71,7 +73,7 @@ public class AdminCustomersMenu implements Menu{
     }
 
 
-    private void createCustomers(Utenti activeUser){
+    private void createCustomers(User activeUser){
 
         Scanner in = new Scanner(System.in);
 

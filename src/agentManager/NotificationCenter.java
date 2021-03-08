@@ -1,8 +1,10 @@
+package agentManager;
+
 import java.util.*;
 
-public class CentroNotifiche implements Observer {
+public class NotificationCenter implements Observer {
 
-    private CentroNotifiche() {
+    private NotificationCenter() {
         nofications = new ArrayList<>();
     }
 
@@ -12,7 +14,7 @@ public class CentroNotifiche implements Observer {
 
     private ArrayList<String> nofications;
 
-    private static CentroNotifiche instance;
+    private static NotificationCenter instance;
 
     public void viewNotification() {
         System.out.println("----------------------------------");
@@ -30,9 +32,9 @@ public class CentroNotifiche implements Observer {
         nofications.add(notification);
     }
 
-    public static CentroNotifiche getInstance() {
+    public static NotificationCenter getInstance() {
             if (instance==null){
-                instance = new CentroNotifiche();
+                instance = new NotificationCenter();
             }
             return instance;
     }
