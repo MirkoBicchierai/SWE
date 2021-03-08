@@ -364,8 +364,8 @@ public class Programma {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
             try {
-                for (Articolo article : order.getArticles()) {
-                    sql = "INSERT INTO OrderRow (idHead,idArticle) " + "VALUES (" + order.getId() + ", " + article.getId() + ");";
+                for (Pair<Articolo,Integer>  i: order.getRows()) {
+                    sql = "INSERT INTO OrderRow (idHead,idArticle,qta) " + "VALUES (" + order.getId() + ", " + i.getValue0().getId() + ","+i.getValue1()+");";
                     stmt = c.createStatement();
                     stmt.executeUpdate(sql);
                     c.commit();
