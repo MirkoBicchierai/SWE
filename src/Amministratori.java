@@ -64,13 +64,40 @@ public class Amministratori extends Utenti {
     public void selectProduct(int id) {
     }
 
-    public void deleteAgent(int idAgent){//todo check ordini connessi
+    public void deleteAgent(int idAgent){   //todo check ordini connessi
     }
 
     public void viewAgent() {
+        System.out.println("----------------------------------");
+        Agenti a;
+        boolean check = false;
+        for (Utenti u : Programma.getInstance().getUsers()){
+            if(u instanceof Agenti){
+                check = true;
+                a = (Agenti)u;
+                System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPerc()+"%");
+            }
+        }
+        if(!check)
+            System.out.println("There are no agent.");
+        System.out.println("----------------------------------");
     }
 
     public void viewCatalogAgent(int idAgent){
+        System.out.println("----------------------------------");
+        Agenti a;
+        boolean check = false;
+        for (Utenti u : Programma.getInstance().getUsers()){
+            if((u instanceof Agenti) && u.getId() == idAgent){
+                check = true;
+                a = (Agenti)u;
+                System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPerc()+"%");
+                a.getCatalog().printCatalog();
+            }
+        }
+        if(!check)
+            System.err.println("Agent ID wrong!.");
+        System.out.println("----------------------------------");
     }
 
     public void viewCustomerOrders(int idCustomer){

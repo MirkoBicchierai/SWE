@@ -59,6 +59,7 @@ public class AdminArticleMenu implements Menu{
         } while (!quit);
     }
 
+
     private void createProduct(Amministratori activeUser){
 
         Scanner in = new Scanner(System.in);
