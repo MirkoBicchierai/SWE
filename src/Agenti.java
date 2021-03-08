@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Agenti extends Utenti {
 
     private Catalogo catalog;
@@ -30,7 +32,8 @@ public class Agenti extends Utenti {
         System.out.println("----------------------------------");
     }
 
-    public void createOrder() {
+    public void createOrder(Clienti c, ArrayList<Articolo> articles) {
+        Programma.getInstance().getOrders().add(new Ordini(this,articles,c));
     }
 
     public boolean deleteOrder(int id) {

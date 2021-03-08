@@ -10,6 +10,22 @@ public class Ordini extends Observable  {
     private float commissionTot;
     private Clienti client;
 
+    public Ordini(Agenti agent, ArrayList<Articolo> articles , Clienti client ) {
+
+        this.total = 0;
+        for (Articolo a : articles){
+            this.total = this.total + a.getPrice();
+        }
+
+        this.commissionTot = (agent.getCommissionPerc()*this.total)/100;
+
+        lastID++;
+        this.id = lastID;
+        this.agent = agent;
+        this.articles = articles;
+        this.client = client;
+    }
+
     public Ordini(float total, float commissionTot, Agenti agent, ArrayList<Articolo> articles , Clienti client ) {
         this.total = total;
         this.commissionTot = commissionTot;

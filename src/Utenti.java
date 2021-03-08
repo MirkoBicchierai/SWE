@@ -64,7 +64,7 @@ public abstract class Utenti {
         System.out.println("");
         System.out.println("----------------------------------");
         for(Clienti c : Programma.getInstance().getCustomers()){
-            System.out.println("CUSTOMERS -> ID: " + c.getId() + " Name: " + c.getBusinessName() + "€ Email: " + c.getEmail() + "€ Country: " + c.getCountry());
+            System.out.println("CUSTOMERS -> ID: " + c.getId() + " Name: " + c.getBusinessName() + " Email: " + c.getEmail() + " Country: " + c.getCountry());
         }
         System.out.println("----------------------------------");
         System.out.println("");
