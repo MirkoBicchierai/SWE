@@ -18,7 +18,11 @@ public class Amministratori extends Utenti {
         System.out.println("----------------------------------");
         boolean check = false;
         for(Ordini i : Programma.getInstance().getOrders()){
-            System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+            if (i.getAgent()!=null) {
+                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Agent: "+i.getAgent().getName());
+            }else{
+                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Agent: DELETED");
+            }
             i.printArticle();
             check=true;
         }
@@ -63,7 +67,7 @@ public class Amministratori extends Utenti {
     public void deleteAgent(int idAgent){
         Agenti agent=null;
         for(Utenti i : Programma.getInstance().getUsers()){
-            if (i instanceof Agenti){
+            if (i instanceof Agenti&& i.getId()==idAgent){
                 agent = (Agenti) i;
                 break;
             }
@@ -122,7 +126,7 @@ public class Amministratori extends Utenti {
         System.out.println("----------------------------------");
         boolean check = false;
         for(Ordini i : Programma.getInstance().getOrders()){
-            if (i.getAgent().getId()==idCustomer) {
+            if (i.getAgent()!=null&&i.getAgent().getId()==idCustomer) {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
                 i.printArticle();
                 check = true;
