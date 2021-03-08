@@ -33,7 +33,7 @@ public class Agenti extends Utenti {
     }
 
     public void createOrder(Clienti c, ArrayList<Articolo> articles) {
-        Programma.getInstance().getOrders().add(new Ordini(this,articles,c));
+        //TODO Programma.getInstance().getOrders().add(new Ordini(this,articles,c));
     }
 
     public boolean deleteOrder(int id) {

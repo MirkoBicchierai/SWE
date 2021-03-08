@@ -99,7 +99,7 @@ public class AgentCreateOrderMenu implements Menu{
                     }
                 }
                 if (!agg) System.err.println("Id Article Not Found!");
-            }catch (Exception e){}
+            }catch (Exception e){  }
             if (!agg) System.err.println("Id Article Not Found!");
         }
 

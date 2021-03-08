@@ -1,3 +1,5 @@
+import org.javatuples.Pair;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -38,6 +40,15 @@ public class Main {
         ArrayList<Articolo> articles2 = new  ArrayList<>();
         articles.add(AA1);
         articles.add(AA2);
+
+        ArrayList<Pair<Articolo,Integer>> pair1= new ArrayList<>();
+        pair1.add(new Pair<>(AA1,20));
+        pair1.add(new Pair<>(AA2,21));
+
+        ArrayList<Pair<Articolo,Integer>> pair2= new ArrayList<>();
+        pair1.add(new Pair<>(AA3,10));
+        pair1.add(new Pair<>(AA2,11));
+
         articles2.add(AA3);
         articles2.add(AA2);
         Catalogo Ca1 = new Catalogo(articles,"descrizione1","Italy");
@@ -52,8 +63,8 @@ public class Main {
         Programma.getInstance().getUsers().add(A11);
         Programma.getInstance().getUsers().add(Admin);
 
-        Ordini O1 = new Ordini(5,10,A1,articles,C1);
-        Ordini O2 = new Ordini(5,10,A11,articles2,C2);
+        Ordini O1 = new Ordini(5,10,A1,pair1,C1);
+        Ordini O2 = new Ordini(5,10,A11,pair2,C2);
         Programma.getInstance().getOrders().add(O1);
         Programma.getInstance().getOrders().add(O2);
 

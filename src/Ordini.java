@@ -1,8 +1,13 @@
+import org.javatuples.Pair;
+
 import java.util.*;
 
 public class Ordini extends Observable  {
 
-    private ArrayList<Articolo> articles;
+    //private ArrayList<Articolo> articles;
+
+    private ArrayList<Pair<Articolo, Integer>> pairArticles;
+
     private int id;
     private static int lastID;
     private Agenti agent;
@@ -10,11 +15,12 @@ public class Ordini extends Observable  {
     private float commissionTot;
     private Clienti client;
 
-    public Ordini(Agenti agent, ArrayList<Articolo> articles , Clienti client ) {
+    public Ordini(Agenti agent, ArrayList<Pair<Articolo, Integer>> pairArticles , Clienti client ) {
 
         this.total = 0;
-        for (Articolo a : articles){
-            this.total = this.total + a.getPrice();
+
+        for (Pair<Articolo, Integer> a : pairArticles){
+            this.total = this.total + a.getValue0().getPrice();
         }
 
         this.commissionTot = (agent.getCommissionPerc()*this.total)/100;
@@ -22,32 +28,38 @@ public class Ordini extends Observable  {
         lastID++;
         this.id = lastID;
         this.agent = agent;
-        this.articles = articles;
+        this.pairArticles = pairArticles;
         this.client = client;
     }
 
-    public Ordini(float total, float commissionTot, Agenti agent, ArrayList<Articolo> articles , Clienti client ) {
+    public Ordini(float total, float commissionTot, Agenti agent, ArrayList<Pair<Articolo, Integer>> pairArticles , Clienti client ) {
         this.total = total;
         this.commissionTot = commissionTot;
         lastID++;
         this.id = lastID;
         this.agent = agent;
-        this.articles = articles;
+        this.pairArticles = pairArticles;
         this.client = client;
     }
 
-    public Ordini(float total, float commissionTot, Agenti agent, ArrayList<Articolo> articles, Clienti client ,int id ) {
+    public Ordini(float total, float commissionTot, Agenti agent, ArrayList<Pair<Articolo, Integer>> pairArticles, Clienti client ,int id ) {
         this.total = total;
         this.commissionTot = commissionTot;
         this.agent = agent;
-        this.articles = articles;
+        this.pairArticles = pairArticles;
         this.id=id;
         lastID = Math.max(lastID, id);
         this.client = client;
     }
 
     public ArrayList<Articolo> getArticles() {
-        return articles;
+
+        ArrayList<Articolo> tmp = new ArrayList<>();
+        for (Pair<Articolo, Integer> a : pairArticles){
+            tmp.add(a.getValue0());
+        }
+
+        return tmp;
     }
 
     public Clienti getClient() {
