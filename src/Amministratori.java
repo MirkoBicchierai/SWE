@@ -39,7 +39,9 @@ public class Amministratori extends Utenti {
     public void viewProduct() {
     }
 
-    public void createAgent() {
+    public void createAgent(String name, String password, float percCommission, Catalogo catalogo) {
+        Programma.getInstance().getUsers().add(new Agenti(name,password,percCommission,catalogo));
+        System.out.println("Created!");
     }
 
     public void createCatlog(String descr, String marketZone, ArrayList<Articolo> articles) {
@@ -54,7 +56,7 @@ public class Amministratori extends Utenti {
     public void selectProduct(int id) {
     }
 
-    public void deleteAgent(int idAgent){
+    public void deleteAgent(int idAgent){//todo check ordini connessi
     }
 
     public void viewAgent() {

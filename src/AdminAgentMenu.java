@@ -31,7 +31,7 @@ public class AdminAgentMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    admin.createAgent(); //todo mai cosi
+                    createAgent(admin);
                     break;
                 case 2:
                     System.out.println("Enter the code of the Agent to Delete");
@@ -41,7 +41,7 @@ public class AdminAgentMenu implements Menu{
                 case 3:
                     System.out.println("Enter the code of the agent for which to view the catalog");
                     int idAgent = in.nextInt();
-                    admin.viewCatalogAgent(idAgent);
+                    admin.viewCatalogAgent(idAgent);//todo aaaaaaaaaaaaaaaa
                     break;
                 case 9:
                     quit = true;
@@ -67,9 +67,9 @@ public class AdminAgentMenu implements Menu{
         Scanner in = new Scanner(System.in);
 
         System.out.println("Insert Name:");
-        String Name = in.nextLine();
+        String name = in.nextLine();
         System.out.println("Insert Password :");
-        String Password = in.nextLine();
+        String password = in.nextLine();
         float percComm ;
         do{
             System.out.println("Insert Percentage of Commission :");
@@ -81,7 +81,28 @@ public class AdminAgentMenu implements Menu{
             }
         }while (percComm==-1);
 
+        Catalogo catalogo = null;
 
-        //activeUser.createAgent(description,marketZone); //todo da sistemare
+        int idCatalog;
+        do{
+            activeUser.viewCatalog();
+            System.out.println("Insert Catalog Id :");
+            try {
+                idCatalog = Integer.parseInt(in.next());
+
+                for(Catalogo i:Programma.getInstance().getCatalogs()){
+                    if (i.getId()==idCatalog){
+                        catalogo=i;
+                    }
+                }
+
+            }catch (Exception e){}
+
+            if (catalogo==null) System.err.println("You must insert a number!");
+
+        }while (catalogo==null);
+
+
+        activeUser.createAgent(name,password,percComm,catalogo);
     }
 }
