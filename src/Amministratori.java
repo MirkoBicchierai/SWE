@@ -79,6 +79,8 @@ public class Amministratori extends Utenti {
                 i.agentDeleted();
             }
         }
+
+        Programma.getInstance().getUsers().remove(agent);
         System.out.println("Deleted!");
     }
 
