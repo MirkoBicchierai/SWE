@@ -1,3 +1,5 @@
+import org.javatuples.Pair;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -80,32 +82,56 @@ public class AgentCreateOrderMenu implements Menu{
     private void subMenuSelectArticles(Agenti agent, int idSelectedCustomers){
 
         Scanner in = new Scanner(System.in);
-        ArrayList<Articolo> articles = new ArrayList<>();
+        ArrayList<Pair<Articolo,Integer>> articlespair = new ArrayList<>();
+        Catalogo c = agent.getCatalog();
 
-        //TODO controllare id articoli selezionati (devono essere nel catalogo) && observer
+        //TODO observer
 
         boolean agg;
+        int qtaArticle = 0;
         while (true){
             agg = false;
             agent.viewCatalog();
             System.out.println("Insert an Id Articles or 0 to terminate Order");
             try {
                 int idArticle = Integer.parseInt(in.next());
-                if (idArticle == 0) break;
-                for (Articolo i : Programma.getInstance().getArticles()) {
+                if (idArticle == 0)
+                    if(articlespair.size()>0)
+                        break;
+                    else {
+                        System.err.println("Select at least an Article!");
+                        continue;
+                    }
+                for (Articolo i : c.getArticles()) {
                     if (i.getId() == idArticle) {
-                        articles.add(i);
+
+                        do {
+                            System.out.println("Insert quantity of article (>0)");
+                            try {
+                                qtaArticle = Math.abs(Integer.parseInt(in.next()));
+                            } catch (Exception e) {
+                                System.err.println("Value not valid");
+                                qtaArticle = -1;
+                            }
+                            if(qtaArticle==0){
+                                System.err.println("Value not valid");
+                                qtaArticle = -1;
+                            }
+                        }while(qtaArticle==-1);
+
+                        articlespair.add(new Pair<>(i,qtaArticle));
                         agg = true;
                     }
                 }
                 if (!agg) System.err.println("Id Article Not Found!");
-            }catch (Exception e){  }
-            if (!agg) System.err.println("Id Article Not Found!");
+            }catch (Exception e){
+                System.err.println("Id not valid!");
+            }
         }
 
         for(Clienti i : Programma.getInstance().getCustomers()){
             if(i.getId() == idSelectedCustomers) {
-                agent.createOrder(i, articles);
+                agent.createOrder(i, articlespair);
                 return;
             }
         }

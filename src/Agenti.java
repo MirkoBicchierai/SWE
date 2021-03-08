@@ -1,3 +1,5 @@
+import org.javatuples.Pair;
+
 import java.util.ArrayList;
 
 public class Agenti extends Utenti {
@@ -32,8 +34,8 @@ public class Agenti extends Utenti {
         System.out.println("----------------------------------");
     }
 
-    public void createOrder(Clienti c, ArrayList<Articolo> articles) {
-        //TODO Programma.getInstance().getOrders().add(new Ordini(this,articles,c));
+    public void createOrder(Clienti c, ArrayList<Pair<Articolo,Integer>> articles) {
+        Programma.getInstance().getOrders().add(new Ordini(this,articles,c));
     }
 
     public boolean deleteOrder(int id) {
