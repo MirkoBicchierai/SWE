@@ -15,17 +15,8 @@ public class AdminMainMenu implements Menu{
 
         System.out.println("Hello "+activeUser.getName()+"!");
 
-        System.out.println("");
-
-        for (String i: CentroNotifiche.getInstance().getNofications()){
-            System.out.println(i);
-            //CentroNotifiche.getInstance().getNofications().remove(i); //todo levala
-        }
-
-        System.out.println("");
-
         boolean quit = false;
-
+        CentroNotifiche.getInstance().viewNotification();
         int menuItem;
 
         do {

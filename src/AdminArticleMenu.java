@@ -61,8 +61,6 @@ public class AdminArticleMenu implements Menu{
 
     private void createProduct(Amministratori activeUser){
 
-        //da fare da zero
-
         Scanner in = new Scanner(System.in);
 
         System.out.println("Insert Description:");

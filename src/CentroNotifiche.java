@@ -15,7 +15,13 @@ public class CentroNotifiche implements Observer {
     private static CentroNotifiche instance;
 
     public void viewNotification() {
-        //TODO STAMPA
+        System.out.println("----------------------------------");
+        for (String i: nofications){
+            System.out.println(i);
+        }
+        if(nofications.size()==0) System.out.println("There aren't Notification!");
+
+        System.out.println("----------------------------------");
         resetNotification();
     }
 

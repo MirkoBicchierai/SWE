@@ -67,6 +67,7 @@ public class Agenti extends Utenti implements Observable{
         for(Ordini i : Programma.getInstance().getOrders()){
             if(i.getAgent().getId() == this.id) {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+                i.printArticle();
                 check=true;
             }
         }
