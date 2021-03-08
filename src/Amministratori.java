@@ -1,3 +1,5 @@
+import org.javatuples.Pair;
+
 import java.util.ArrayList;
 
 public class Amministratori extends Utenti {
@@ -17,6 +19,7 @@ public class Amministratori extends Utenti {
         boolean check = false;
         for(Ordini i : Programma.getInstance().getOrders()){
             System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+            i.printArticle();
             check=true;
         }
         if(!check)
@@ -39,6 +42,9 @@ public class Amministratori extends Utenti {
     }
 
     public void viewProduct() {
+        for(Articolo i :Programma.getInstance().getArticles()){
+            i.display();
+        }
     }
 
     public void createAgent(String name, String password, float percCommission, Catalogo catalogo) {
@@ -67,7 +73,21 @@ public class Amministratori extends Utenti {
     public void viewCatalogAgent(int idAgent){
     }
 
-    public void viewCustomerOrders(int IdCustomer){
+    public void viewCustomerOrders(int idCustomer){
+
+        System.out.println("----------------------------------");
+        boolean check = false;
+        for(Ordini i : Programma.getInstance().getOrders()){
+            if (i.getAgent().getId()==idCustomer) {
+                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+                i.printArticle();
+                check = true;
+            }
+        }
+        if(!check)
+            System.out.println("There are no orders.");
+        System.out.println("----------------------------------");
+
     }
 
 

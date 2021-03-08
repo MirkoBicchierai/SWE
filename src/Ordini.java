@@ -82,6 +82,12 @@ public class Ordini extends Observable  {
         return total;
     }
 
+    public void printArticle() {
+        for(Pair<Articolo,Integer> i:pairArticles){
+            System.out.println("    • Id: "+i.getValue0().getId()+" Article: "+i.getValue0().getName()+" Price: "+i.getValue0().getPrice()+" Qta: "+i.getValue1());
+        }
+    }
+
     public float getCommissionTot() {
         return commissionTot;
     }
