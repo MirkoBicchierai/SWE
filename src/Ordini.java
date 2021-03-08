@@ -62,6 +62,10 @@ public class Ordini extends Observable  {
         return tmp;
     }
 
+    public ArrayList<Pair<Articolo, Integer>> getRows() {
+        return pairArticles;
+    }
+
     public Clienti getClient() {
         return client;
     }
