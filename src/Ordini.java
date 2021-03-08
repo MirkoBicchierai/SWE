@@ -18,7 +18,7 @@ public class Ordini {
         this.total = 0;
 
         for (Pair<Articolo, Integer> a : pairArticles){
-            this.total = this.total + a.getValue0().getPrice();
+            this.total = this.total + a.getValue0().getPrice() * a.getValue1();
         }
 
         this.commissionTot = (agent.getCommissionPerc()*this.total)/100;
