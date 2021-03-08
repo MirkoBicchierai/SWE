@@ -19,7 +19,7 @@ public class AgentHistoricalOrderMenu implements Menu{
         int menuItem;
         do {
             activeUser.viewOrders();
-            System.out.println("agentManager.Menu option:");
+            System.out.println("Menu option:");
             System.out.println("1. Delete an order");
             System.out.println("9. Back");
             System.out.println("0. Quit");
