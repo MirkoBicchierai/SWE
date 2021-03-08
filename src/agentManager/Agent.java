@@ -70,6 +70,7 @@ public class Agent extends User implements Observable{
             if(i.getAgent().getId() == this.id) {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
                 i.printArticle();
+                System.out.println("");
                 check=true;
             }
         }

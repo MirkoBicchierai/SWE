@@ -22,7 +22,7 @@ public class AdminMainMenu implements Menu{
         int menuItem;
 
         do {
-            System.out.println("agentManager.Menu Option:");
+            System.out.println("Menu Option:");
 
             System.out.println("1. View Agents");
             System.out.println("2. View Catalogs");
