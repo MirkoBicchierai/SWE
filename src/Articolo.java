@@ -1,5 +1,4 @@
 public abstract class Articolo {
-    //uml è astratta non interfaccia
 
     protected String name;
     protected int id;
@@ -30,10 +29,6 @@ public abstract class Articolo {
 
     public float getPrice() {
         return price;
-    }
-
-    public static int getLastID() {
-        return lastID;
     }
 
     public abstract void display();

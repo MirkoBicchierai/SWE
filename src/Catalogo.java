@@ -35,10 +35,6 @@ public class Catalogo {
         return marketZone;
     }
 
-    public static int getLastID() {
-        return lastID;
-    }
-
     public ArrayList<Articolo> getArticles() {
         return articles;
     }

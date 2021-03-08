@@ -22,7 +22,6 @@ public class Ordini {
         }
 
         this.commissionTot = (agent.getCommissionPerc()*this.total)/100;
-
         lastID++;
         this.id = lastID;
         this.agent = agent;

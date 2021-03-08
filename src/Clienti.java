@@ -6,7 +6,7 @@ public class Clienti {
     private String country;
     private String email;
     private static int lastID = 0;
-    private int id; // non è in uml
+    private int id;
 
     public Clienti(String businessName, String country, String email) {
         this.businessName = businessName;

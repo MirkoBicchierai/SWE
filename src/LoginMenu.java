@@ -27,6 +27,7 @@ public class LoginMenu implements Menu{
                 menuItem = -1;
             }
             switch (menuItem) {
+
                 case 1:
                     while (activeUser == null) {
 
@@ -49,6 +50,7 @@ public class LoginMenu implements Menu{
                     quit = true;
                     Programma.getInstance().close();
                     break;
+
                 default:
                     System.err.println("Invalid choice.");
             }

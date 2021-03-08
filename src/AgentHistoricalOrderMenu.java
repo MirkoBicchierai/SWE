@@ -30,7 +30,6 @@ public class AgentHistoricalOrderMenu implements Menu{
             }
 
             switch (menuItem) {
-
                 case 1:
                     do {
                         System.out.println("Insert order ID");

@@ -356,7 +356,10 @@ public class Programma {
 
         for (Ordini order : orders) {
             try {
-                sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + order.getId() + ", '" + order.getAgent().getId() + "', "+order.getClient().getId()+" ,'" + order.getTotal() + "', '" + order.getCommissionTot() + "');";
+                if(order.getAgent()!=null)
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + order.getId() + ", '" + order.getAgent().getId() + "', "+order.getClient().getId()+" ,'" + order.getTotal() + "', '" + order.getCommissionTot() + "');";
+                else
+                    sql = "INSERT INTO OrderHead (idHead,idAgent,IdCustomer,Total,Commission) " + "VALUES (" + order.getId() + ", '" + -1 + "', "+order.getClient().getId()+" ,'" + order.getTotal() + "', '" + order.getCommissionTot() + "');";
                 stmt = c.createStatement();
                 stmt.executeUpdate(sql);
                 c.commit();

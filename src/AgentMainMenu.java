@@ -21,7 +21,6 @@ public class AgentMainMenu implements Menu {
             System.out.println("1. View catalog");
             System.out.println("2. Historical Order");
             System.out.println("3. Create Order");
-
             System.out.println("9. Logout");
             System.out.println("0. Quit");
             System.out.print("Choose menu item: ");

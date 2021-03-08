@@ -34,9 +34,11 @@ public class AgentCreateOrderMenu implements Menu{
             }
 
             switch (menuItem) {
+
                 case 1:
                     createCustomers(activeUser);
                     break;
+
                 case 2:
                     // TODO prendere idc
                     do{
@@ -49,16 +51,18 @@ public class AgentCreateOrderMenu implements Menu{
                     }while( !Programma.getInstance().checkCustomersExist( idS ) );
 
                     subMenuSelectArticles( (Agenti) activeUser , idS );
-
                     break;
+
                 case 9:
                     Programma.getInstance().setMenu(new AgentMainMenu());
                     quit = true;
                     break;
+
                 case 0:
                     quit = true;
                     Programma.getInstance().close();
                     break;
+
                 default:
                     System.err.println("Invalid choice.");
             }
@@ -66,16 +70,13 @@ public class AgentCreateOrderMenu implements Menu{
     }
 
     private void createCustomers(Utenti activeUser){
-
         Scanner in = new Scanner(System.in);
-
         System.out.println("Insert Email:");
         String email = in.nextLine();
         System.out.println("Insert country :");
         String country = in.nextLine();
         System.out.println("Insert Business-Name :");
         String name = in.nextLine();
-
         activeUser.createCustomer(name,country,email);
     }
 
@@ -84,8 +85,6 @@ public class AgentCreateOrderMenu implements Menu{
         Scanner in = new Scanner(System.in);
         ArrayList<Pair<Articolo,Integer>> articlespair = new ArrayList<>();
         Catalogo c = agent.getCatalog();
-
-        //TODO observer
 
         boolean agg;
         int qtaArticle = 0;
