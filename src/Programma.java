@@ -247,11 +247,11 @@ public class Programma {
                     break;
                 }
             }
-
+            /*
             if(tmpAgent == null){
                 System.err.println("Agente Non Presente!");
                 break;
-            }
+            }*/
 
             Clienti tmpCustomer = null;
             for (Clienti i : customers) {

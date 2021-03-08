@@ -36,13 +36,21 @@ public class AdminAgentMenu implements Menu{
                     break;
                 case 2:
                     System.out.println("Enter the code of the Agent to Delete");
-                    int idA = in.nextInt();
-                    admin.deleteAgent(idA);
+                    try {
+                        int idA = in.nextInt();
+                        admin.deleteAgent(idA);
+                    }catch (Exception e){
+                        System.err.println("Invalid Id!");
+                    }
                     break;
                 case 3:
                     System.out.println("Enter the code of the agent for which to view the catalog");
-                    int idAgent = in.nextInt();
-                    admin.viewCatalogAgent(idAgent);//todo centesimo commit!!!
+                    try {
+                        int idAgent = in.nextInt();
+                        admin.viewCatalogAgent(idAgent);
+                    }catch (Exception e){
+                        System.err.println("Invalid Id!");
+                    }
                     break;
                 case 9:
                     quit = true;

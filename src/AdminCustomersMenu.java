@@ -35,13 +35,21 @@ public class AdminCustomersMenu implements Menu{
                     break;
                 case 2:
                     System.out.println("Enter the code of the Customer to Delete");
-                    int idC = in.nextInt();
-                    admin.deleteClient(idC);
+                    try {
+                        int idC = in.nextInt();
+                        admin.deleteClient(idC);
+                    }catch (Exception e){
+                        System.err.println("Invalid Id!");
+                    }
                     break;
                 case 3:
                     System.out.println("Enter the code of the Customer for which to view the Orders");
-                    int idCustomer = in.nextInt();
-                    admin.viewCustomerOrders(idCustomer);
+                    try {
+                        int idCustomer = in.nextInt();
+                        admin.viewCustomerOrders(idCustomer);
+                    }catch (Exception e){
+                        System.err.println("Invalid Id!");
+                    }
                     break;
                 case 9:
                     quit = true;

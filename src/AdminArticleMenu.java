@@ -31,13 +31,17 @@ public class AdminArticleMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    //
+                    createProductQuery(admin);
                     break;
 
                 case 2:
                     System.out.println("Enter the code of the Product to Delete");
-                    int idP = in.nextInt();
-                    admin.deleteProduct(idP);
+                    try {
+                        int idP = in.nextInt();
+                        admin.deleteProduct(idP);
+                    }catch (Exception e){
+                        System.err.println("Invalid Id!");
+                    }
                     break;
 
                 case 9:
@@ -59,45 +63,82 @@ public class AdminArticleMenu implements Menu{
         } while (!quit);
     }
 
-    private void createProduct(Amministratori activeUser){
+    private void createProductQuery(Amministratori activeUser){
 
         Scanner in = new Scanner(System.in);
-
-        System.out.println("Insert Description:");
-        String description = in.nextLine();
-        System.out.println("Insert Market Zone :");
-        String marketZone = in.nextLine();
-
+        boolean done = false;
+        float price = 0;
         ArrayList<Articolo> articles = new ArrayList<>();
-        boolean agg;
-        while (true){
-            agg = false;
-            activeUser.viewProduct();
-            System.out.println("Insert Id Articles or 0 to terminate Catalog");
+
+        System.out.println("Insert Article Name :");
+        String name = in.nextLine();
+
+        int reply;
+        do {
+            System.out.println("Do you want to insert a Composite Article?");
+            System.out.println("1. Yes");
+            System.out.println("0. No");
+
             try {
-                int idArticle = Integer.parseInt(in.next());
-
-                if (idArticle == 0) {
-                    if (articles.size()>0) {
-                        break;
-                    }else{
-                        System.err.println("Select at least an Article!");
-                        continue;
-                    }
-                }
-
-                for (Articolo i : Programma.getInstance().getArticles()) {
-                    if (i.getId() == idArticle) {
-                        articles.add(i);
-                        agg = true;
-                    }
-                }
-                if (!agg) System.err.println("Id Article Not Found!");
+                reply = Integer.parseInt(in.next());
             }catch (Exception e){
-                System.err.println("Id Not Valid!");
+                reply = -1;
             }
-        }
+            switch (reply) {
 
-        activeUser.createCatlog(description,marketZone,articles);
+                case 1:
+                    boolean agg;
+                    while (true) {
+                        agg = false;
+                        activeUser.viewProduct();
+                        System.out.println("Insert Id Articles Components or 0 to terminate Composition");
+                        try {
+                            int idArticle = Integer.parseInt(in.next());
+
+                            if (idArticle == 0) {
+                                if (articles.size() > 0) {
+                                    break;
+                                } else {
+                                    System.err.println("Select at least an Article!");
+                                    continue;
+                                }
+                            }
+
+                            for (Articolo i : Programma.getInstance().getArticles()) {
+                                if (i.getId() == idArticle) {
+                                    articles.add(i);
+                                    price+=i.price;
+                                    agg = true;
+                                }
+                            }
+
+                            if (!agg) System.err.println("Id Article Not Found!");
+                        } catch (Exception e) {
+                            System.err.println("Id Not Valid!");
+                        }
+                    }
+                    done = true;
+                    break;
+
+                case 0:
+                    do {
+                        System.out.println("Insert Price :");
+                        try {
+                            price = Float.parseFloat(in.next());
+                            break;
+                        } catch (Exception e) {
+                            System.err.println("Invalid Choice!");
+                        }
+                    } while (true);
+                    done = true;
+                    break;
+
+                default:
+                    System.err.println("Invalid choice.");
+            }
+        } while (!done);
+
+
+        activeUser.createProduct(name,price,articles);
     }
 }

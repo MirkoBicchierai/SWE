@@ -90,6 +90,10 @@ public class Ordini {
         return commissionTot;
     }
 
+    public void agentDeleted(){
+        agent=null;
+    }
+
     public Agenti getAgent() {
         return agent;
     }

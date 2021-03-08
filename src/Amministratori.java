@@ -42,9 +42,11 @@ public class Amministratori extends Utenti {
     }
 
     public void viewProduct() {
+        System.out.println("----------------------------------");
         for(Articolo i :Programma.getInstance().getArticles()){
             i.display();
         }
+        System.out.println("----------------------------------");
     }
 
     public void createAgent(String name, String password, float percCommission, Catalogo catalogo) {
@@ -58,13 +60,26 @@ public class Amministratori extends Utenti {
         System.out.println("Created!");
     }
 
-    public void selectCatalog(int id) {
-    }
+    public void deleteAgent(int idAgent){
+        Agenti agent=null;
+        for(Utenti i : Programma.getInstance().getUsers()){
+            if (i instanceof Agenti){
+                agent = (Agenti) i;
+                break;
+            }
+        }
 
-    public void selectProduct(int id) {
-    }
+        if (agent==null){
+            System.err.println("Id Agente Inesistente!");
+            return;
+        }
 
-    public void deleteAgent(int idAgent){//todo check ordini connessi
+        for(Ordini i : Programma.getInstance().getOrders()){
+            if (i.getAgent()==agent){
+                i.agentDeleted();
+            }
+        }
+        System.out.println("Deleted!");
     }
 
     public void viewAgent() {
@@ -136,7 +151,7 @@ public class Amministratori extends Utenti {
     public void deleteProduct(int idArticle) {
         Articolo tmp = null;
 
-        for(Ordini i:Programma.getInstance().getOrders()){      //todo testare listino vuoto
+        for(Ordini i:Programma.getInstance().getOrders()){
             for(Articolo j:i.getArticles()){
                 if (j.getId()==idArticle){
                     System.err.println("This Article is Already Ordered! It can't be Deleted!");
@@ -175,7 +190,14 @@ public class Amministratori extends Utenti {
         System.out.println("Deleted!");
     }
 
-    public void createProduct() {
+    public void createProduct(String name, float price, ArrayList<Articolo> a) {
+        if (a.size()==0){
+            Programma.getInstance().getArticles().add(new Prodotto(name, price));
+        }else {
+            Programma.getInstance().getArticles().add(new Composto(name, a));
+        }
+
+
     }
 
 }
