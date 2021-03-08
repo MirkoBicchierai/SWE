@@ -11,11 +11,12 @@ public class AdminCustomersMenu implements Menu{
         Amministratori admin = (Amministratori)activeUser;
         Scanner in = new Scanner(System.in);
 
-        boolean quit = false;
+        boolean quit = false;           //finito da testare
 
         int menuItem;
 
         do {
+            admin.viewCustomers();
             System.out.println("1. Add Customers");
             System.out.println("2. Delete Customers");
             System.out.println("3. View Order Client");
@@ -66,12 +67,13 @@ public class AdminCustomersMenu implements Menu{
 
         Scanner in = new Scanner(System.in);
 
+        System.out.println("Insert Business-Name :");
+        String name = in.nextLine();
         System.out.println("Insert Email:");
         String email = in.nextLine();
         System.out.println("Insert country :");
         String country = in.nextLine();
-        System.out.println("Insert Business-Name :");
-        String name = in.nextLine();
+
 
         activeUser.createCustomer(name,country,email);
     }

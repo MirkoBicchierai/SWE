@@ -17,6 +17,7 @@ public class AdminAgentMenu implements Menu{
         int menuItem;
 
         do {
+            admin.viewAgent();
             System.out.println("1. Add Agent");
             System.out.println("2. Delete Agent");
             System.out.println("3. View Catalog Agent");

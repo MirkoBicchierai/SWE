@@ -18,6 +18,7 @@ public class AdminCatalogMenu implements Menu{
         int menuItem;
 
         do {
+            activeUser.viewCatalog();
             System.out.println("1. Add Catalog");
             System.out.println("2. Delete Catalog");
             System.out.println("9. Back");
@@ -80,7 +81,14 @@ public class AdminCatalogMenu implements Menu{
             try {
                 int idArticle = Integer.parseInt(in.next());
 
-                if (idArticle == 0) break;
+                if (idArticle == 0) {
+                    if (articles.size()>0) {
+                        break;
+                    }else{
+                        System.err.println("Select at least an Article!");
+                        continue;
+                    }
+                }
 
                 for (Articolo i : Programma.getInstance().getArticles()) {
                     if (i.getId() == idArticle) {
@@ -89,8 +97,9 @@ public class AdminCatalogMenu implements Menu{
                     }
                 }
                 if (!agg) System.err.println("Id Article Not Found!");
-            }catch (Exception e){}
-            if (!agg) System.err.println("Id Article Not Found!");
+            }catch (Exception e){
+                System.err.println("Id Not Valid!");
+            }
         }
 
         activeUser.createCatlog(description,marketZone,articles);

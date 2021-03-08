@@ -19,7 +19,7 @@ public class AdminMainMenu implements Menu{
 
         for (String i: CentroNotifiche.getInstance().getNofications()){
             System.out.println(i);
-            //CentroNotifiche.getInstance().getNofications().remove(i);
+            //CentroNotifiche.getInstance().getNofications().remove(i); //todo levala
         }
 
         System.out.println("");
@@ -49,19 +49,19 @@ public class AdminMainMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    admin.viewAgent();
+
                     Programma.getInstance().setMenu(new AdminAgentMenu());
                     quit = true;
                     break;
 
                 case 2:
-                    activeUser.viewCatalog();
+
                     Programma.getInstance().setMenu(new AdminCatalogMenu());
                     quit = true;
                     break;
 
                 case 3:
-                    admin.viewCustomers();
+
                     Programma.getInstance().setMenu(new AdminCustomersMenu());
                     quit = true;
                     break;
@@ -71,7 +71,7 @@ public class AdminMainMenu implements Menu{
                     break;
 
                 case 5:
-                    admin.viewProduct();
+
                     Programma.getInstance().setMenu(new AdminArticleMenu());
                     quit = true;
                     break;
