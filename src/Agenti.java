@@ -37,7 +37,7 @@ public class Agenti extends Utenti implements Observable{
     public void createOrder(Clienti c, ArrayList<Pair<Articolo,Integer>> articles) {
         Programma.getInstance().getOrders().add(new Ordini(this,articles,c));
         System.out.println("Created!");
-        notify(CentroNotifiche.getInstance(),"Sio merda");
+        notify(CentroNotifiche.getInstance(),"A new order has been issued by for customer " + c.getBusinessName() + " from " + this.name);
     }
 
     @Override
