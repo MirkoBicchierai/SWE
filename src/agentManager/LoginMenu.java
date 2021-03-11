@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class LoginMenu implements Menu{
 
+
+
     @Override
     public Menu getCurrentState() {
         return this;
