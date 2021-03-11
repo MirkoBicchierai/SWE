@@ -34,35 +34,35 @@ public class Program {
         c = DBConnection.getInstance();
     }
 
-    public User getActiveUser() {
+    protected User getActiveUser() {
         return activeUser;
     }
 
-    public ArrayList<User> getUsers() {
+    protected ArrayList<User> getUsers() {
         return users;
     }
 
-    public ArrayList<Article> getArticles() {
+    protected ArrayList<Article> getArticles() {
         return articles;
     }
 
-    public ArrayList<Catalog> getCatalogs() {
+    protected ArrayList<Catalog> getCatalogs() {
         return catalogs;
     }
 
-    public ArrayList<Customer> getCustomers() {
+    protected ArrayList<Customer> getCustomers() {
         return customers;
     }
 
-    public ArrayList<Order> getOrders() {
+    protected ArrayList<Order> getOrders() {
         return orders;
     }
 
-    public void close(){
+    protected void close(){
         wantClose = true;
     }
 
-    public void setMenu(Menu menu) { //forse inutile
+    protected void setMenu(Menu menu) { //forse inutile
         this.menu = menu;
     }
 
@@ -83,12 +83,12 @@ public class Program {
 
     }
 
-    public void logout(){
+    protected void logout(){
         activeUser = null;
         this.setMenu(new LoginMenu());
     }
 
-    public boolean checkCustomersExist(int id){
+    protected boolean checkCustomersExist(int id){
         for(Customer c :customers){
             if(c.getId()==id)
                 return true;
@@ -97,9 +97,9 @@ public class Program {
         return false;
     }
 
-    public User login(String name, String psw) {
+    protected User login(String name, String psw) {
         for (User i : users) {
-            if (name.equals(i.name) && User.getHash(psw).equals(i.passwordHash)) {
+            if (name.equals(i.getName()) && User.getHash(psw).equals(i.getPasswordHash())) {
                 activeUser = i;
                 break;
             }
@@ -132,7 +132,7 @@ public class Program {
         return instance;
     }
 
-    public void load() throws SQLException {
+    private void load() throws SQLException {
 
         Statement stmt = c.createStatement();
         Statement stmt1 = c.createStatement();
@@ -278,7 +278,7 @@ public class Program {
 
     }
 
-    public void upload() {
+    protected void upload() {
         String sql = "";
         Statement stmt = null;
         try {

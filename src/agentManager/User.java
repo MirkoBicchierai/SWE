@@ -5,10 +5,10 @@ import java.security.NoSuchAlgorithmException;
 
 public abstract class User {
 
-    protected int id;
-    protected String name;
-    protected String passwordHash;
-    protected static int lastID;
+    private int id;
+    private String name;
+    private String passwordHash;
+    private static int lastID;
 
     public User(String name, String password) {
         this.passwordHash=getHash(password);

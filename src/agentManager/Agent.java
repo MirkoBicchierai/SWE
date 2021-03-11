@@ -38,7 +38,7 @@ public class Agent extends User implements Observable{
     public void createOrder(Customer c, ArrayList<Pair<Article,Integer>> articles) {
         Program.getInstance().getOrders().add(new Order(this,articles,c));
         System.out.println("Created!");
-        notify(NotificationCenter.getInstance(),"A new order has been issued by for customer " + c.getBusinessName() + " from " + this.name);
+        notify(NotificationCenter.getInstance(),"A new order has been issued by for customer " + c.getBusinessName() + " from " + this.getName());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Agent extends User implements Observable{
 
         boolean check = false;
         for(Order i : Program.getInstance().getOrders()) {
-            if(i.getId() == id && i.getAgent().getId() == this.id){
+            if(i.getId() == id && i.getAgent().getId() == this.getId()){
                 Program.getInstance().getOrders().remove(i);
                 i.printArticle();
                 check=true;
@@ -66,7 +66,7 @@ public class Agent extends User implements Observable{
         System.out.println("----------------------------------");
         boolean check = false;
         for(Order i : Program.getInstance().getOrders()){
-            if(i.getAgent().getId() == this.id) {
+            if(i.getAgent().getId() == this.getId()) {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
                 i.printArticle();
                 System.out.println("");
