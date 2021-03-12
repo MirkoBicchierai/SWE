@@ -2,6 +2,8 @@ import agentManager.Agent;
 import agentManager.Program;
 import org.junit.jupiter.api.BeforeAll;
 
+import java.sql.SQLException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AgentTest {
@@ -10,7 +12,14 @@ public class AgentTest {
 
     @BeforeAll
     static void prepare() {
-        Program.getInstance().login("Mirko","111");
+        try {
+            Program.getInstance().load(DBConnectionTest.getInstance());
+        } catch (SQLException e) {
+            System.err.println("Unable to load data!");
+            fail();
+        }
+
+        Program.getInstance().login("Agent1","111");
         agent =(Agent) Program.getInstance().getActiveUser();
         assertNotNull(agent);
     }
