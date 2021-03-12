@@ -1,0 +1,24 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DBConnectionTest {
+
+    private static Connection c = null;
+
+    public static Connection getInstance() {
+        if(c==null) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+                c = DriverManager.getConnection("jdbc:sqlite:db/TEST.db");
+                c.setAutoCommit(false);
+            } catch (Exception e ) {
+                System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+                System.exit(-1);
+            }
+        }
+        return c;
+    }
+
+    private DBConnectionTest(){}
+
+}

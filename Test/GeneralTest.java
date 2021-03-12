@@ -4,21 +4,21 @@ public class GeneralTest {
 
     @BeforeAll
     static void prepare() {
-
+        DBConnectionTest.getInstance();
     }
 
     @org.junit.jupiter.api.Test
-    void uploadData() {
+    void testUploadData() {
         System.out.println("");
     }
 
     @org.junit.jupiter.api.Test
-    void loadData() {
+    void testLoadData() {
         System.out.println("");
     }
 
     @org.junit.jupiter.api.Test
-    void loginUser() {
+    void testLoginUser() {
         System.out.println("");
     }
 

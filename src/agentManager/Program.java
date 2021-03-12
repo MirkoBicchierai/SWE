@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
 
-
 public final class Program {
 
     private User activeUser;
@@ -18,7 +17,6 @@ public final class Program {
     private ArrayList<Order> orders;
     private NotificationCenter notCenter;
     private static Program instance;
-    private Connection c;
     private Menu menu;
     private Boolean wantClose = false;
 
@@ -30,7 +28,6 @@ public final class Program {
         orders = new ArrayList<>();
         customers = new ArrayList<>();
         activeUser= null;
-        c = DBConnection.getInstance();
     }
 
     public User getActiveUser() { return activeUser; }
@@ -69,6 +66,13 @@ public final class Program {
 
     public void run() {
 
+        try {
+            this.load(DBConnection.getInstance());
+        } catch (SQLException e) {
+            System.err.println("Unable to load!");
+            return ;
+        }
+
         this.setMenu(new LoginMenu());
 
         while (!wantClose) {
@@ -76,7 +80,7 @@ public final class Program {
         }
 
         System.out.println("Bye Bye!");
-        this.upload();
+        this.upload(DBConnection.getInstance());
 
     }
 
@@ -114,18 +118,14 @@ public final class Program {
     }
 
     public static Program getInstance() {
-        if (instance == null) {
+
+        if (instance == null)
             instance = new Program();
-            try {
-                instance.load();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+
         return instance;
     }
 
-    private void load() throws SQLException {
+    public void load(Connection c) throws SQLException {
 
         Statement stmt = c.createStatement();
         Statement stmt1 = c.createStatement();
@@ -271,7 +271,7 @@ public final class Program {
 
     }
 
-    void upload() {
+    public void upload(Connection c) {
         String sql = "";
         Statement stmt = null;
         try {
