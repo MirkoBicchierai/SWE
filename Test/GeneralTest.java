@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.BeforeAll;
 
-public class outsideTest {
+public class GeneralTest {
 
     @BeforeAll
     static void prepare() {
