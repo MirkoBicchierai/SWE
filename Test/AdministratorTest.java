@@ -22,7 +22,7 @@ public class AdministratorTest {
             fail();
         }
 
-        Program.getInstance().login("Ganjiro","111");
+        Program.getInstance().login("Admin","111");
         admin = (Administrator) Program.getInstance().getActiveUser();
         assertNotNull(admin);
 
@@ -30,9 +30,7 @@ public class AdministratorTest {
 
     @org.junit.jupiter.api.Test
     void testCreateAgent() {
-        ArrayList<Article> articles = new ArrayList<>();
-        Catalog c = new Catalog(articles,"catalogo1","italy");
-        admin.createAgent("Mirko","111", 3.5F,c);
+
     }
 
     @org.junit.jupiter.api.Test
