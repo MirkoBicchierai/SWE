@@ -57,9 +57,9 @@ public class Administrator extends User {
         System.out.println("Created!");
     }
 
-    public void createCatlog(String descr, String marketZone, ArrayList<Article> articles) {
+    public void createCatalog(String description, String marketZone, ArrayList<Article> articles) {
 
-        Program.getInstance().getCatalogs().add(new Catalog(articles,descr,marketZone));
+        Program.getInstance().getCatalogs().add(new Catalog(articles,description,marketZone));
         System.out.println("Created!");
     }
 
@@ -162,10 +162,18 @@ public class Administrator extends User {
         System.out.println("Deleted!");
     }
 
-    public void deleteClient(int idCLient) {
+    public void deleteClient(int idClient) {
         Customer tmp = null;
+
+        for(Order i: Program.getInstance().getOrders()){
+            if(i.getClient().getId()==idClient){
+                System.err.println("Client Can't be Deleted! It's Linked to an Order!");
+                return;
+            }
+        }
+
         for(Customer i: Program.getInstance().getCustomers()){
-            if(i.getId()==idCLient){
+            if(i.getId()==idClient){
                 tmp = i;
             }
         }
