@@ -1,5 +1,5 @@
 package agentManager;
 
 public interface Observable {
-    void notify(Observer o,String notification);
+    void notify(Observer o, String notification);
 }
