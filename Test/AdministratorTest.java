@@ -1,7 +1,6 @@
 import agentManager.Administrator;
 import agentManager.Program;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -17,18 +16,38 @@ public class AdministratorTest {
     }
 
     @org.junit.jupiter.api.Test
-    void test() {
-
+    void deleteCatalog() {
+        System.out.println("");
     }
 
     @org.junit.jupiter.api.Test
-    void test1() {
-        System.out.println("Wrong ID! Re-insert it");
+    void deleteAgent() {
+        System.out.println("");
     }
 
     @org.junit.jupiter.api.Test
-    void test2() {
-        System.out.println("Wrong ID! Re-insert it");
+    void deleteCustomer() {
+        System.out.println("");
+    }
+
+    @org.junit.jupiter.api.Test
+    void deleteArticle() {
+        System.out.println("");
+    }
+
+    @org.junit.jupiter.api.Test
+    void createAgent() {
+        System.out.println("");
+    }
+
+    @org.junit.jupiter.api.Test
+    void createCatalog() {
+        System.out.println("");
+    }
+
+    @org.junit.jupiter.api.Test
+    void createProduct() {
+        System.out.println("");
     }
 
 }
