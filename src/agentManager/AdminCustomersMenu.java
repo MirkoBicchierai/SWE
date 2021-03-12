@@ -83,8 +83,6 @@ public class AdminCustomersMenu implements Menu{
         String email = in.nextLine();
         System.out.println("Insert country :");
         String country = in.nextLine();
-
-
         activeUser.createCustomer(name,country,email);
     }
 }

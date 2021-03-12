@@ -139,8 +139,6 @@ public class AdminArticleMenu implements Menu{
                     System.err.println("Invalid choice.");
             }
         } while (!done);
-
-
         activeUser.createProduct(name,price,articles);
     }
 }

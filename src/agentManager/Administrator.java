@@ -228,8 +228,5 @@ public class Administrator extends User {
         }else {
             Program.getInstance().getArticles().add(new Compound(name, a));
         }
-
-
     }
-
 }

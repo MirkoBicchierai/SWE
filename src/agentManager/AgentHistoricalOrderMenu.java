@@ -58,6 +58,5 @@ public class AgentHistoricalOrderMenu implements Menu{
 
             }
         } while (!quit);
-
     }
 }

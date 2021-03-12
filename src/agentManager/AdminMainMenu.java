@@ -81,10 +81,7 @@ public class AdminMainMenu implements Menu{
 
                 default:
                     System.err.println("Invalid choice.");
-
             }
-
         } while (!quit);
-
     }
 }

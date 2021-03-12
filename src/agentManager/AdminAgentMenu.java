@@ -111,8 +111,6 @@ public class AdminAgentMenu implements Menu{
             if (catalog ==null) System.err.println("You must insert a number!");
 
         }while (catalog ==null);
-
-
         activeUser.createAgent(name,password,percComm, catalog);
     }
 }

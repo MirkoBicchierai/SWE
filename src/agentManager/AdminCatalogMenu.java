@@ -103,7 +103,6 @@ public class AdminCatalogMenu implements Menu{
                 System.err.println("Id Not Valid!");
             }
         }
-
         activeUser.createCatlog(description,marketZone,articles);
     }
 }

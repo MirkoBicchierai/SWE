@@ -11,7 +11,6 @@ public class Main {
             startProgram();
         else
             realMain();
-
     }
 
     private static void realMain(){

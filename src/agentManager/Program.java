@@ -1,7 +1,6 @@
 package agentManager;
 
 import org.javatuples.Pair;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.ResultSet;
@@ -9,7 +8,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 
-public class Program {
+public final class Program {
 
     private User activeUser;
     private ArrayList<User> users;
@@ -34,39 +33,37 @@ public class Program {
         c = DBConnection.getInstance();
     }
 
-    protected User getActiveUser() {
-        return activeUser;
-    }
+    public User getActiveUser() { return activeUser; }
 
-    protected ArrayList<User> getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 
-    protected ArrayList<Article> getArticles() {
+    public ArrayList<Article> getArticles() {
         return articles;
     }
 
-    protected ArrayList<Catalog> getCatalogs() {
+    public ArrayList<Catalog> getCatalogs() {
         return catalogs;
     }
 
-    protected ArrayList<Customer> getCustomers() {
+    public ArrayList<Customer> getCustomers() {
         return customers;
     }
 
-    protected ArrayList<Order> getOrders() {
+    public ArrayList<Order> getOrders() {
         return orders;
     }
 
-    protected void close(){
+    void close(){
         wantClose = true;
     }
 
-    protected void setMenu(Menu menu) { //forse inutile
+    void setMenu(Menu menu) { //forse inutile
         this.menu = menu;
     }
 
-    private Menu getState() { //forse inutile
+    Menu getState() { //forse inutile
         return this.menu.getCurrentState();
     }
 
@@ -83,12 +80,12 @@ public class Program {
 
     }
 
-    protected void logout(){
+    void logout(){
         activeUser = null;
         this.setMenu(new LoginMenu());
     }
 
-    protected boolean checkCustomersExist(int id){
+    boolean checkCustomersExist(int id){
         for(Customer c :customers){
             if(c.getId()==id)
                 return true;
@@ -97,7 +94,7 @@ public class Program {
         return false;
     }
 
-    protected User login(String name, String psw) {
+    public void login(String name, String psw) {
         for (User i : users) {
             if (name.equals(i.getName()) && User.getHash(psw).equals(i.getPasswordHash())) {
                 activeUser = i;
@@ -107,17 +104,13 @@ public class Program {
 
         if (activeUser == null) {
             System.err.println("Password e/o Nome utente Errati!");
-            return activeUser;
+        }else{
+            if (activeUser instanceof Administrator) {
+                this.setMenu(new AdminMainMenu());
+            } else {
+                this.setMenu(new AgentMainMenu());
+            }
         }
-
-        if (activeUser instanceof Administrator) {
-            this.setMenu(new AdminMainMenu());
-        } else {
-            this.setMenu(new AgentMainMenu());
-        }
-
-        return activeUser;
-
     }
 
     public static Program getInstance() {
@@ -278,7 +271,7 @@ public class Program {
 
     }
 
-    protected void upload() {
+    void upload() {
         String sql = "";
         Statement stmt = null;
         try {
@@ -436,7 +429,6 @@ public class Program {
         } catch (Exception e2) {
             e2.printStackTrace();
         }
-
     }
 
 }

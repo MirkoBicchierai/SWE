@@ -32,13 +32,13 @@ public class LoginMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    while (activeUser == null) {
+                    while (Program.getInstance().getActiveUser() == null) {
 
                         System.out.println("Insert Username:");
                         name = inLog.nextLine();
                         System.out.println("Insert Password:");
                         psw = inLog.nextLine();
-                        activeUser = Program.getInstance().login(name, psw);
+                        Program.getInstance().login(name, psw);
 
                     }
                     quit = true;

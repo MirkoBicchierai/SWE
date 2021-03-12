@@ -57,7 +57,5 @@ public class AgentMainMenu implements Menu {
                     System.err.println("Invalid choice.");
             }
         } while (!quit);
-
     }
-
 }

@@ -77,6 +77,4 @@ public class Agent extends User implements Observable{
             System.out.println("There are no orders.");
         System.out.println("----------------------------------");
     }
-
-
 }
