@@ -137,7 +137,6 @@ public class Administrator extends User {
 
     }
 
-
     public void deleteCatalog(int IdCatalog){//controllo se utente collegato
         Catalog tmp = null;
 

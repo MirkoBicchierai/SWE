@@ -15,7 +15,7 @@ public class AdminCatalogMenu implements Menu{
         Administrator admin = (Administrator)activeUser;
         Scanner in = new Scanner(System.in);
 
-        boolean quit = false;               //finito!!
+        boolean quit = false;
 
         int menuItem;
 

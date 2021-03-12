@@ -29,6 +29,8 @@ public class LoginMenu implements Menu{
             }catch (Exception e){
                 menuItem = -1;
             }
+
+            System.out.println(menuItem);
             switch (menuItem) {
 
                 case 1:
