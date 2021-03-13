@@ -56,7 +56,7 @@ public final class Program {
         wantClose = true;
     }
 
-    void setMenu(Menu menu) { //forse inutile
+    void setMenu(Menu menu) {
         this.menu = menu;
     }
 
@@ -84,7 +84,7 @@ public final class Program {
 
     }
 
-    void logout(){
+    public void logout(){
         activeUser = null;
         this.setMenu(new LoginMenu());
     }
@@ -235,11 +235,6 @@ public final class Program {
                     break;
                 }
             }
-            /*
-            if(tmpAgent == null){
-                System.err.println("Agente Non Presente!");
-                break;
-            }*/
 
             Customer tmpCustomer = null;
             for (Customer i : customers) {
@@ -429,6 +424,8 @@ public final class Program {
         } catch (Exception e2) {
             e2.printStackTrace();
         }
+
+        instance = null;
     }
 
 }

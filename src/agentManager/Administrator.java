@@ -73,7 +73,7 @@ public class Administrator extends User {
         }
 
         if (agent==null){
-            System.err.println("Id Agente Inesistente!");
+            System.err.println("Id Agent Not Exist!");
             return;
         }
 
@@ -230,7 +230,7 @@ public class Administrator extends User {
     }
 
     public void createProduct(String name, float price, ArrayList<Article> a) {
-        if (a.size()==0){
+        if (a==null||a.size()==0){
             Program.getInstance().getArticles().add(new Product(name, price));
         }else {
             Program.getInstance().getArticles().add(new Compound(name, a));

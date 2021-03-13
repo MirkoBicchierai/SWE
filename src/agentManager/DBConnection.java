@@ -7,7 +7,7 @@ public class DBConnection {
 
     private static Connection c = null;
 
-    public static Connection getInstance() {
+    static Connection getInstance() {
         if(c==null) {
             try {
                 Class.forName("org.sqlite.JDBC");

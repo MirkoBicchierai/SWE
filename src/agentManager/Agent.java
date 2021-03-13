@@ -48,17 +48,22 @@ public class Agent extends User implements Observable{
 
     public boolean deleteOrder(int id) {
 
-        boolean check = false;
+        Order orderToDelete = null;
+
         for(Order i : Program.getInstance().getOrders()) {
             if(i.getId() == id && i.getAgent().getId() == this.getId()){
-                Program.getInstance().getOrders().remove(i);
-                i.printArticle();
-                check=true;
+                orderToDelete = i;
             }
         }
-        if(!check)
+        if(orderToDelete==null) {
             System.err.println("Wrong ID! Re-insert it");
-        return check;
+            return false;
+        }
+
+        Program.getInstance().getOrders().remove(orderToDelete);
+
+        return true;
+
     }
 
     @Override
