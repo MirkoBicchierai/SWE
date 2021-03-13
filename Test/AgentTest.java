@@ -55,17 +55,40 @@ public class AgentTest {
     @Test
     void testDeleteOrder() {
 
-        int orderCountBefore = p.getOrders().size();
-
         Order order = p.getOrders().get(0);
+
+        for (Order i: p.getOrders()){
+            if (i.getAgent()==agent){
+                order = i;
+            }
+        }
+
+        int orderCountBefore1 = p.getOrders().size();
 
         agent.deleteOrder(order.getId());
 
+        Order finalOrder1 = order;
         assertAll("Order deleted",
-                () -> assertTrue(p.getOrders().size()<orderCountBefore),
-                () -> assertFalse(p.getOrders().contains(order))
+                () -> assertTrue(p.getOrders().size()<orderCountBefore1),
+                () -> assertFalse(p.getOrders().contains(finalOrder1))
         );
-        
+
+        for (Order i: p.getOrders()){
+            if (i.getAgent()!=agent){
+                order = i;
+            }
+        }
+
+        int orderCountBefore2 = p.getOrders().size();
+
+        agent.deleteOrder(order.getId());
+
+        Order finalOrder2 = order;
+        assertAll("Order deleted",
+                () -> assertEquals(orderCountBefore2, p.getOrders().size()),
+                () -> assertTrue(p.getOrders().contains(finalOrder2))
+        );
+
     }
 
 }
