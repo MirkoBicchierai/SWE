@@ -6,17 +6,17 @@ import java.util.ArrayList;
 public final class Agent extends User implements Observable{
 
     private final Catalog catalog;
-    private final float commissionPerc;
+    private final float commissionPercentage;
 
-    public Agent(String name, String password, float commissionPerc, Catalog catalog) {
+    public Agent(String name, String password, float commissionPercentage, Catalog catalog) {
             super(name,password);
-            this.commissionPerc = commissionPerc;
+            this.commissionPercentage = commissionPercentage;
             this.catalog = catalog;
     }
 
-    public Agent(String name, String passwordHash, float commissionPerc, Catalog catalog, int id) {
+    public Agent(String name, String passwordHash, float commissionPercentage, Catalog catalog, int id) {
         super(name,passwordHash, id);
-        this.commissionPerc = commissionPerc;
+        this.commissionPercentage = commissionPercentage;
         this.catalog = catalog;
     }
 
@@ -24,8 +24,8 @@ public final class Agent extends User implements Observable{
         return catalog;
     }
 
-    public float getCommissionPerc() {
-        return commissionPerc;
+    public float getCommissionPercentage() {
+        return commissionPercentage;
     }
 
     @Override

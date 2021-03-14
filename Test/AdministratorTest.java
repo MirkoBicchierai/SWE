@@ -53,7 +53,7 @@ public class AdministratorTest {
         articles.add(p.getArticles().get(2));
         articles.add(p.getArticles().get(3));
         int preSize = p.getCatalogs().size();
-        admin.createCatalog("descriprion","Italy",articles);
+        admin.createCatalog("description","Italy",articles);
 
         assertAll("Test create agent",
                 () -> assertEquals(preSize + 1, p.getCatalogs().size()),
@@ -112,7 +112,7 @@ public class AdministratorTest {
         articles.add(p.getArticles().get(1));
         articles.add(p.getArticles().get(2));
         articles.add(p.getArticles().get(3));
-        admin.createCatalog("descriprion","Italy",articles);
+        admin.createCatalog("description","Italy",articles);
         preSize = p.getCatalogs().size();
 
         int lastCat = p.getCatalogs().get(p.getCatalogs().size()-1).getId();
@@ -132,7 +132,7 @@ public class AdministratorTest {
 
         //base article SAFE DELETE
         ArrayList<Article> articles = new ArrayList<>();
-        admin.createProduct("testProduct1 - candelete",5.5F, articles);
+        admin.createProduct("testProduct1 - can_delete",5.5F, articles);
         Article P1 = p.getArticles().get(p.getArticles().size()-1);
         int A1 = p.getArticles().get(p.getArticles().size()-1).getId();
         admin.deleteProduct(A1);

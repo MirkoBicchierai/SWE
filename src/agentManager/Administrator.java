@@ -60,7 +60,7 @@ public final class Administrator extends User {
             if(u instanceof Agent){
                 check = true;
                 a = (Agent)u;
-                System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPerc()+"%");
+                System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPercentage()+"%");
             }
         }
         if(!check)
@@ -76,7 +76,7 @@ public final class Administrator extends User {
             if((u instanceof Agent) && u.getId() == idAgent){
                 check = true;
                 a = (Agent)u;
-                System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPerc()+"%");
+                System.out.println("Agent -> ID: "+a.getId()+" Name: "+a.getName()+" Commission: "+a.getCommissionPercentage()+"%");
                 a.getCatalog().printCatalog();
             }
         }
@@ -102,8 +102,8 @@ public final class Administrator extends User {
 
     }
 
-    public void createAgent(String name, String password, float percCommission, Catalog catalog) {
-        Program.getInstance().getUsers().add(new Agent(name,password,percCommission, catalog));
+    public void createAgent(String name, String password, float commission, Catalog catalog) {
+        Program.getInstance().getUsers().add(new Agent(name,password,commission, catalog));
         System.out.println("Created!");
     }
 

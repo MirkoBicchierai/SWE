@@ -5,23 +5,23 @@ import java.util.ArrayList;
 public final class NotificationCenter implements Observer {
 
     private NotificationCenter() {
-        nofications = new ArrayList<>();
+        notification = new ArrayList<>();
     }
 
-    public ArrayList<String> getNofications() {
-        return nofications;
+    public ArrayList<String> getNotification() {
+        return notification;
     }
 
-    private ArrayList<String> nofications;
+    private ArrayList<String> notification;
 
     private static NotificationCenter instance;
 
     public void viewNotification() {
         System.out.println("----------------------------------");
-        for (String i: nofications){
+        for (String i: notification){
             System.out.println(i);
         }
-        if(nofications.size()==0) System.out.println("There aren't Notification!");
+        if(notification.size()==0) System.out.println("There aren't Notification!");
 
         System.out.println("----------------------------------");
         resetNotification();
@@ -29,7 +29,7 @@ public final class NotificationCenter implements Observer {
 
     @Override
     public void update(String notification) {
-        nofications.add(notification);
+        this.notification.add(notification);
     }
 
     public static NotificationCenter getInstance() {
@@ -40,7 +40,7 @@ public final class NotificationCenter implements Observer {
     }
 
     private void resetNotification(){
-        nofications = new ArrayList<>();
+        notification = new ArrayList<>();
     }
 
 }

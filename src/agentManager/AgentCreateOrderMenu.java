@@ -83,7 +83,7 @@ public final class AgentCreateOrderMenu implements Menu{
     private void subMenuSelectArticles(Agent agent, int idSelectedCustomers){
 
         Scanner in = new Scanner(System.in);
-        ArrayList<Pair<Article,Integer>> articlespair = new ArrayList<>();
+        ArrayList<Pair<Article,Integer>> articlesPair = new ArrayList<>();
         Catalog c = agent.getCatalog();
 
         boolean agg;
@@ -95,7 +95,7 @@ public final class AgentCreateOrderMenu implements Menu{
             try {
                 int idArticle = Integer.parseInt(in.next());
                 if (idArticle == 0)
-                    if(articlespair.size()>0)
+                    if(articlesPair.size()>0)
                         break;
                     else {
                         System.err.println("Select at least an Article!");
@@ -118,7 +118,7 @@ public final class AgentCreateOrderMenu implements Menu{
                             }
                         }while(qtaArticle==-1);
 
-                        articlespair.add(new Pair<>(i,qtaArticle));
+                        articlesPair.add(new Pair<>(i,qtaArticle));
                         agg = true;
                     }
                 }
@@ -130,7 +130,7 @@ public final class AgentCreateOrderMenu implements Menu{
 
         for(Customer i : Program.getInstance().getCustomers()){
             if(i.getId() == idSelectedCustomers) {
-                agent.createOrder(i, articlespair);
+                agent.createOrder(i, articlesPair);
                 return;
             }
         }

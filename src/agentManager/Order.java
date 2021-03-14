@@ -21,7 +21,7 @@ public final class Order {
             this.total = this.total + a.getValue0().getPrice() * a.getValue1();
         }
 
-        this.commissionTot = (agent.getCommissionPerc()*this.total)/100;
+        this.commissionTot = (agent.getCommissionPercentage()*this.total)/100;
         lastID++;
         this.id = lastID;
         this.agent = agent;
