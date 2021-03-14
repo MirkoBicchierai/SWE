@@ -121,7 +121,7 @@ public final class Administrator extends User {
         }
     }
 
-    public void deleteCatalog(int IdCatalog){//controllo se utente collegato
+    public void deleteCatalog(int IdCatalog){
         Catalog tmp = null;
 
         for(User i: Program.getInstance().getUsers()){
@@ -206,7 +206,7 @@ public final class Administrator extends User {
         }
 
         for(Catalog i: Program.getInstance().getCatalogs())
-            i.getArticles().removeIf(j -> j.getId() == idArticle); //rimuove j se j.getid == article
+            i.getArticles().removeIf(j -> j.getId() == idArticle); //remove j if j.getId() == article
 
 
         Program.getInstance().getArticles().remove(tmp);
