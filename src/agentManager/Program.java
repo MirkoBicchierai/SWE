@@ -108,7 +108,7 @@ public final class Program {
         }
 
         if (activeUser == null) {
-            System.err.println("Password e/o Nome utente Errati!");
+            System.err.println("Wrong password and/or UserName !");
         }else{
             if (activeUser instanceof Administrator) {
                 this.setMenu(new AdminMainMenu());
@@ -194,12 +194,12 @@ public final class Program {
 
         rs = stmt.executeQuery("SELECT * FROM User;");
         while (rs.next()) {
-            int id = rs.getInt("id");                             //1 agente - 0 amministratore
+            int id = rs.getInt("id");                             //1 agent - 0 administrator
             String name = rs.getString("Name");
             String passHash = rs.getString("Passwordhash");
             int type = rs.getInt("Type");
             int idCatalog = rs.getInt("IdCatalog");
-            float commissionPerc = rs.getFloat("CommissionPerc");
+            float commissionPercentage = rs.getFloat("CommissionPerc");
 
             if (type == 1) {
                 Catalog tmp = null;
@@ -210,11 +210,11 @@ public final class Program {
                 }
 
                 if(tmp == null){
-                    System.err.println("agentManager.Catalog Non Presente!");
+                    System.err.println("Catalog don't exist!");
                     break;
                 }
 
-                users.add(new Agent(name, passHash, commissionPerc, tmp,id));
+                users.add(new Agent(name, passHash, commissionPercentage, tmp,id));
             } else {
                 users.add(new Administrator(name, passHash, id));
             }
@@ -245,7 +245,7 @@ public final class Program {
             }
 
             if(tmpCustomer == null){
-                System.err.println("Cliente Non Presente!");
+                System.err.println("Customer don't exist!");
                 break;
             }
 
@@ -292,7 +292,7 @@ public final class Program {
                 } else {
                     type = 1;
                     Agent tmp = (Agent) user;
-                    perch = tmp.getCommissionPerc();
+                    perch = tmp.getCommissionPercentage();
                     sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,IdCatalog) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ,"+tmp.getCatalog().getId()+");";
                 }
 
@@ -385,7 +385,7 @@ public final class Program {
             }
         }
 
-        for (String notify : notCenter.getNofications()) {
+        for (String notify : notCenter.getNotification()) {
             try {
                 sql = "INSERT INTO Notification (Message) " + "VALUES ('" + notify + "');";
                 stmt = c.createStatement();

@@ -14,7 +14,7 @@ public final class AdminCustomersMenu implements Menu{
         Administrator admin = (Administrator)activeUser;
         Scanner in = new Scanner(System.in);
 
-        boolean quit = false;           //finito da testare
+        boolean quit = false;
 
         int menuItem;
 

@@ -27,7 +27,7 @@ public final class AdminMainMenu implements Menu{
             System.out.println("1. View Agents");
             System.out.println("2. View Catalogs");
             System.out.println("3. View Customers");
-            System.out.println("4. View Storic Orders");
+            System.out.println("4. View Historical Orders");
             System.out.println("5. View Articles");
 
             System.out.println("9. Logout");

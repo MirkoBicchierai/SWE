@@ -80,16 +80,16 @@ public final class AdminAgentMenu implements Menu{
         String name = in.nextLine();
         System.out.println("Insert Password :");
         String password = in.nextLine();
-        float percComm ;
+        float percentage ;
         do{
             System.out.println("Insert Percentage of Commission :");
             try {
-                percComm = Math.abs(Float.parseFloat(in.next()));
+                percentage = Math.abs(Float.parseFloat(in.next()));
             }catch (Exception e){
                 System.err.println("You must insert a number!");
-                percComm = -1;
+                percentage = -1;
             }
-        }while (percComm==-1);
+        }while (percentage==-1);
 
         Catalog catalog = null;
 
@@ -111,6 +111,6 @@ public final class AdminAgentMenu implements Menu{
             if (catalog ==null) System.err.println("You must insert a number!");
 
         }while (catalog ==null);
-        activeUser.createAgent(name,password,percComm, catalog);
+        activeUser.createAgent(name,password,percentage, catalog);
     }
 }
