@@ -2,7 +2,7 @@ package agentManager;
 
 import java.util.Scanner;
 
-public class AdminAgentMenu implements Menu{
+public final class AdminAgentMenu implements Menu{
     @Override
     public Menu getCurrentState() {
         return this;
@@ -106,7 +106,7 @@ public class AdminAgentMenu implements Menu{
                     }
                 }
 
-            }catch (Exception e){}
+            }catch (Exception ignored){}
 
             if (catalog ==null) System.err.println("You must insert a number!");
 

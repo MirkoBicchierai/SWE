@@ -1,6 +1,4 @@
 import agentManager.*;
-
-import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.BeforeAll;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -100,7 +98,7 @@ public class AdministratorTest {
     void testDeleteCatalog() {
 
         int preSize = p.getCatalogs().size();
-        boolean check = false;
+        boolean check;
 
         check = checkCatalog(1);
         admin.deleteCatalog(1);

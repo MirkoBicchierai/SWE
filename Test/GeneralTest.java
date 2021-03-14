@@ -29,8 +29,8 @@ public class GeneralTest {
     @org.junit.jupiter.api.Test
     void testUploadLoadData() throws SQLException {
         String sql;
-        Statement stmt=null;
-        ResultSet rs = null;
+        Statement stmt;
+        ResultSet rs;
 
         Connection c = DBConnectionTest.getInstance();
         p.upload(c);

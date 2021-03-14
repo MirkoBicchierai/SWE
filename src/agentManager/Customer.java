@@ -1,12 +1,12 @@
 package agentManager;
 
-public class Customer {
+public final class Customer {
 
-    private String businessName;
-    private String country;
-    private String email;
+    private final String businessName;
+    private final String country;
+    private final String email;
     private static int lastID = 0;
-    private int id;
+    private final int id;
 
     public Customer(String businessName, String country, String email) {
         this.businessName = businessName;

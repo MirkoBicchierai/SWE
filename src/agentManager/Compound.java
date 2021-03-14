@@ -2,9 +2,9 @@ package agentManager;
 
 import java.util.ArrayList;
 
-public class Compound extends Article {
+public final class Compound extends Article {
 
-    private ArrayList<Article> components;
+    private final ArrayList<Article> components;
 
     public Compound(String name, ArrayList<Article> components) {
         super( name, 0);

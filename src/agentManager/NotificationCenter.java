@@ -2,7 +2,7 @@ package agentManager;
 
 import java.util.ArrayList;
 
-public class NotificationCenter implements Observer {
+public final class NotificationCenter implements Observer {
 
     private NotificationCenter() {
         nofications = new ArrayList<>();

@@ -6,16 +6,17 @@ import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.Arrays;
 
 public final class Program {
 
     private User activeUser;
-    private ArrayList<User> users;
-    private ArrayList<Article> articles;
-    private ArrayList<Catalog> catalogs;
-    private ArrayList<Customer> customers;
-    private ArrayList<Order> orders;
-    private NotificationCenter notCenter;
+    private final ArrayList<User> users;
+    private final ArrayList<Article> articles;
+    private final ArrayList<Catalog> catalogs;
+    private final ArrayList<Customer> customers;
+    private final ArrayList<Order> orders;
+    private final NotificationCenter notCenter;
     private static Program instance;
     private Menu menu;
     private Boolean wantClose = false;
@@ -60,7 +61,7 @@ public final class Program {
         this.menu = menu;
     }
 
-    Menu getState() { //forse inutile
+    Menu getState() {
         return this.menu.getCurrentState();
     }
 
@@ -129,7 +130,7 @@ public final class Program {
 
         Statement stmt = c.createStatement();
         Statement stmt1 = c.createStatement();
-        ResultSet rs, rs1 = null;
+        ResultSet rs, rs1;
 
         rs = stmt.executeQuery("SELECT * FROM Customer;");
         while (rs.next()) {
@@ -157,20 +158,19 @@ public final class Program {
         while (rs.next()) {
             int id = rs.getInt("id");
             String name = rs.getString("name");
-            float price = rs.getFloat("Price");
-            ArrayList<Article> tmp = new ArrayList<>();
+            ArrayList<Article> components = new ArrayList<>();
             rs1 = stmt1.executeQuery("SELECT * FROM ArticleCompound WHERE IdCompound = " + id + " ;");
             while (rs1.next()) {
                 int idComponent = rs1.getInt("idComponent");
 
                 for (Article a : articles) {
                     if (a.getId() == idComponent) {
-                        tmp.add(a);
+                        components.add(a);
                         break;
                     }
                 }
             }
-            articles.add(new Compound(name, tmp, id));
+            articles.add(new Compound(name, components, id));
         }
 
         rs = stmt.executeQuery("SELECT * FROM CatalogHead;");
@@ -267,37 +267,15 @@ public final class Program {
     }
 
     public void upload(Connection c) {
-        String sql = "";
+        String sql;
         Statement stmt = null;
         try {
             stmt = c.createStatement();
-            sql = "DELETE FROM User WHERE 1=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            sql = "DELETE FROM OrderHead WHERE 1=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            sql = "DELETE FROM OrderRow WHERE 1=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            sql = "DELETE FROM Notification WHERE 1=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            sql = "DELETE FROM Customer WHERE 1=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            sql = "DELETE FROM CatalogRow WHERE 1=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            sql = "DELETE FROM CatalogHead WHERE 1=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            sql = "DELETE FROM Article WHERE 1=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
-            sql = "DELETE FROM ArticleCompound WHERE 1=1;";
-            stmt.executeUpdate(sql);
-            c.commit();
+            for (String s : Arrays.asList("DELETE FROM User;", "DELETE FROM OrderHead;", "DELETE FROM OrderRow;", "DELETE FROM Notification;", "DELETE FROM Customer;", "DELETE FROM CatalogRow;", "DELETE FROM CatalogHead;", "DELETE FROM Article;", "DELETE FROM ArticleCompound;")) {
+                sql = s;
+                stmt.executeUpdate(sql);
+                c.commit();
+            }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);

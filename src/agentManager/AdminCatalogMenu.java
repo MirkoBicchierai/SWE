@@ -3,7 +3,7 @@ package agentManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdminCatalogMenu implements Menu{
+public final class AdminCatalogMenu implements Menu{
 
     @Override
     public Menu getCurrentState() {

@@ -2,7 +2,7 @@ package agentManager;
 
 import java.util.ArrayList;
 
-public class Administrator extends User {
+public final class Administrator extends User {
 
     public Administrator(String name, String password) {
         super(name, password);
@@ -22,7 +22,7 @@ public class Administrator extends User {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName()+" Agent: DELETED");
             }
             i.printArticle();
-            System.out.println("");
+            System.out.println();
             check=true;
         }
         if(!check)
@@ -34,10 +34,10 @@ public class Administrator extends User {
     public void viewCatalog() {
         System.out.println("----------------------------------");
         if (Program.getInstance().getCatalogs().size()>0){
-            System.out.println("");
+            System.out.println();
             for (Catalog i : Program.getInstance().getCatalogs()) {
                 i.printCatalog();
-                System.out.println("");
+                System.out.println();
             }
         }else
             System.out.println("There are no catalogs!.");
@@ -50,41 +50,6 @@ public class Administrator extends User {
             i.display();
         }
         System.out.println("----------------------------------");
-    }
-
-    public void createAgent(String name, String password, float percCommission, Catalog catalog) {
-        Program.getInstance().getUsers().add(new Agent(name,password,percCommission, catalog));
-        System.out.println("Created!");
-    }
-
-    public void createCatalog(String description, String marketZone, ArrayList<Article> articles) {
-
-        Program.getInstance().getCatalogs().add(new Catalog(articles,description,marketZone));
-        System.out.println("Created!");
-    }
-
-    public void deleteAgent(int idAgent){
-        Agent agent=null;
-        for(User i : Program.getInstance().getUsers()){
-            if (i instanceof Agent && i.getId()==idAgent){
-                agent = (Agent) i;
-                break;
-            }
-        }
-
-        if (agent==null){
-            System.err.println("Id Agent Not Exist!");
-            return;
-        }
-
-        for(Order i : Program.getInstance().getOrders()){
-            if (i.getAgent()==agent){
-                i.agentDeleted();
-            }
-        }
-
-        Program.getInstance().getUsers().remove(agent);
-        System.out.println("Deleted!");
     }
 
     public void viewAgent() {
@@ -135,6 +100,25 @@ public class Administrator extends User {
             System.out.println("There are no orders.");
         System.out.println("----------------------------------");
 
+    }
+
+    public void createAgent(String name, String password, float percCommission, Catalog catalog) {
+        Program.getInstance().getUsers().add(new Agent(name,password,percCommission, catalog));
+        System.out.println("Created!");
+    }
+
+    public void createCatalog(String description, String marketZone, ArrayList<Article> articles) {
+
+        Program.getInstance().getCatalogs().add(new Catalog(articles,description,marketZone));
+        System.out.println("Created!");
+    }
+
+    public void createProduct(String name, float price, ArrayList<Article> a) {
+        if (a==null||a.size()==0){
+            Program.getInstance().getArticles().add(new Product(name, price));
+        }else {
+            Program.getInstance().getArticles().add(new Compound(name, a));
+        }
     }
 
     public void deleteCatalog(int IdCatalog){//controllo se utente collegato
@@ -229,11 +213,29 @@ public class Administrator extends User {
         System.out.println("Deleted!");
     }
 
-    public void createProduct(String name, float price, ArrayList<Article> a) {
-        if (a==null||a.size()==0){
-            Program.getInstance().getArticles().add(new Product(name, price));
-        }else {
-            Program.getInstance().getArticles().add(new Compound(name, a));
+    public void deleteAgent(int idAgent){
+        Agent agent=null;
+        for(User i : Program.getInstance().getUsers()){
+            if (i instanceof Agent && i.getId()==idAgent){
+                agent = (Agent) i;
+                break;
+            }
         }
+
+        if (agent==null){
+            System.err.println("Id Agent Not Exist!");
+            return;
+        }
+
+        for(Order i : Program.getInstance().getOrders()){
+            if (i.getAgent()==agent){
+                i.agentDeleted();
+            }
+        }
+
+        Program.getInstance().getUsers().remove(agent);
+        System.out.println("Deleted!");
     }
+
+
 }

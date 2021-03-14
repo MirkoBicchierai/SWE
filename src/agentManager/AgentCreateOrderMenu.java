@@ -4,7 +4,7 @@ import org.javatuples.Pair;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AgentCreateOrderMenu implements Menu{
+public final class AgentCreateOrderMenu implements Menu{
     @Override
     public Menu getCurrentState() {
         return this;
@@ -37,7 +37,7 @@ public class AgentCreateOrderMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    createCustomers(activeUser);
+                    createCustomers((Agent) activeUser);
                     break;
 
                 case 2:
@@ -69,7 +69,7 @@ public class AgentCreateOrderMenu implements Menu{
         } while (!quit);
     }
 
-    private void createCustomers(User activeUser){
+    private void createCustomers(Agent activeUser){
         Scanner in = new Scanner(System.in);
         System.out.println("Insert Email:");
         String email = in.nextLine();
@@ -87,7 +87,7 @@ public class AgentCreateOrderMenu implements Menu{
         Catalog c = agent.getCatalog();
 
         boolean agg;
-        int qtaArticle = 0;
+        int qtaArticle;
         while (true){
             agg = false;
             agent.viewCatalog();

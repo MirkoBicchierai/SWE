@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AgentTest {
 
     private static Agent agent =null;
-    private static Program p = Program.getInstance();
+    private static final Program p = Program.getInstance();
 
     @BeforeAll
     static void prepare() {
@@ -40,14 +40,14 @@ public class AgentTest {
 
         Order createdOrder = p.getOrders().get(p.getOrders().size()-1);
 
-        String messageNotifica = NotificationCenter.getInstance().getNofications().get(NotificationCenter.getInstance().getNofications().size()-1);
+        String messageNotification = NotificationCenter.getInstance().getNofications().get(NotificationCenter.getInstance().getNofications().size()-1);
 
         assertAll("Order's Data",
                 () -> assertEquals(createdOrder.getAgent(), agent),
                 () -> assertEquals(createdOrder.getClient(), customer),
                 () -> assertEquals(createdOrder.getArticles().get(0), articles.get(0).getValue0()),
                 () -> assertEquals(createdOrder.getArticles().get(1), articles.get(1).getValue0()),
-                () -> assertTrue(messageNotifica.contains(agent.getName()))
+                () -> assertTrue(messageNotification.contains(agent.getName()))
         );
 
     }

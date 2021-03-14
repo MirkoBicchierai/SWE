@@ -3,7 +3,7 @@ package agentManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DBConnection {
+public final class DBConnection {
 
     private static Connection c = null;
 

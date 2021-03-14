@@ -3,16 +3,15 @@ package agentManager;
 import org.javatuples.Pair;
 import java.util.ArrayList;
 
-public class Order {
+public final class Order {
 
-    private ArrayList<Pair<Article, Integer>> pairArticles;
-
-    private int id;
+    private final ArrayList<Pair<Article, Integer>> pairArticles;
+    private final int id;
     private static int lastID;
     private Agent agent;
     private float total;
-    private float commissionTot;
-    private Customer client;
+    private final float commissionTot;
+    private final Customer client;
 
     public Order(Agent agent, ArrayList<Pair<Article, Integer>> pairArticles , Customer client ) {
 

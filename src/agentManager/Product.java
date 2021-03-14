@@ -1,6 +1,6 @@
 package agentManager;
 
-public class Product extends Article {
+public final class Product extends Article {
 
     public Product(String name, float price) {
         super(name, price);

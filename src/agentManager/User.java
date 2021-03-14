@@ -5,9 +5,9 @@ import java.security.NoSuchAlgorithmException;
 
 public abstract class User {
 
-    private int id;
-    private String name;
-    private String passwordHash;
+    private final int id;
+    private final String name;
+    private final String passwordHash;
     private static int lastID;
 
     public User(String name, String password) {
@@ -63,17 +63,18 @@ public abstract class User {
     }
 
     public void viewCustomers(){
-        System.out.println("");
+        System.out.println();
         System.out.println("----------------------------------");
         for(Customer c : Program.getInstance().getCustomers()){
             System.out.println("CUSTOMERS -> ID: " + c.getId() + " Name: " + c.getBusinessName() + " Email: " + c.getEmail() + " Country: " + c.getCountry());
         }
         System.out.println("----------------------------------");
-        System.out.println("");
+        System.out.println();
 
     }
 
     public abstract void viewOrders();
+
     public abstract void viewCatalog();
 
 }

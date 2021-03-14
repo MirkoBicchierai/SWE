@@ -3,10 +3,10 @@ package agentManager;
 import org.javatuples.Pair;
 import java.util.ArrayList;
 
-public class Agent extends User implements Observable{
+public final class Agent extends User implements Observable{
 
-    private Catalog catalog;
-    private float commissionPerc;
+    private final Catalog catalog;
+    private final float commissionPerc;
 
     public Agent(String name, String password, float commissionPerc, Catalog catalog) {
             super(name,password);
@@ -74,7 +74,7 @@ public class Agent extends User implements Observable{
             if(i.getAgent().getId() == this.getId()) {
                 System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
                 i.printArticle();
-                System.out.println("");
+                System.out.println();
                 check=true;
             }
         }

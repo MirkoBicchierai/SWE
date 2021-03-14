@@ -2,7 +2,7 @@ package agentManager;
 
 import java.util.Scanner;
 
-public class AdminMainMenu implements Menu{
+public final class AdminMainMenu implements Menu{
 
     @Override
     public Menu getCurrentState() {

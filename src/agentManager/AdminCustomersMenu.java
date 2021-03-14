@@ -2,7 +2,8 @@ package agentManager;
 
 import java.util.Scanner;
 
-public class AdminCustomersMenu implements Menu{
+public final class AdminCustomersMenu implements Menu{
+
     @Override
     public Menu getCurrentState() {
         return this;
@@ -72,8 +73,7 @@ public class AdminCustomersMenu implements Menu{
         } while (!quit);
     }
 
-
-    private void createCustomers(User activeUser){
+    private void createCustomers(Administrator activeUser){
 
         Scanner in = new Scanner(System.in);
 

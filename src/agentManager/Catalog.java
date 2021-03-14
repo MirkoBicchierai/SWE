@@ -2,13 +2,13 @@ package agentManager;
 
 import java.util.ArrayList;
 
-public class Catalog {
+public final class Catalog {
 
-    private int id;
-    private String description;
-    private String marketZone;
+    private final int id;
+    private final String description;
+    private final String marketZone;
     private static int lastID = 0;
-    private ArrayList<Article> articles;
+    private final ArrayList<Article> articles;
 
     public Catalog(ArrayList<Article> articles, String description , String marketZone) {
         this.articles = articles;
