@@ -35,7 +35,7 @@ public final class AgentCreateOrderMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    createCustomers( agent);
+                    createCustomers(agent);
                     break;
 
                 case 2:
@@ -103,13 +103,14 @@ public final class AgentCreateOrderMenu implements Menu{
             System.out.println("Insert an Id Articles or 0 to terminate Order");
             try {
                 int idArticle = Integer.parseInt(in.next());
-                if (idArticle == 0)
-                    if(articlesPair.size()>0)
+                if (idArticle == 0) {
+                    if (articlesPair.size() > 0)
                         break;
                     else {
                         System.err.println("Select at least an Article!");
                         continue;
                     }
+                }
                 for (Article i : c.getArticles()) {
                     if (i.getId() == idArticle) {
 

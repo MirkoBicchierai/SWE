@@ -7,11 +7,11 @@ public final class AdminArticleMenu implements Menu{
 
     @Override
     public void showMenu() {
+
         Administrator admin = (Administrator) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
-
         int menuItem;
 
         do {
@@ -46,14 +46,13 @@ public final class AdminArticleMenu implements Menu{
                     quit = true;
                     Program.getInstance().setMenu(new AdminMainMenu());
                     break;
-                case 0:
 
+                case 0:
                     quit = true;
                     Program.getInstance().close();
                     break;
 
                 default:
-
                     System.err.println("Invalid choice.");
 
             }

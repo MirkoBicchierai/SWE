@@ -70,7 +70,6 @@ public abstract class User {
         }
         System.out.println("----------------------------------");
         System.out.println();
-
     }
 
     public abstract void viewOrders();

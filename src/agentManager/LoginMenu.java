@@ -8,10 +8,9 @@ public final class LoginMenu implements Menu{
     public void showMenu() {
         Scanner in = new Scanner(System.in);
         Scanner inLog = new Scanner(System.in);
-        String name;
-        String psw;
         boolean quit = false;
         int menuItem;
+
         do {
             System.out.println("Menu option:");
             System.out.println("1. Login");
@@ -30,9 +29,9 @@ public final class LoginMenu implements Menu{
                     while (Program.getInstance().getActiveUser() == null) {
 
                         System.out.println("Insert Username:");
-                        name = inLog.nextLine();
+                        String name = inLog.nextLine();
                         System.out.println("Insert Password:");
-                        psw = inLog.nextLine();
+                        String psw = inLog.nextLine();
                         Program.getInstance().login(name, psw);
 
                     }

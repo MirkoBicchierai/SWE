@@ -7,6 +7,7 @@ public final class AdminCatalogMenu implements Menu{
 
     @Override
     public void showMenu() {
+
         Administrator admin = (Administrator) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
@@ -31,6 +32,7 @@ public final class AdminCatalogMenu implements Menu{
                 case 1:
                     createCatalog(admin);
                     break;
+
                 case 2:
                     System.out.println("Enter the code of the Catalog to Delete");
                     int idCatalog;
@@ -41,12 +43,13 @@ public final class AdminCatalogMenu implements Menu{
                     }
                     admin.deleteCatalog(idCatalog);
                     break;
+
                 case 9:
                     quit = true;
                     Program.getInstance().setMenu(new AdminMainMenu());
                     break;
-                case 0:
 
+                case 0:
                     quit = true;
                     Program.getInstance().close();
                     break;
