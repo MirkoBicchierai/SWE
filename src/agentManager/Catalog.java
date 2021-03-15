@@ -17,6 +17,7 @@ public final class Catalog {
         lastID++;
         this.id=lastID;
     }
+
     public Catalog(ArrayList<Article> articles, String description , String marketZone, int id) {
         this.articles = articles;
         this.description = description;

@@ -112,15 +112,6 @@ public final class Program {
         this.setMenu(new LoginMenu());
     }
 
-    boolean checkCustomersExist(int id){
-        for(Customer c :customers){             //todo da levare
-            if(c.getId()==id)
-                return true;
-        }
-        System.err.println("Wrong ID re-insert it!.");
-        return false;
-    }
-
     public void load(Connection c) throws SQLException {
 
         Statement stmt = c.createStatement();

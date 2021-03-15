@@ -237,5 +237,4 @@ public final class Administrator extends User {
         System.out.println("Deleted!");
     }
 
-
 }

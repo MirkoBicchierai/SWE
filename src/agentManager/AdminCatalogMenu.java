@@ -100,4 +100,5 @@ public final class AdminCatalogMenu implements Menu{
         }
         activeUser.createCatalog(description,marketZone,articles);
     }
+
 }

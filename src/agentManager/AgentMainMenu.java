@@ -53,4 +53,5 @@ public final class AgentMainMenu implements Menu {
             }
         } while (!quit);
     }
+
 }

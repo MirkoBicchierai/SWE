@@ -9,23 +9,15 @@ public final class Agent extends User implements Observable{
     private final float commissionPercentage;
 
     public Agent(String name, String password, float commissionPercentage, Catalog catalog) {
-            super(name,password);
-            this.commissionPercentage = commissionPercentage;
-            this.catalog = catalog;
+        super(name,password);
+        this.commissionPercentage = commissionPercentage;
+        this.catalog = catalog;
     }
 
     public Agent(String name, String passwordHash, float commissionPercentage, Catalog catalog, int id) {
         super(name,passwordHash, id);
         this.commissionPercentage = commissionPercentage;
         this.catalog = catalog;
-    }
-
-    public Catalog getCatalog() {
-        return catalog;
-    }
-
-    public float getCommissionPercentage() {
-        return commissionPercentage;
     }
 
     @Override
@@ -55,6 +47,14 @@ public final class Agent extends User implements Observable{
         if(!check)
             System.out.println("There are no orders.");
         System.out.println("----------------------------------");
+    }
+
+    public Catalog getCatalog() {
+        return catalog;
+    }
+
+    public float getCommissionPercentage() {
+        return commissionPercentage;
     }
 
     public void createOrder(Customer c, ArrayList<Pair<Article,Integer>> articles) {

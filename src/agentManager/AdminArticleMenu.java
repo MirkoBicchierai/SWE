@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public final class AdminArticleMenu implements Menu{
 
-
     @Override
     public void showMenu(User activeUser) {
         Administrator admin = (Administrator)activeUser;
@@ -138,4 +137,5 @@ public final class AdminArticleMenu implements Menu{
         } while (!done);
         activeUser.createProduct(name,price,articles);
     }
+
 }
