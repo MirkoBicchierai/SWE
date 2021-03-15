@@ -177,10 +177,10 @@ public class AdministratorTest {
                 C2 = cli;
         }
 
-        admin.deleteClient(1); // SAFE DELETE
+        admin.deleteCustomer(1); // SAFE DELETE
         assertFalse(p.getCustomers().contains(C1));
 
-        admin.deleteClient(2); // BLOCK DELETE, the customer had an order
+        admin.deleteCustomer(2); // BLOCK DELETE, the customer had an order
         assertTrue(p.getCustomers().contains(C2));
 
     }

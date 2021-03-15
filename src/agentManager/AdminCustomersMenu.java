@@ -35,7 +35,7 @@ public final class AdminCustomersMenu implements Menu{
                     System.out.println("Enter the code of the Customer to Delete");
                     try {
                         int idC = in.nextInt();
-                        admin.deleteClient(idC);
+                        admin.deleteCustomer(idC);
                     }catch (Exception e){
                         System.err.println("Invalid Id!");
                     }

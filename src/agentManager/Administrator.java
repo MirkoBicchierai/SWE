@@ -150,7 +150,7 @@ public final class Administrator extends User {
         System.out.println("Deleted!");
     }
 
-    public void deleteClient(int idClient) {
+    public void deleteCustomer(int idClient) {
         Customer tmp = null;
 
         for(Order i: Program.getInstance().getOrders()){
