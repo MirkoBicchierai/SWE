@@ -57,6 +57,7 @@ public final class Order {
         }
 
         return tmp;
+
     }
 
     public ArrayList<Pair<Article, Integer>> getRows() {
@@ -96,7 +97,5 @@ public final class Order {
     public void agentDeleted(){
         agent=null;
     }
-
-
 
 }

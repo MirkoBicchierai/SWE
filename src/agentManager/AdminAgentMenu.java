@@ -109,4 +109,5 @@ public final class AdminAgentMenu implements Menu{
         }while (catalog ==null);
         activeUser.createAgent(name,password,percentage, catalog);
     }
+
 }

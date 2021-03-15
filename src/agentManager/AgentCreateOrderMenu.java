@@ -10,6 +10,7 @@ public final class AgentCreateOrderMenu implements Menu{
     public void showMenu(User activeUser) {
         Scanner in = new Scanner(System.in);
         boolean quit = false;
+        boolean checkCustomer;
         int menuItem;
         int idS;
         do {
@@ -45,7 +46,17 @@ public final class AgentCreateOrderMenu implements Menu{
                             idS = -1;
                         }
 
-                    }while( !Program.getInstance().checkCustomersExist( idS ) );
+                        checkCustomer = false;
+                        for(Customer c :Program.getInstance().getCustomers()){
+                            if (c.getId() == idS) {
+                                checkCustomer = true;
+                                break;
+                            }
+                        }
+                        if(!checkCustomer)
+                            System.err.println("Wrong ID re-insert it!.");
+
+                    }while( !checkCustomer );
 
                     subMenuSelectArticles( (Agent) activeUser , idS );
                     break;

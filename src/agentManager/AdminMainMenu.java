@@ -79,4 +79,5 @@ public final class AdminMainMenu implements Menu{
             }
         } while (!quit);
     }
+
 }

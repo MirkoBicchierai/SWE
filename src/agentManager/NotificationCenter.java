@@ -4,17 +4,29 @@ import java.util.ArrayList;
 
 public final class NotificationCenter implements Observer {
 
+    private ArrayList<String> notification;
+
+    private static NotificationCenter instance;
+
     private NotificationCenter() {
         notification = new ArrayList<>();
+    }
+
+    public static NotificationCenter getInstance() {
+        if (instance==null){
+            instance = new NotificationCenter();
+        }
+        return instance;
+    }
+
+    @Override
+    public void update(String notification) {
+        this.notification.add(notification);
     }
 
     public ArrayList<String> getNotification() {
         return notification;
     }
-
-    private ArrayList<String> notification;
-
-    private static NotificationCenter instance;
 
     public void viewNotification() {
         System.out.println("----------------------------------");
@@ -25,18 +37,6 @@ public final class NotificationCenter implements Observer {
 
         System.out.println("----------------------------------");
         resetNotification();
-    }
-
-    @Override
-    public void update(String notification) {
-        this.notification.add(notification);
-    }
-
-    public static NotificationCenter getInstance() {
-            if (instance==null){
-                instance = new NotificationCenter();
-            }
-            return instance;
     }
 
     private void resetNotification(){

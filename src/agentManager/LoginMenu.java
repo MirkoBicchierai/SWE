@@ -49,4 +49,5 @@ public final class LoginMenu implements Menu{
             }
         } while (!quit);
     }
+
 }
