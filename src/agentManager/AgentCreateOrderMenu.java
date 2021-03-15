@@ -7,7 +7,8 @@ import java.util.Scanner;
 public final class AgentCreateOrderMenu implements Menu{
 
     @Override
-    public void showMenu(User activeUser) {
+    public void showMenu() {
+        Agent agent = (Agent)Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
         boolean quit = false;
         boolean checkCustomer;
@@ -15,7 +16,7 @@ public final class AgentCreateOrderMenu implements Menu{
         int idS;
         do {
 
-            activeUser.viewCustomers();
+            agent.viewCustomers();
 
             System.out.println("agentManager.Menu option:");
             System.out.println("1. Create new customers");
@@ -34,7 +35,7 @@ public final class AgentCreateOrderMenu implements Menu{
             switch (menuItem) {
 
                 case 1:
-                    createCustomers((Agent) activeUser);
+                    createCustomers( agent);
                     break;
 
                 case 2:
@@ -58,7 +59,7 @@ public final class AgentCreateOrderMenu implements Menu{
 
                     }while( !checkCustomer );
 
-                    subMenuSelectArticles( (Agent) activeUser , idS );
+                    subMenuSelectArticles(agent , idS );
                     break;
 
                 case 9:

@@ -6,8 +6,8 @@ import java.util.Scanner;
 public final class AdminCatalogMenu implements Menu{
 
     @Override
-    public void showMenu(User activeUser) {
-        Administrator admin = (Administrator)activeUser;
+    public void showMenu() {
+        Administrator admin = (Administrator) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
@@ -15,7 +15,7 @@ public final class AdminCatalogMenu implements Menu{
         int menuItem;
 
         do {
-            activeUser.viewCatalog();
+            admin.viewCatalog();
             System.out.println("1. Add Catalog");
             System.out.println("2. Delete Catalog");
             System.out.println("9. Back");

@@ -5,16 +5,16 @@ import java.util.Scanner;
 public final class AgentHistoricalOrderMenu implements Menu{
 
     @Override
-    public void showMenu(User activeUser) {
+    public void showMenu() {
 
-        Agent agent = (Agent)activeUser;
+        Agent agent = (Agent) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
         int idOrder;
         int menuItem;
         do {
-            activeUser.viewOrders();
+            agent.viewOrders();
             System.out.println("Menu option:");
             System.out.println("1. Delete an order");
             System.out.println("9. Back");

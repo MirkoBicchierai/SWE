@@ -5,15 +5,17 @@ import java.util.Scanner;
 public final class AdminMainMenu implements Menu{
 
     @Override
-    public void showMenu(User activeUser) {
+    public void showMenu() {
 
-        Administrator admin = (Administrator)activeUser;
+        Administrator admin = (Administrator) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Hello "+activeUser.getName()+"!");
+        System.out.println("Hello "+admin.getName()+"!");
 
         boolean quit = false;
-        NotificationCenter.getInstance().viewNotification();
+
+        admin.viewNotification();
+
         int menuItem;
 
         do {
@@ -55,7 +57,7 @@ public final class AdminMainMenu implements Menu{
                     break;
 
                 case 4:
-                    activeUser.viewOrders();
+                    admin.viewOrders();
                     break;
 
                 case 5:

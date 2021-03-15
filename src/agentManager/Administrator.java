@@ -68,6 +68,10 @@ public final class Administrator extends User {
         System.out.println("----------------------------------");
     }
 
+    public void viewNotification() {
+        NotificationCenter.getInstance().viewNotification();
+    }
+
     public void viewCatalogAgent(int idAgent){
         System.out.println("----------------------------------");
         Agent a;

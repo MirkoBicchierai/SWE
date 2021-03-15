@@ -6,8 +6,8 @@ import java.util.Scanner;
 public final class AdminArticleMenu implements Menu{
 
     @Override
-    public void showMenu(User activeUser) {
-        Administrator admin = (Administrator)activeUser;
+    public void showMenu() {
+        Administrator admin = (Administrator) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;

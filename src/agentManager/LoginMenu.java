@@ -5,7 +5,7 @@ import java.util.Scanner;
 public final class LoginMenu implements Menu{
 
     @Override
-    public void showMenu(User activeUser) {
+    public void showMenu() {
         Scanner in = new Scanner(System.in);
         Scanner inLog = new Scanner(System.in);
         String name;

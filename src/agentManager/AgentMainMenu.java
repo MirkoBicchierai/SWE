@@ -5,11 +5,11 @@ import java.util.Scanner;
 public final class AgentMainMenu implements Menu {
 
     @Override
-    public void showMenu(User activeUser) {
+    public void showMenu() {
 
-        Agent activeAgent = (Agent)activeUser;
+        Agent activeAgent = (Agent) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello "+activeUser.getName()+"!");
+        System.out.println("Hello "+activeAgent.getName()+"!");
 
         boolean quit = false;
         int menuItem;

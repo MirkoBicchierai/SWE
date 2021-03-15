@@ -77,7 +77,7 @@ public final class Program {
         this.setMenu(new LoginMenu());
 
         while (!wantClose) {
-            menu.showMenu(activeUser);
+            menu.showMenu();
         }
 
         System.out.println("Bye Bye!");
