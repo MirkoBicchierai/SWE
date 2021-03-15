@@ -53,16 +53,16 @@ public final class Program {
         return orders;
     }
 
-    void close(){
-        wantClose = true;
+    public static Program getInstance() {
+
+        if (instance == null)
+            instance = new Program();
+
+        return instance;
     }
 
     void setMenu(Menu menu) {
         this.menu = menu;
-    }
-
-    Menu getState() {
-        return this.menu.getCurrentState();
     }
 
     public void run() {
@@ -77,7 +77,7 @@ public final class Program {
         this.setMenu(new LoginMenu());
 
         while (!wantClose) {
-            this.getState().showMenu(activeUser);
+            menu.showMenu(activeUser);
         }
 
         System.out.println("Bye Bye!");
@@ -85,21 +85,7 @@ public final class Program {
 
     }
 
-    public void logout(){
-        activeUser = null;
-        this.setMenu(new LoginMenu());
-    }
-
-    boolean checkCustomersExist(int id){
-        for(Customer c :customers){
-            if(c.getId()==id)
-                return true;
-        }
-        System.err.println("Wrong ID re-insert it!.");
-        return false;
-    }
-
-    public void login(String name, String psw) {
+    public boolean login(String name, String psw) {
         for (User i : users) {
             if (name.equals(i.getName()) && User.getHash(psw).equals(i.getPasswordHash())) {
                 activeUser = i;
@@ -109,21 +95,30 @@ public final class Program {
 
         if (activeUser == null) {
             System.err.println("Wrong password and/or UserName !");
-        }else{
-            if (activeUser instanceof Administrator) {
-                this.setMenu(new AdminMainMenu());
-            } else {
-                this.setMenu(new AgentMainMenu());
-            }
+            return false;
         }
+
+        if (activeUser instanceof Administrator) {
+            this.setMenu(new AdminMainMenu());
+        } else {
+            this.setMenu(new AgentMainMenu());
+        }
+
+        return true;
     }
 
-    public static Program getInstance() {
+    public void logout(){
+        activeUser = null;
+        this.setMenu(new LoginMenu());
+    }
 
-        if (instance == null)
-            instance = new Program();
-
-        return instance;
+    boolean checkCustomersExist(int id){
+        for(Customer c :customers){             //todo da levare
+            if(c.getId()==id)
+                return true;
+        }
+        System.err.println("Wrong ID re-insert it!.");
+        return false;
     }
 
     public void load(Connection c) throws SQLException {
@@ -404,6 +399,10 @@ public final class Program {
         }
 
         instance = null;
+    }
+
+    void close(){
+        wantClose = true;
     }
 
 }

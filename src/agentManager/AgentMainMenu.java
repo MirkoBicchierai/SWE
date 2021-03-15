@@ -5,11 +5,6 @@ import java.util.Scanner;
 public final class AgentMainMenu implements Menu {
 
     @Override
-    public Menu getCurrentState() {
-        return this;
-    }
-
-    @Override
     public void showMenu(User activeUser) {
 
         Agent activeAgent = (Agent)activeUser;

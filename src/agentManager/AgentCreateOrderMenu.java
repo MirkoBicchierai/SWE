@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public final class AgentCreateOrderMenu implements Menu{
-    @Override
-    public Menu getCurrentState() {
-        return this;
-    }
 
     @Override
     public void showMenu(User activeUser) {
@@ -48,6 +44,7 @@ public final class AgentCreateOrderMenu implements Menu{
                         }catch (Exception e){
                             idS = -1;
                         }
+
                     }while( !Program.getInstance().checkCustomersExist( idS ) );
 
                     subMenuSelectArticles( (Agent) activeUser , idS );

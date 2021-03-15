@@ -29,9 +29,31 @@ public final class Agent extends User implements Observable{
     }
 
     @Override
+    public void notify(Observer o,String notification) {
+        o.update(notification);
+    }
+
+    @Override
     public void viewCatalog() {
         System.out.println("----------------------------------");
         catalog.printCatalog();
+        System.out.println("----------------------------------");
+    }
+
+    @Override
+    public void viewOrders() {
+        System.out.println("----------------------------------");
+        boolean check = false;
+        for(Order i : Program.getInstance().getOrders()){
+            if(i.getAgent().getId() == this.getId()) {
+                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
+                i.printArticle();
+                System.out.println();
+                check=true;
+            }
+        }
+        if(!check)
+            System.out.println("There are no orders.");
         System.out.println("----------------------------------");
     }
 
@@ -39,11 +61,6 @@ public final class Agent extends User implements Observable{
         Program.getInstance().getOrders().add(new Order(this,articles,c));
         System.out.println("Created!");
         notify(NotificationCenter.getInstance(),"A new order has been issued by for customer " + c.getBusinessName() + " from " + this.getName());
-    }
-
-    @Override
-    public void notify(Observer o,String notification) {
-        o.update(notification);
     }
 
     public boolean deleteOrder(int id) {
@@ -66,20 +83,4 @@ public final class Agent extends User implements Observable{
 
     }
 
-    @Override
-    public void viewOrders() {
-        System.out.println("----------------------------------");
-        boolean check = false;
-        for(Order i : Program.getInstance().getOrders()){
-            if(i.getAgent().getId() == this.getId()) {
-                System.out.println("Order -> ID: " + i.getId() + " TOTAL: " + i.getTotal() + "€ COMMISSION: " + i.getCommissionTot() + "€ CLIENT: " + i.getClient().getBusinessName());
-                i.printArticle();
-                System.out.println();
-                check=true;
-            }
-        }
-        if(!check)
-            System.out.println("There are no orders.");
-        System.out.println("----------------------------------");
-    }
 }

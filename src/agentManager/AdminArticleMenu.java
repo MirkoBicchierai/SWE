@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public final class AdminArticleMenu implements Menu{
-    @Override
-    public Menu getCurrentState() {
-        return this;
-    }
+
 
     @Override
     public void showMenu(User activeUser) {

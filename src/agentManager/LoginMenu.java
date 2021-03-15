@@ -5,11 +5,6 @@ import java.util.Scanner;
 public final class LoginMenu implements Menu{
 
     @Override
-    public Menu getCurrentState() {
-        return this;
-    }
-
-    @Override
     public void showMenu(User activeUser) {
         Scanner in = new Scanner(System.in);
         Scanner inLog = new Scanner(System.in);

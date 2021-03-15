@@ -5,11 +5,6 @@ import java.util.Scanner;
 public final class AdminCustomersMenu implements Menu{
 
     @Override
-    public Menu getCurrentState() {
-        return this;
-    }
-
-    @Override
     public void showMenu(User activeUser) {
         Administrator admin = (Administrator)activeUser;
         Scanner in = new Scanner(System.in);
