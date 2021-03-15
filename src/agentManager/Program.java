@@ -76,9 +76,8 @@ public final class Program {
 
         this.setMenu(new LoginMenu());
 
-        while (!wantClose) {
+        while (!wantClose)
             menu.showMenu();
-        }
 
         System.out.println("Bye Bye!");
         this.upload(DBConnection.getInstance());
@@ -98,11 +97,10 @@ public final class Program {
             return false;
         }
 
-        if (activeUser instanceof Administrator) {
+        if (activeUser instanceof Administrator)
             this.setMenu(new AdminMainMenu());
-        } else {
+        else
             this.setMenu(new AgentMainMenu());
-        }
 
         return true;
     }

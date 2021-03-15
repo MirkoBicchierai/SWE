@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public final class NotificationCenter implements Observer {
 
     private ArrayList<String> notification;
-
     private static NotificationCenter instance;
 
     private NotificationCenter() {
@@ -17,11 +16,6 @@ public final class NotificationCenter implements Observer {
             instance = new NotificationCenter();
         }
         return instance;
-    }
-
-    @Override
-    public void update(String notification) {
-        this.notification.add(notification);
     }
 
     public ArrayList<String> getNotification() {
@@ -41,6 +35,11 @@ public final class NotificationCenter implements Observer {
 
     private void resetNotification(){
         notification = new ArrayList<>();
+    }
+
+    @Override
+    public void update(String notification) {
+        this.notification.add(notification);
     }
 
 }

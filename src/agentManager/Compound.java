@@ -8,9 +8,8 @@ public final class Compound extends Article {
 
     public Compound(String name, ArrayList<Article> components) {
         super( name, 0);
-        for(Article i:components) {
+        for(Article i:components)
             this.price += i.price;
-        }
         this.components = components;
     }
 
@@ -29,7 +28,7 @@ public final class Compound extends Article {
     public void display() {
         System.out.println("--Id: "+this.id+" Article compound: " + name + " Price: " + price);
         for(Article i : components)
-            System.out.println("  ||Compound: " + i.getName() + " Price: " + i.getPrice());
+            System.out.println("  ||Component: " + i.getName() + " Price: " + i.getPrice());
     }
 
 }

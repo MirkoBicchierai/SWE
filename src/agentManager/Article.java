@@ -2,10 +2,10 @@ package agentManager;
 
 public abstract class Article {
 
-    protected String name;
-    protected int id;
+    protected final String name;
+    protected final int id;
     protected float price;
-    protected static int lastID;
+    private static int lastID;
 
     public Article(String name, float price) {
         this.name = name;

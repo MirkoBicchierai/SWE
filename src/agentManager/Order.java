@@ -9,18 +9,17 @@ public final class Order {
     private final int id;
     private static int lastID;
     private Agent agent;
-    private float total;
+    private final float total;
     private final float commissionTot;
     private final Customer client;
 
     public Order(Agent agent, ArrayList<Pair<Article, Integer>> pairArticles , Customer client ) {
 
-        this.total = 0;
+        float tmp = 0;
+        for (Pair<Article, Integer> a : pairArticles)
+            tmp = tmp + a.getValue0().getPrice() * a.getValue1();
 
-        for (Pair<Article, Integer> a : pairArticles){
-            this.total = this.total + a.getValue0().getPrice() * a.getValue1();
-        }
-
+        this.total = tmp;
         this.commissionTot = (agent.getCommissionPercentage()*this.total)/100;
         lastID++;
         this.id = lastID;
@@ -89,9 +88,10 @@ public final class Order {
     }
 
     public void printArticle() {
-        for(Pair<Article,Integer> i:pairArticles){
+
+        for(Pair<Article,Integer> i:pairArticles)
             System.out.println("    • Id: "+i.getValue0().getId()+" Article: "+i.getValue0().getName()+" Price: "+i.getValue0().getPrice()+" Qta: "+i.getValue1());
-        }
+
     }
 
     public void agentDeleted(){

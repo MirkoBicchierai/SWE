@@ -6,11 +6,11 @@ public final class AdminAgentMenu implements Menu{
 
     @Override
     public void showMenu() {
+
         Administrator admin = (Administrator) Program.getInstance().getActiveUser();
         Scanner in = new Scanner(System.in);
 
         boolean quit = false;
-
         int menuItem;
 
         do {
@@ -31,6 +31,7 @@ public final class AdminAgentMenu implements Menu{
                 case 1:
                     createAgent(admin);
                     break;
+
                 case 2:
                     System.out.println("Enter the code of the Agent to Delete");
                     try {
@@ -40,6 +41,7 @@ public final class AdminAgentMenu implements Menu{
                         System.err.println("Invalid Id!");
                     }
                     break;
+
                 case 3:
                     System.out.println("Enter the code of the agent for which to view the catalog");
                     try {
@@ -49,18 +51,18 @@ public final class AdminAgentMenu implements Menu{
                         System.err.println("Invalid Id!");
                     }
                     break;
+
                 case 9:
                     quit = true;
                     Program.getInstance().setMenu(new AdminMainMenu());
                     break;
-                case 0:
 
+                case 0:
                     quit = true;
                     Program.getInstance().close();
                     break;
 
                 default:
-
                     System.err.println("Invalid choice.");
 
             }
