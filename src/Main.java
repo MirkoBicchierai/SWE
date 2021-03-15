@@ -1,4 +1,4 @@
-package agentManager;
+import agentManager.Program;
 
 public class Main {
 
