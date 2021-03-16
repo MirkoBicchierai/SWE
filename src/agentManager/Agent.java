@@ -3,21 +3,24 @@ package agentManager;
 import org.javatuples.Pair;
 import java.util.ArrayList;
 
-public final class Agent extends User implements Observable{
+public final class Agent extends User implements Subject {
 
     private final Catalog catalog;
     private final float commissionPercentage;
+    private final ArrayList<Observer> observers;
 
     public Agent(String name, String password, float commissionPercentage, Catalog catalog,String email) {
         super(name,password,email);
         this.commissionPercentage = commissionPercentage;
         this.catalog = catalog;
+        this.observers = new ArrayList<>();
     }
 
     public Agent(String name, String passwordHash, float commissionPercentage, Catalog catalog, String email,int id) {
         super(name,passwordHash, email,id);
         this.commissionPercentage = commissionPercentage;
         this.catalog = catalog;
+        this.observers = new ArrayList<>();
     }
 
     public Catalog getCatalog() {
@@ -31,7 +34,7 @@ public final class Agent extends User implements Observable{
     public void createOrder(Customer c, ArrayList<Pair<Article,Integer>> articles) {
         Program.getInstance().getOrders().add(new Order(this,articles,c));
         System.out.println("Created!");
-        notify(NotificationCenter.getInstance(),"A new order has been issued by for customer " + c.getBusinessName() + " from " + this.getName());
+        notify("A new order has been issued by for customer " + c.getBusinessName() + " from " + this.getName());
     }
 
     public boolean deleteOrder(int id) {
@@ -55,8 +58,9 @@ public final class Agent extends User implements Observable{
     }
 
     @Override
-    public void notify(Observer o,String notification) {
-        o.update(notification);
+    public void notify(String notification) {
+        for(Observer o: observers)
+            o.update(notification);
     }
 
     @Override
@@ -83,4 +87,17 @@ public final class Agent extends User implements Observable{
         System.out.println("----------------------------------");
     }
 
+    @Override
+    public void attach(Observer o) {
+
+        observers.add(o);
+
+    }
+
+    @Override
+    public void detach(Observer o) {
+
+        observers.remove(o);
+
+    }
 }
