@@ -32,9 +32,10 @@ public final class Agent extends User implements Subject {
     }
 
     public void createOrder(Customer c, ArrayList<Pair<Article,Integer>> articles) {
-        Program.getInstance().getOrders().add(new Order(this,articles,c));
+        Order order = new Order(this,articles,c);
+        Program.getInstance().getOrders().add(order);
         System.out.println("Created!");
-        notify("A new order has been issued by for customer " + c.getBusinessName() + " from " + this.getName());
+        notify(order);
     }
 
     public boolean deleteOrder(int id) {
@@ -58,9 +59,9 @@ public final class Agent extends User implements Subject {
     }
 
     @Override
-    public void notify(String notification) {
+    public void notify(Order order) {
         for(Observer o: observers)
-            o.update(notification);
+            o.update(order);
     }
 
     @Override

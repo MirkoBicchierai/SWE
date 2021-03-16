@@ -40,7 +40,7 @@ public class AgentTest {
 
         Order createdOrder = p.getOrders().get(p.getOrders().size()-1);
 
-        String messageNotification = NotificationCenter.getInstance().getNotification().get(NotificationCenter.getInstance().getNotification().size()-1);
+        String messageNotification = Program.getInstance().getNotificationCenter().getNotification().get(Program.getInstance().getNotificationCenter().getNotification().size()-1);
 
         assertAll("Order's Data",
                 () -> assertEquals(createdOrder.getAgent(), agent),

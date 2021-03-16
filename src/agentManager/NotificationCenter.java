@@ -7,15 +7,8 @@ public final class NotificationCenter implements Observer {
     private ArrayList<String> notification;
     private static NotificationCenter instance;
 
-    private NotificationCenter() {
+    public NotificationCenter() {
         notification = new ArrayList<>();
-    }
-
-    public static NotificationCenter getInstance() {
-        if (instance==null){
-            instance = new NotificationCenter();
-        }
-        return instance;
     }
 
     public ArrayList<String> getNotification() {
@@ -37,9 +30,14 @@ public final class NotificationCenter implements Observer {
         notification = new ArrayList<>();
     }
 
+    public void addNotification(String string){
+        notification.add(string);
+    }
+
     @Override
-    public void update(String notification) {
-        this.notification.add(notification);
+    public void update(Order order) {
+
+        this.notification.add("A new order has been issued by for customer " + order.getClient().getBusinessName() + " from " + order.getAgent().getName());
     }
 
 }

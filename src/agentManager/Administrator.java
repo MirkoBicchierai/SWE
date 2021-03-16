@@ -69,7 +69,7 @@ public final class Administrator extends User {
     }
 
     public void viewNotification() {
-        NotificationCenter.getInstance().viewNotification();
+        Program.getInstance().getNotificationCenter().viewNotification();
     }
 
     public void viewCatalogAgent(int idAgent){

@@ -22,7 +22,7 @@ public final class Program {
     private Boolean wantClose = false;
 
     private Program() {
-        notCenter = NotificationCenter.getInstance();
+        notCenter = new NotificationCenter();
         users = new ArrayList<>();
         articles = new ArrayList<>();
         catalogs = new ArrayList<>();
@@ -32,6 +32,10 @@ public final class Program {
     }
 
     public User getActiveUser() { return activeUser; }
+
+    public NotificationCenter getNotificationCenter() {
+        return notCenter;
+    }
 
     public ArrayList<User> getUsers() {
         return users;
@@ -99,13 +103,19 @@ public final class Program {
 
         if (activeUser instanceof Administrator)
             this.setMenu(new AdminMainMenu());
-        else
+        else {
             this.setMenu(new AgentMainMenu());
+            ((Agent)activeUser).attach(notCenter);
+            //todo aAaAaAaAaA
+        }
 
         return true;
     }
 
     public void logout(){
+        if (activeUser instanceof Agent) {
+            ((Agent) activeUser).detach(notCenter);
+        }
         activeUser = null;
         this.setMenu(new LoginMenu());
     }
@@ -128,7 +138,7 @@ public final class Program {
         rs = stmt.executeQuery("SELECT * FROM Notification;");
         while (rs.next()) {
             String message = rs.getString("message");
-            notCenter.update(message);
+            notCenter.addNotification(message);
         }
 
         rs = stmt.executeQuery("SELECT * FROM Article WHERE id not in (SELECT IdCompound FROM ArticleCompound );");
