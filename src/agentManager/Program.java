@@ -20,9 +20,11 @@ public final class Program {
     private static Program instance;
     private Menu menu;
     private Boolean wantClose = false;
+    private final NotificationEmail emailNot;
 
     private Program() {
         notCenter = new NotificationCenter();
+        emailNot = new NotificationEmail();
         users = new ArrayList<>();
         articles = new ArrayList<>();
         catalogs = new ArrayList<>();
@@ -106,7 +108,7 @@ public final class Program {
         else {
             this.setMenu(new AgentMainMenu());
             ((Agent)activeUser).attach(notCenter);
-            //todo aAaAaAaAaA
+            ((Agent)activeUser).attach(emailNot);
         }
 
         return true;
@@ -115,6 +117,7 @@ public final class Program {
     public void logout(){
         if (activeUser instanceof Agent) {
             ((Agent) activeUser).detach(notCenter);
+            ((Agent) activeUser).detach(emailNot);
         }
         activeUser = null;
         this.setMenu(new LoginMenu());
