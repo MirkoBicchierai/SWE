@@ -31,7 +31,7 @@ public class AdministratorTest {
     void testCreateAgent() {
 
         Catalog catalog = p.getCatalogs().get( (int)((Math.random() * (p.getCatalogs().size()-1 - 1)) + 1) );
-        admin.createAgent("UnitTest", "111",5.5F,catalog);
+        admin.createAgent("UnitTest", "111",5.5F,catalog,"unitTest@gmail.com");
         User createUser = p.getUsers().get(p.getUsers().size()-1);
 
         assertTrue(createUser instanceof Agent);

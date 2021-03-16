@@ -9,19 +9,22 @@ public abstract class User {
     private final String name;
     private final String passwordHash;
     private static int lastID;
+    private final String email;
 
-    public User(String name, String password) {
+    public User(String name, String password,String email) {
         this.passwordHash=getHash(password);
         lastID++;
         this.id = lastID;
         this.name = name;
+        this.email = email;
     }
 
-    public User(String name, String passwordHash, int id) {
+    public User(String name, String passwordHash, String email,int id) {
         this.passwordHash=passwordHash;
         this.id=id;
         lastID = Math.max(lastID, id);
         this.name = name;
+        this.email = email;
     }
 
     public static String getHash(String password){
@@ -43,6 +46,10 @@ public abstract class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getName() {

@@ -8,14 +8,14 @@ public final class Agent extends User implements Observable{
     private final Catalog catalog;
     private final float commissionPercentage;
 
-    public Agent(String name, String password, float commissionPercentage, Catalog catalog) {
-        super(name,password);
+    public Agent(String name, String password, float commissionPercentage, Catalog catalog,String email) {
+        super(name,password,email);
         this.commissionPercentage = commissionPercentage;
         this.catalog = catalog;
     }
 
-    public Agent(String name, String passwordHash, float commissionPercentage, Catalog catalog, int id) {
-        super(name,passwordHash, id);
+    public Agent(String name, String passwordHash, float commissionPercentage, Catalog catalog, String email,int id) {
+        super(name,passwordHash, email,id);
         this.commissionPercentage = commissionPercentage;
         this.catalog = catalog;
     }

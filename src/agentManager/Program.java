@@ -184,6 +184,7 @@ public final class Program {
             int type = rs.getInt("Type");
             int idCatalog = rs.getInt("IdCatalog");
             float commissionPercentage = rs.getFloat("CommissionPerc");
+            String email = rs.getString("email");
 
             if (type == 1) {
                 Catalog tmp = null;
@@ -198,9 +199,9 @@ public final class Program {
                     break;
                 }
 
-                users.add(new Agent(name, passHash, commissionPercentage, tmp,id));
+                users.add(new Agent(name, passHash, commissionPercentage, tmp,email,id));
             } else {
-                users.add(new Administrator(name, passHash, id));
+                users.add(new Administrator(name, passHash, email,id));
             }
         }
 
@@ -272,12 +273,12 @@ public final class Program {
                 if (!(user instanceof Agent)) {
                     type = 0;
                     perch = 0;
-                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " );";
+                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ,'"+user.getEmail()+"');";
                 } else {
                     type = 1;
                     Agent tmp = (Agent) user;
                     perch = tmp.getCommissionPercentage();
-                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,IdCatalog) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ,"+tmp.getCatalog().getId()+");";
+                    sql = "INSERT INTO User (Id,Name,PasswordHash,Type,CommissionPerc,IdCatalog,email) " + "VALUES (" + user.getId() + ", '" + user.getName() + "', '" + user.getPasswordHash() + "', " + type + ", " + perch + " ,"+tmp.getCatalog().getId()+" ,'"+user.getEmail()+"');";
                 }
 
                 stmt = c.createStatement();

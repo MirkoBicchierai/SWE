@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public final class Administrator extends User {
 
-    public Administrator(String name, String password) {
-        super(name, password);
+    public Administrator(String name, String password,String email) {
+        super(name, password,email);
     }
-    public Administrator(String name, String passwordHash, int id) {
-        super(name, passwordHash, id);
+    public Administrator(String name, String passwordHash,String email ,int id) {
+        super(name, passwordHash, email,id);
     }
 
     @Override
@@ -106,8 +106,8 @@ public final class Administrator extends User {
 
     }
 
-    public void createAgent(String name, String password, float commission, Catalog catalog) {
-        Program.getInstance().getUsers().add(new Agent(name,password,commission, catalog));
+    public void createAgent(String name, String password, float commission, Catalog catalog, String email) {
+        Program.getInstance().getUsers().add(new Agent(name,password,commission, catalog,email));
         System.out.println("Created!");
     }
 
