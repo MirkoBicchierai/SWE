@@ -27,6 +27,7 @@ public class AgentTest {
     }
 
     @Test
+    @DisplayName("Create Order Test")
     void testOrderCreation() {
 
         ArrayList<Pair<Article,Integer>> articles = new ArrayList<>();
@@ -53,6 +54,7 @@ public class AgentTest {
     }
 
     @Test
+    @DisplayName("Delete Order Test")
     void testDeleteOrder() {
 
         Order order = p.getOrders().get(0);

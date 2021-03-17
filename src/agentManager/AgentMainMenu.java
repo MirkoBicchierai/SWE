@@ -14,7 +14,7 @@ public final class AgentMainMenu implements Menu {
         boolean quit = false;
         int menuItem;
         do {
-            System.out.println("agentManager.Menu option:");
+            System.out.println("Menu option:");
             System.out.println("1. View catalog");
             System.out.println("2. Historical Order");
             System.out.println("3. Create Order");

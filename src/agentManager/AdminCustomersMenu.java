@@ -31,6 +31,7 @@ public final class AdminCustomersMenu implements Menu{
                 case 1:
                     createCustomers(admin);
                     break;
+
                 case 2:
                     System.out.println("Enter the code of the Customer to Delete");
                     try {
@@ -40,6 +41,7 @@ public final class AdminCustomersMenu implements Menu{
                         System.err.println("Invalid Id!");
                     }
                     break;
+
                 case 3:
                     System.out.println("Enter the code of the Customer for which to view the Orders");
                     try {
@@ -49,29 +51,26 @@ public final class AdminCustomersMenu implements Menu{
                         System.err.println("Invalid Id!");
                     }
                     break;
+
                 case 9:
                     quit = true;
                     Program.getInstance().setMenu(new AdminMainMenu());
                     break;
-                case 0:
 
+                case 0:
                     quit = true;
                     Program.getInstance().close();
                     break;
 
                 default:
-
                     System.err.println("Invalid choice.");
 
             }
-
         } while (!quit);
     }
 
     private void createCustomers(Administrator activeUser){
-
         Scanner in = new Scanner(System.in);
-
         System.out.println("Insert Business-Name :");
         String name = in.nextLine();
         System.out.println("Insert Email:");

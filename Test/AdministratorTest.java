@@ -1,5 +1,6 @@
 import agentManager.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -31,6 +32,7 @@ public class AdministratorTest {
     }
 
     @Test
+    @DisplayName("Create Agent Test")
     void testCreateAgent() {
 
         Catalog catalog = p.getCatalogs().get( (int)((Math.random() * (p.getCatalogs().size()-1 - 1)) + 1) );
@@ -49,6 +51,7 @@ public class AdministratorTest {
     }
 
     @Test
+    @DisplayName("Create Catalog Test")
     void testCreateCatalog() {
 
         ArrayList<Article> articles = new ArrayList<>();
@@ -66,6 +69,7 @@ public class AdministratorTest {
     }
 
     @Test
+    @DisplayName("Create Product Test")
     void testCreateProduct() {
         int preSize = p.getArticles().size();
         admin.createProduct("ProductTestSingle",3.5F);
@@ -98,6 +102,7 @@ public class AdministratorTest {
     }
 
     @Test
+    @DisplayName("Delete Catalog Test")
     void testDeleteCatalog() {
 
         int preSize = p.getCatalogs().size();
@@ -131,6 +136,7 @@ public class AdministratorTest {
     }
 
     @Test
+    @DisplayName("Delete Product Test")
     void testDeleteArticle() {
 
         admin.createProduct("testProduct1 - can_delete",5.5F);
@@ -164,6 +170,7 @@ public class AdministratorTest {
     }
 
     @Test
+    @DisplayName("Delete CustomerTest")
     void testDeleteCustomer() {
 
         Customer C1 = null;
@@ -185,6 +192,7 @@ public class AdministratorTest {
     }
 
     @Test
+    @DisplayName("Delete Agent Test")
     void testDeleteAgent() {
 
         int id = 4;

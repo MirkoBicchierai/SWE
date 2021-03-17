@@ -1,6 +1,8 @@
 import agentManager.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,7 +27,8 @@ public class GeneralTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
+    @DisplayName("Upload/Load data Test")
     void testUploadLoadData() throws SQLException {
         String sql;
         Statement stmt;
@@ -118,7 +121,8 @@ public class GeneralTest {
         c.commit();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
+    @DisplayName("Login user Test")
     void testLoginUser() {
 
         p.login("Agent1","111");

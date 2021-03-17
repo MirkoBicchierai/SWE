@@ -8,6 +8,4 @@ public class Main {
 
     }
 
-}//todo sistemare ordini e compound (DB)
- //todo agentManager.menu
-//todo dare dei nomi ai test!!
+}
