@@ -229,7 +229,7 @@ public final class Administrator extends User {
         }
 
         if (agent==null){
-            System.err.println("Id Agent Not Exist!");
+            System.err.println("Id Agent Doesn't Exist!");
             return;
         }
 
