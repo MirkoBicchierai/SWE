@@ -47,6 +47,7 @@ public final class Agent extends User implements Subject {
                 orderToDelete = i;
             }
         }
+
         if(orderToDelete==null) {
             System.err.println("Wrong ID! Re-insert it");
             return false;

@@ -5,7 +5,7 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-public class NotificationEmail implements Observer{
+public final class NotificationEmail implements Observer{
 
     @Override
     public void update(Order o) {

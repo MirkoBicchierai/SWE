@@ -117,12 +117,14 @@ public final class Administrator extends User {
         System.out.println("Created!");
     }
 
-    public void createProduct(String name, float price, ArrayList<Article> a) {
-        if (a==null||a.size()==0){
-            Program.getInstance().getArticles().add(new Product(name, price));
-        }else {
-            Program.getInstance().getArticles().add(new Compound(name, a));
-        }
+    public void createProduct(String name, ArrayList<Article> a) {
+
+        Program.getInstance().getArticles().add(new Compound(name, a));
+
+    }
+
+    public void createProduct(String name, float price) {
+        Program.getInstance().getArticles().add(new Product(name, price));
     }
 
     public void deleteCatalog(int IdCatalog){
