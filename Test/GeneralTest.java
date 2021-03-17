@@ -2,7 +2,6 @@ import agentManager.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -83,7 +82,7 @@ public class GeneralTest {
         p.login("Admin","111");
         Administrator admin = (Administrator) p.getActiveUser();
 
-        admin.createProduct("TestProductUpload",12.2F,null);
+        admin.createProduct("TestProductUpload",12.2F);
         admin.createCustomer("TestCustomerUpload", "TestCustomerUpload", "TestCustomerUpload" );
 
         p.upload(c);

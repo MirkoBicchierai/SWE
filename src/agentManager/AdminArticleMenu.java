@@ -115,6 +115,7 @@ public final class AdminArticleMenu implements Menu{
                         }
                     }
                     done = true;
+                    activeUser.createProduct(name,articles);
                     break;
 
                 case 0:
@@ -128,13 +129,13 @@ public final class AdminArticleMenu implements Menu{
                         }
                     } while (true);
                     done = true;
+                    activeUser.createProduct(name,price);
                     break;
 
                 default:
                     System.err.println("Invalid choice.");
             }
         } while (!done);
-        activeUser.createProduct(name,price,articles);
     }
 
 }

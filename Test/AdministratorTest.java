@@ -68,8 +68,7 @@ public class AdministratorTest {
     @Test
     void testCreateProduct() {
         int preSize = p.getArticles().size();
-        ArrayList<Article> articles = new ArrayList<>();
-        admin.createProduct("ProductTestSingle",3.5F,articles);
+        admin.createProduct("ProductTestSingle",3.5F);
 
         assertAll("Single Article",
                 () -> assertEquals(preSize + 1, p.getArticles().size()),
@@ -78,6 +77,7 @@ public class AdministratorTest {
         );
 
         int preSize2 = p.getArticles().size();
+        ArrayList<Article> articles = new ArrayList<>();
         articles.add(p.getArticles().get(1));
         articles.add(p.getArticles().get(2));
 
@@ -86,7 +86,7 @@ public class AdministratorTest {
             tmp += a.getPrice();
         float prePrice = tmp;
 
-        admin.createProduct("Compound article",3.5F,articles);
+        admin.createProduct("Compound article",articles);
 
         assertAll("Compound Article",
                 () -> assertEquals(preSize2 + 1, p.getArticles().size()),
@@ -133,16 +133,13 @@ public class AdministratorTest {
     @Test
     void testDeleteArticle() {
 
-        //base article SAFE DELETE
-        ArrayList<Article> articles = new ArrayList<>();
-        admin.createProduct("testProduct1 - can_delete",5.5F, articles);
+        admin.createProduct("testProduct1 - can_delete",5.5F);
         Article P1 = p.getArticles().get(p.getArticles().size()-1);
         int A1 = p.getArticles().get(p.getArticles().size()-1).getId();
         admin.deleteProduct(A1);
 
         assertFalse(p.getArticles().contains(P1));
 
-        //ordered article BLOCK DELETE
         int A2 = 1;
         Article P2 = null;
 
@@ -152,13 +149,12 @@ public class AdministratorTest {
             }
         }
         admin.deleteProduct(A2);
-
         assertTrue(p.getArticles().contains(P2));
 
-        //article compound BLOCK DELETE
+        ArrayList<Article> articles = new ArrayList<>();
         articles.add(p.getArticles().get(2));
         articles.add(p.getArticles().get(3));
-        admin.createProduct("testProduct2",5.5F, articles);
+        admin.createProduct("testProduct2", articles);
         Article P3 = p.getArticles().get(2);
         int A3 = p.getArticles().get(2).getId();
         admin.deleteProduct(A3);
