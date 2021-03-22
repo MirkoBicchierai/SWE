@@ -35,7 +35,7 @@ public final class Agent extends User implements Subject {
         Order order = new Order(this,articles,c);
         Program.getInstance().getOrders().add(order);
         System.out.println("Created!");
-        notify(order);
+        notify(new Order(order));
     }
 
     public boolean deleteOrder(int id) {
@@ -60,9 +60,9 @@ public final class Agent extends User implements Subject {
     }
 
     @Override
-    public void notify(Order order) {
+    public void notify(Object obj) {
         for(Observer o: observers)
-            o.update(order);
+            o.update(obj);
     }
 
     @Override

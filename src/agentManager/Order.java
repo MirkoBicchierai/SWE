@@ -13,6 +13,10 @@ public final class Order {
     private final float commissionTot;
     private final Customer client;
 
+    public Order(Order old){
+        this(old.getTotal(),old.getCommissionTot(), old.getAgent(), old.getRows(), old.getClient(), old.getId());
+    }
+
     public Order(Agent agent, ArrayList<Pair<Article, Integer>> pairArticles , Customer client ) {
 
         float tmp = 0;

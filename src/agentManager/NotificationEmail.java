@@ -8,8 +8,8 @@ import javax.mail.internet.*;
 public final class NotificationEmail implements Observer{
 
     @Override
-    public void update(Order o) {
-
+    public void update(Object obj) {
+        Order o = (Order)obj;
         String to = "";
         for (User u : Program.getInstance().getUsers()){
             if(u instanceof Administrator)
@@ -26,7 +26,7 @@ public final class NotificationEmail implements Observer{
         text = "<html><meta charset='UTF-8'>" +
                 "<p style='line-height: 2em; font-size: 16px; font-family: Calibri;'>" +
                 "We require your attention regarding the following order: <br>" +
-                "<table>" +
+                "<table style='width:100%;'>" +
                 "   <tbody>" +
                 "      <tr style='background:#f5f2f2'>" +
                 "          <td style='font-weight: bold; width:20%'>Order number:</td>" +
@@ -60,7 +60,7 @@ public final class NotificationEmail implements Observer{
         text = "<html><meta charset='UTF-8'>" +
                 "<p style='line-height: 2em; font-size: 16px; font-family: Calibri;'>" +
                 "We require your attention regarding the following order: <br>" +
-                "<table>" +
+                "<table style='width:100%;'>" +
                 "   <tbody>" +
                 "      <tr style='background:#f5f2f2'>" +
                 "          <td style='font-weight: bold; width:20%'>Order number:</td>" +

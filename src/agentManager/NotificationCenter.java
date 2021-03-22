@@ -35,7 +35,8 @@ public final class NotificationCenter implements Observer {
     }
 
     @Override
-    public void update(Order order) {
+    public void update(Object obj) {
+        Order order = (Order)obj;
         this.notification.add("A new order has been issued by for customer " + order.getClient().getBusinessName() + " from " + order.getAgent().getName());
     }
 

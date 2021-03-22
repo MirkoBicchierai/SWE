@@ -2,6 +2,6 @@ package agentManager;
 
 public interface Observer {
 
-    void update(Order order);
+    void update(Object obj);
 
 }
