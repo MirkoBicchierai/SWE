@@ -13293,19 +13293,6 @@
 						},
 						{
 							"_type": "UMLNoteView",
-							"_id": "AAAAAAF4QWryrk/460U=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"font": "Arial;13;0",
-							"left": 160,
-							"top": 504,
-							"width": 70,
-							"height": 40,
-							"text": "Sigleton"
-						},
-						{
-							"_type": "UMLNoteView",
 							"_id": "AAAAAAF4QWtKclXsmmY=",
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
@@ -13331,22 +13318,6 @@
 								"$ref": "AAAAAAF4QWtKclXsmmY="
 							},
 							"points": "208:807;208:848"
-						},
-						{
-							"_type": "UMLNoteLinkView",
-							"_id": "AAAAAAF4QWuXTV+q3EQ=",
-							"_parent": {
-								"$ref": "AAAAAAFF+qBtyKM79qY="
-							},
-							"font": "Arial;13;0",
-							"head": {
-								"$ref": "AAAAAAF4My4Kh1XcHc8="
-							},
-							"tail": {
-								"$ref": "AAAAAAF4QWryrk/460U="
-							},
-							"lineStyle": 2,
-							"points": "193:543;193:592"
 						},
 						{
 							"_type": "UMLAssociationView",
@@ -15815,7 +15786,7 @@
 								"reference": {
 									"$ref": "AAAAAAF4Mz3PkJNvl9o="
 								},
-								"aggregation": "shared"
+								"aggregation": "composite"
 							},
 							"visibility": "private"
 						}
