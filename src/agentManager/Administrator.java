@@ -112,15 +112,12 @@ public final class Administrator extends User {
     }
 
     public void createCatalog(String description, String marketZone, ArrayList<Article> articles) {
-
         Program.getInstance().getCatalogs().add(new Catalog(articles,description,marketZone));
         System.out.println("Created!");
     }
 
     public void createProduct(String name, ArrayList<Article> a) {
-
         Program.getInstance().getArticles().add(new Compound(name, a));
-
     }
 
     public void createProduct(String name, float price) {
